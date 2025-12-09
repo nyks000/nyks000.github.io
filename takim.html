@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARS PMC | Takım</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- GLOBAL CSS --- */
+        :root { --primary: #d4af37; --bg-dark: #050505; --text: #e0e0e0; --success: #00ff00; --danger: #ff0000; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-dark); color: var(--text); font-family: 'Rajdhani', sans-serif; padding-top: 90px; overflow-x: hidden; }
+        
+        /* NAVBAR */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 80px; background: rgba(5,5,5,0.95); border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 9999; animation: slideDown 0.8s ease-out; }
+        @keyframes slideDown { from {transform: translateY(-100%);} to {transform: translateY(0);} }
+        .logo { font-family: 'Black Ops One'; font-size: 28px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; padding: 8px 12px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        @media (max-width: 768px) { .navbar { flex-direction: column; height: auto; padding: 15px; } .nav-links { margin-top: 10px; flex-wrap: wrap; justify-content: center; } }
+
+        /* KART STİLİ */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: #111; border: 1px solid #333; text-align: center; padding: 0; transition: 0.3s; position: relative; overflow: hidden; cursor: pointer; border-bottom: 3px solid var(--primary); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); border-color: var(--primary); }
+        .card-img-box { width: 100%; height: 300px; overflow: hidden; position: relative; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: grayscale(80%); }
+        .card:hover .card-img { transform: scale(1.1); filter: grayscale(0%); }
+        .card-info { padding: 20px; background: #111; position: relative; z-index: 2; }
+        .card h3 { color: var(--primary); font-family: 'Black Ops One'; font-size: 1.8rem; margin-bottom: 5px; }
+        .rank { color: #888; letter-spacing: 2px; font-weight: bold; font-size: 0.9rem; }
+        .overlay-scan { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; font-family: 'Black Ops One'; color: var(--primary); font-size: 1.5rem; letter-spacing: 2px; border: 2px solid var(--primary); }
+        .card:hover .overlay-scan { opacity: 1; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .dossier { background: #0a0a0a; border: 2px solid var(--primary); width: 90%; max-width: 900px; display: flex; flex-wrap: wrap; box-shadow: 0 0 50px rgba(212, 175, 55, 0.2); position: relative; animation: slideIn 0.4s ease-out; }
+        @keyframes slideIn { from {transform: translateY(50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+        .dossier-img { flex: 1; min-width: 300px; height: 500px; object-fit: cover; border-right: 2px solid var(--primary); filter: grayscale(20%); }
+        .dossier-info { flex: 1.5; padding: 40px; position: relative; }
+        .dossier-header { border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .dossier-header h2 { font-family: 'Black Ops One'; font-size: 3rem; color: var(--primary); line-height: 1; margin-right: 20px; }
+        .dossier-header span { font-size: 1.2rem; color: #888; letter-spacing: 3px; }
+        .stat-row { margin-bottom: 15px; display: flex; align-items: center; }
+        .stat-label { width: 150px; color: var(--primary); font-weight: bold; letter-spacing: 1px; }
+        .stat-value { color: #fff; font-size: 1.1rem; }
+        .status-badge { display: inline-block; padding: 5px 15px; border-radius: 5px; font-weight: bold; font-family: 'Black Ops One'; letter-spacing: 1px; text-transform: uppercase; }
+        .status-active { background: rgba(0, 255, 0, 0.1); color: var(--success); border: 1px solid var(--success); box-shadow: 0 0 10px var(--success); }
+        .status-inactive { background: rgba(255, 0, 0, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+        
+        .close-btn { position: absolute; top: 15px; right: 20px; color: #fff; font-size: 36px; cursor: pointer; transition: 0.3s; z-index: 100; background: rgba(0,0,0,0.5); width: 40px; height: 40px; text-align: center; line-height: 40px; border-radius: 50%; }
+        .close-btn:hover { color: var(--primary); background: #fff; transform: rotate(90deg); }
+        @media (max-width: 768px) { .dossier { flex-direction: column; height: 90vh; overflow-y: auto; } .dossier-img { height: 300px; width: 100%; border-right: none; border-bottom: 2px solid var(--primary); } .dossier-info { padding: 20px; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">PARS PMC</a>
+        <div class="nav-links">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="takim.html" class="active">Takım</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="basvuru.html">BAŞVUR</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 style="text-align:center; font-family:'Black Ops One'; color:var(--primary); margin-bottom:40px;" data-aos="zoom-in">OPERASYON KADROSU</h2>
+        <div class="grid" id="team-grid"></div>
+    </div>
+
+    <div id="dossierModal" class="modal" onclick="closeDossier(event)">
+        <div class="dossier">
+            <div class="close-btn" onclick="forceClose()">&times;</div>
+            <img id="pImg" src="" class="dossier-img">
+            <div class="dossier-info">
+                <div class="dossier-header"><h2 id="pName">KOD ADI</h2><span id="pRole">GÖREV</span></div>
+                <div class="stat-row"><div class="stat-label">TECRÜBE:</div><div class="stat-value" id="pExp"></div></div>
+                <div class="stat-row"><div class="stat-label">UZMANLIK:</div><div class="stat-value" id="pWeapon"></div></div>
+                <div class="stat-row"><div class="stat-label">DURUM:</div><div id="pStatus" class="status-badge status-active"></div></div>
+                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
+                <p id="pDesc" style="color:#aaa; line-height:1.6;"></p>
+                <div style="margin-top:30px; color:var(--primary); font-size:0.8rem; letter-spacing:2px;">// PARS PMC DATABASE // ACCESS GRANTED</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="config.js"></script> <script>
+        AOS.init();
+
+        // Takım Üyelerini Config'den Çekme
+        const teamGrid = document.getElementById('team-grid');
+        
+        SITE_DATA.team.forEach((member, index) => {
+            const delay = index * 100; // Animasyon gecikmesi
+            
+            // HTML Kartını Oluştur
+            const cardHTML = `
+                <div class="card" data-aos="fade-up" data-aos-delay="${delay}" 
+                    onclick="openDossier('${member.kodAdi}', '${member.rutbe}', '${member.tecrube}', '${member.silah}', '${member.durum}', '${member.resim}', '${member.aciklama}')">
+                    <div class="card-img-box">
+                        <img src="${member.resim}" class="card-img">
+                        <div class="overlay-scan">DOSYAYI AÇ</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>${member.kodAdi}</h3>
+                        <span class="rank">${member.rutbe}</span>
+                    </div>
+                </div>
+            `;
+            teamGrid.innerHTML += cardHTML;
+        });
+
+        // Modal Fonksiyonları
+        function openDossier(name, role, exp, weapon, status, img, desc) {
+            const modal = document.getElementById('dossierModal');
+            document.getElementById('pName').innerText = name;
+            document.getElementById('pRole').innerText = role;
+            document.getElementById('pExp').innerText = exp;
+            document.getElementById('pWeapon').innerText = weapon;
+            document.getElementById('pImg').src = img;
+            document.getElementById('pDesc').innerText = desc;
+            
+            const statusBox = document.getElementById('pStatus');
+            statusBox.innerText = status;
+            statusBox.className = status === "OPERASYONEL" ? "status-badge status-active" : "status-badge status-inactive";
+
+            modal.style.display = 'flex';
+        }
+
+        function closeDossier(e) {
+            if(e.target.id === 'dossierModal') document.getElementById('dossierModal').style.display = 'none';
+        }
+
+        function forceClose() {
+            document.getElementById('dossierModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARS PMC | Operasyon Merkezi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- GLOBAL CSS (TÜM SAYFALAR İÇİN AYNI) --- */
+        :root { --primary: #d4af37; --bg-dark: #050505; --text: #e0e0e0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at center, #111 0%, #000 100%);
+            color: var(--text); font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden; padding-top: 90px;
+        }
+
+        /* MENÜ DÜZELTMESİ (SAĞA KAYMAYI ENGELLER) */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+            background: rgba(5, 5, 5, 0.95); border-bottom: 2px solid var(--primary);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; z-index: 9999; /* En üstte durmasını sağlar */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            animation: slideDown 0.8s ease-out; /* Menü animasyonu */
+        }
+        @keyframes slideDown { from {transform: translateY(-100%);} to {transform: translateY(0);} }
+
+        .logo { font-family: 'Black Ops One'; font-size: 28px; color: var(--primary); text-decoration: none; letter-spacing: 2px; }
+
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a {
+            color: #fff; text-decoration: none; font-weight: 700; font-size: 16px;
+            text-transform: uppercase; padding: 8px 12px; transition: 0.3s; border-radius: 4px;
+            position: relative; overflow: hidden;
+        }
+        /* Hover Animasyonu */
+        .nav-links a::before {
+            content:''; position: absolute; bottom: 0; left: -100%; width: 100%; height: 2px;
+            background: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover::before { left: 0; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        /* Mobil Menü */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; height: auto; padding: 15px; }
+            .nav-links { margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* --- SAYFAYA ÖZEL --- */
+        .hero {
+            height: calc(100vh - 80px); display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+        }
+        .hero-logo { 
+            width: 280px; filter: drop-shadow(0 0 20px var(--primary)); 
+            animation: pulse 3s infinite alternate; 
+        }
+        @keyframes pulse { from {transform: scale(1);} to {transform: scale(1.05);} }
+
+        h1 { 
+            font-family: 'Black Ops One'; font-size: 4rem; margin: 20px 0; color: #fff; 
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        
+        .btn-main {
+            padding: 15px 50px; border: 2px solid var(--primary); color: var(--primary);
+            font-size: 1.2rem; font-weight: bold; text-decoration: none; text-transform: uppercase;
+            transition: 0.4s; position: relative; z-index: 1; overflow: hidden;
+        }
+        .btn-main::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--primary); transition: 0.4s; z-index: -1;
+        }
+        .btn-main:hover::after { left: 0; }
+        .btn-main:hover { color: #000; box-shadow: 0 0 30px var(--primary); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">PARS PMC</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Ana Sayfa</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="takim.html">Takım</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="basvuru.html">BAŞVUR</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="pars-logo.jpg" alt="Logo" class="hero-logo" data-aos="zoom-in" data-aos-duration="1500">
+        <h1 data-aos="fade-up" data-aos-delay="300">GÖLGELERİN İÇİNDE<br><span style="color:var(--primary)">ZAFERİN PEŞİNDE</span></h1>
+        <p style="color:#ccc; font-size:1.2rem;" data-aos="fade-up" data-aos-delay="500">Profesyonel Taktik Simülasyon Birliği</p>
+        <a href="basvuru.html" class="btn-main" data-aos="flip-up" data-aos-delay="700">KATIL</a>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARS PMC | Galeri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root { --primary: #d4af37; --bg-dark: #050505; --text: #e0e0e0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-dark); color: var(--text); font-family: 'Rajdhani', sans-serif; padding-top: 90px; overflow-x: hidden; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 80px; background: rgba(5,5,5,0.95); border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 9999; animation: slideDown 0.8s ease-out; }
+        @keyframes slideDown { from {transform: translateY(-100%);} to {transform: translateY(0);} }
+        .logo { font-family: 'Black Ops One'; font-size: 28px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; padding: 8px 12px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        @media (max-width: 768px) { .navbar { flex-direction: column; height: auto; padding: 15px; } .nav-links { margin-top: 10px; flex-wrap: wrap; justify-content: center; } }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .item { height: 250px; border: 1px solid #333; overflow: hidden; cursor: pointer; position: relative; }
+        .item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .item:hover img { transform: scale(1.1); opacity: 0.7; }
+        .overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--primary); font-family:'Black Ops One'; opacity: 0; transition: 0.3s; pointer-events: none; font-size: 1.5rem; }
+        .item:hover .overlay { opacity: 1; }
+        
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; align-items:center; justify-content:center; }
+        .modal-content { background:#111; border:2px solid var(--primary); max-width:800px; width:90%; animation: zoomIn 0.3s; position: relative; }
+        @keyframes zoomIn { from {transform:scale(0.5);} to {transform:scale(1);} }
+        .modal img { width:100%; max-height:50vh; object-fit:cover; }
+        .details { padding:20px; }
+        .close { position:absolute; top:-15px; right:-15px; color:white; font-size:30px; cursor:pointer; background: #000; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); text-align: center; line-height: 35px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">PARS PMC</a>
+        <div class="nav-links">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="hakkimizda.html">Hakkımızda</a>
+            <a href="takim.html">Takım</a>
+            <a href="galeri.html" class="active">Galeri</a>
+            <a href="basvuru.html">BAŞVUR</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:30px; font-family:'Black Ops One'" data-aos="fade-down">GALERİ</h2>
+        
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+            <img id="mImg" src="">
+            <div class="details"><h3 id="mTitle" style="color:#d4af37; font-family:'Black Ops One'"></h3><p id="mDesc" style="color:#aaa"></p></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="config.js"></script> <script>
+        AOS.init();
+
+        const galleryGrid = document.getElementById('gallery-grid');
+        
+        SITE_DATA.gallery.forEach((item, index) => {
+            const delay = index * 100;
+            const html = `
+                <div class="item" data-aos="fade-up" data-aos-delay="${delay}" onclick="openModal('${item.resim}', '${item.baslik}', '${item.aciklama}')">
+                    <img src="${item.resim}">
+                    <div class="overlay">İNCELE</div>
+                </div>
+            `;
+            galleryGrid.innerHTML += html;
+        });
+
+        function openModal(src, title, desc) {
+            document.getElementById('modal').style.display = 'flex';
+            document.getElementById('mImg').src = src;
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mDesc').innerText = desc;
+        }
+        function closeModal(e) { if(e.target.id === 'modal') document.getElementById('modal').style.display='none'; }
+    </script>
+</body>
+</html>
