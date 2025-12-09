@@ -5,7 +5,7 @@ const SITE_DATA = {
         {
             kodAdi: "PARS-01",
             rutbe: "TAKIM KOMUTANI",
-            tecrube: "Eski Personel",
+            tecrube: "Eski Askeri Personel",
             silah: "Takım Yönetimi, Harekat Planlama",
             durum: "OPERASYONEL",
             // img klasöründeki dosya adı:
@@ -15,7 +15,7 @@ const SITE_DATA = {
         {
             kodAdi: "PARS-02 ",
             rutbe: "TAKIM KOMUTANI",
-            tecrube: "Eski Personel",
+            tecrube: "Eski Askeri Personel",
             silah: "Özel Görev Nişancısı, Eğitmen,",
             durum: "OPERASYONEL",
             resim: "img/cengizhan.png",
@@ -28,16 +28,16 @@ const SITE_DATA = {
             silah: "Hafif Makineli Uzmanı, Mekanik Bakım",
             durum: "OPERASYONEL",
             resim: "img/ahmet.png",
-            aciklama: "Takım Kıdemlisi, Hafif makineli tüfek uzmanı, Silah bakım sorumulusu."
+            aciklama: "Takım Kıdemlisi, Hafif makineli Silah Uzmanı, Tüfek bakım sorumulusu."
         },
-          {
+        {
             kodAdi: "PARS-04",
             rutbe: "KIDEMLİ PERSONEL",
             tecrube: "2.5 YIL",
             silah: "Ağır Makineli Uzmanı, Taktikal Medik, Elektronik Uzmanı",
             durum: "OPERASYONEL",
             resim: "img/furkan.png",
-            aciklama: "Takım Kıdemlisi, Ağır makineli tüfek uzmanı, Silah bakım sorumulusu."
+            aciklama: "Takım Kıdemlisi, Ağır makineli Silah Uzmanı, Silah bakım sorumulusu."
         },
         {
             kodAdi: "PARS-05",
