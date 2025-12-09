@@ -2,36 +2,47 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PARS PMC | Galeri</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Galeri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root { --primary: #d4af37; --bg-dark: #050505; --text: #e0e0e0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg-dark); color: var(--text); font-family: 'Rajdhani', sans-serif; padding-top: 90px; overflow-x: hidden; }
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 80px; background: rgba(5,5,5,0.95); border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 9999; animation: slideDown 0.8s ease-out; }
-        @keyframes slideDown { from {transform: translateY(-100%);} to {transform: translateY(0);} }
-        .logo { font-family: 'Black Ops One'; font-size: 28px; color: var(--primary); text-decoration: none; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; padding: 8px 12px; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        @media (max-width: 768px) { .navbar { flex-direction: column; height: auto; padding: 15px; } .nav-links { margin-top: 10px; flex-wrap: wrap; justify-content: center; } }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg-dark); color: var(--text); font-family: 'Rajdhani', sans-serif; padding-top: 100px; overflow-x: hidden; }
+
+        /* NAVBAR (AYNI) */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; min-height: 80px; background: rgba(5,5,5,0.98); border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; z-index: 9999; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .logo { font-family: 'Black Ops One'; font-size: 24px; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 10px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; text-transform: uppercase; padding: 8px 10px; border-radius: 4px; transition: 0.3s; }
+        .nav-links a.active { background: rgba(212, 175, 55, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 15px; }
+            .logo { margin-bottom: 10px; font-size: 28px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 5px; }
+            .nav-links a { font-size: 13px; background: #111; border: 1px solid #333; width: 48%; text-align: center; }
+            body { padding-top: 160px; }
+        }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
+        /* Mobil Grid */
+        @media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr; } }
+
         .item { height: 250px; border: 1px solid #333; overflow: hidden; cursor: pointer; position: relative; }
         .item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .item:hover img { transform: scale(1.1); opacity: 0.7; }
-        .overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--primary); font-family:'Black Ops One'; opacity: 0; transition: 0.3s; pointer-events: none; font-size: 1.5rem; }
-        .item:hover .overlay { opacity: 1; }
-        
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; align-items:center; justify-content:center; }
-        .modal-content { background:#111; border:2px solid var(--primary); max-width:800px; width:90%; animation: zoomIn 0.3s; position: relative; }
-        @keyframes zoomIn { from {transform:scale(0.5);} to {transform:scale(1);} }
-        .modal img { width:100%; max-height:50vh; object-fit:cover; }
+        .overlay { position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--primary); font-family:'Black Ops One'; font-size:1.5rem; opacity:0; transition:0.3s; pointer-events:none; }
+        .item:hover .overlay { opacity:1; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10000; align-items:center; justify-content:center; padding: 20px; }
+        .modal-content { background:#111; border:2px solid var(--primary); width:100%; max-width:800px; animation: zoomIn 0.3s; position: relative; }
+        @keyframes zoomIn { from {transform:scale(0.8);} to {transform:scale(1);} }
+        .modal img { width:100%; max-height:60vh; object-fit:contain; background: #000; }
         .details { padding:20px; }
-        .close { position:absolute; top:-15px; right:-15px; color:white; font-size:30px; cursor:pointer; background: #000; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); text-align: center; line-height: 35px; }
+        .close { position:absolute; top:-15px; right:-15px; color:white; font-size:24px; cursor:pointer; background: #000; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); text-align: center; line-height: 35px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
@@ -46,43 +57,35 @@
         </div>
     </nav>
     <div class="container">
-        <h2 style="text-align:center; color:var(--primary); margin-bottom:30px; font-family:'Black Ops One'" data-aos="fade-down">GALERİ</h2>
-        
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:30px; font-family:'Black Ops One'; font-size:2rem;" data-aos="fade-down">GALERİ</h2>
         <div class="gallery-grid" id="gallery-grid"></div>
     </div>
 
-    <div id="modal" class="modal" onclick="closeModal(event)">
+    <div id="modal" class="modal" onclick="if(event.target.id==='modal')this.style.display='none'">
         <div class="modal-content">
             <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
             <img id="mImg" src="">
-            <div class="details"><h3 id="mTitle" style="color:#d4af37; font-family:'Black Ops One'"></h3><p id="mDesc" style="color:#aaa"></p></div>
+            <div class="details"><h3 id="mTitle" style="color:#d4af37; font-family:'Black Ops One'; margin-bottom:5px;"></h3><p id="mDesc" style="color:#aaa;"></p></div>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="config.js"></script> <script>
+    <script src="config.js"></script>
+    <script>
         AOS.init();
-
         const galleryGrid = document.getElementById('gallery-grid');
-        
         SITE_DATA.gallery.forEach((item, index) => {
-            const delay = index * 100;
-            const html = `
-                <div class="item" data-aos="fade-up" data-aos-delay="${delay}" onclick="openModal('${item.resim}', '${item.baslik}', '${item.aciklama}')">
-                    <img src="${item.resim}">
-                    <div class="overlay">İNCELE</div>
-                </div>
-            `;
-            galleryGrid.innerHTML += html;
+            galleryGrid.innerHTML += `
+                <div class="item" data-aos="fade-up" data-aos-delay="${index*100}" onclick="openModal('${item.resim}', '${item.baslik}', '${item.aciklama}')">
+                    <img src="${item.resim}"><div class="overlay">İNCELE</div>
+                </div>`;
         });
-
         function openModal(src, title, desc) {
             document.getElementById('modal').style.display = 'flex';
             document.getElementById('mImg').src = src;
             document.getElementById('mTitle').innerText = title;
             document.getElementById('mDesc').innerText = desc;
         }
-        function closeModal(e) { if(e.target.id === 'modal') document.getElementById('modal').style.display='none'; }
     </script>
 </body>
 </html>
