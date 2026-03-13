@@ -1,73 +1,170 @@
-/* --- BAŞVURU SAYFASI DÜZENİ (YENİ) --- */
-.basvuru-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr; /* Form geniş, bilgi kutusu dar */
-    gap: 30px;
-    align-items: start;
+:root {
+    --primary: #ff4d6d;
+    --primary-hover: #ff2a55;
+    --bg-light: #ffe6ea;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-color: #2c3e50;
 }
 
-/* İletişim Kartı (Başvuru yanında) */
-.contact-card {
-    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-    padding: 30px;
-    border: 1px solid #333;
-    border-radius: 10px;
-    border-top: 4px solid var(--gold);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
 
-.contact-item {
+body {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: var(--text-color);
+    min-height: 100vh;
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #333;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
 }
 
-.contact-item:last-child { border-bottom: none; }
+/* Yüzen Kalpler */
+.floating-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
 
-.contact-icon {
+.heart-emoji {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
     font-size: 24px;
-    color: var(--gold);
-    margin-right: 15px;
-    width: 40px;
+    user-select: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ana Kart */
+.card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     text-align: center;
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.contact-text h4 { color: #fff; font-size: 0.9rem; margin-bottom: 5px; }
-.contact-text p { color: #bbb; font-size: 0.85rem; margin: 0; }
-
-/* --- ÜYE GİRİŞ MODAL (POPUP) --- */
-.modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
-    display: none; /* Başlangıçta gizli */
-    justify-content: center; align-items: center; z-index: 2000;
+/* Resim Alanı */
+.image-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 25px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border: 5px solid white;
+    background-color: #f1f2f6; /* Resim yüklenene kadar gri arka plan */
 }
 
-.modal-box {
-    background: #111; border: 2px solid var(--gold); padding: 40px;
-    width: 400px; border-radius: 10px; position: relative;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-    animation: slideDown 0.4s ease;
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.close-btn {
-    position: absolute; top: 10px; right: 15px;
-    color: #fff; font-size: 24px; cursor: pointer; transition: 0.3s;
+/* Yazı Formatı */
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 30px;
 }
-.close-btn:hover { color: var(--gold); }
 
-.btn-login-nav {
-    background: transparent; border: 1px solid #555; color: #aaa;
-    padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s;
-    font-weight: bold; font-family: 'Exo 2', sans-serif;
+.highlight {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.2rem;
+    color: var(--primary);
+    display: inline-block;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
 }
-.btn-login-nav:hover { border-color: var(--gold); color: var(--gold); }
 
-/* Mobilde düzeni alt alta yap */
-@media (max-width: 768px) {
-    .basvuru-grid { grid-template-columns: 1fr; }
-    .modal-box { width: 90%; }
+/* Buton Alanı */
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    min-height: 80px;
+    flex-wrap: wrap; /* Taşarsa alta inmesi için */
+}
+
+/* Genel Buton Stili */
+.btn {
+    border: none;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 20;
+}
+
+/* Evet Butonu */
+.btn-yes {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-yes:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-hover);
+}
+
+/* Hayır Butonu */
+.btn-no {
+    background-color: #f1f2f6;
+    color: #57606f;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.btn-no:hover {
+    background-color: #dfe4ea;
+}
+
+/* Mobil Uyum */
+@media (max-width: 500px) {
+    .card { padding: 30px 20px; }
+    h1 { font-size: 1.3rem; }
+    .highlight { font-size: 1.8rem; }
+    .image-wrapper { width: 180px; height: 180px; }
+}
+
+/* Kutlama Kalpleri */
+.celebration-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
 }
