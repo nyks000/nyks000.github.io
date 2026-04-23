@@ -1,115 +1,118 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const mainImage = document.getElementById("mainImage");
-    const questionText = document.getElementById("questionText");
-    const buttonsContainer = document.getElementById("buttonsContainer");
-
-    // Hayır butonuna basıldıkça değişecek metinler
-    const noTexts = [
-        "Emin misin?",
-        "Gerçekten mi?",
-        "Bir daha düşün...",
-        "Lütfen 🥺",
-        "Ama çok tatlıyız...",
-        "Kalbimi kırıyorsun 💔",
-        "İnsafsızlık bu...",
-        "Son kararın mı?",
-        "Ağlıyorum şu an 😭",
-        "Şans bile vermeyecek misin?"
-    ];
-
-    let noCount = 0;
-
-    // "Hayır" butonuna basınca olacaklar
-    noBtn.addEventListener("click", () => {
-        noCount++;
-        
-        // Hayır butonunun metnini sırayla değiştir
-        noBtn.innerText = noTexts[Math.min(noCount - 1, noTexts.length - 1)];
-        
-        // Evet butonunu %30 büyüt
-        const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-        const newSize = currentSize * 1.3;
-        
-        const currentPaddingY = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
-        const currentPaddingX = parseFloat(window.getComputedStyle(yesBtn).paddingLeft);
-        
-        yesBtn.style.fontSize = `${newSize}px`;
-        yesBtn.style.padding = `${currentPaddingY * 1.2}px ${currentPaddingX * 1.2}px`;
-        
-        // Belirli bir tıklamadan sonra "Hayır" butonunu tamamen yok et (Tatlı bir mızıkçılık)
-        if (noCount > 9) {
-            noBtn.style.display = "none";
-        }
-    });
-
-    // "Evet" butonuna basınca olacaklar
-    yesBtn.addEventListener("click", (e) => {
-        // Metni güncelle
-        questionText.innerHTML = `<span class="highlight" style="font-size:2.5rem;">Yeeey! 🎉</span><br><br><span style="font-size: 1.2rem; font-weight: 600;">O zaman Instagram DM'den mesajını bekliyorum 😊</span>`;
-        
-        // Butonları gizle
-        buttonsContainer.style.display = "none";
-        
-        // Kutlama Emojileri Fırlat
-        createCelebrationHearts(e.clientX, e.clientY);
-    });
-
-    // --- Arka Plan Kalpleri Fonksiyonları ---
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Elements ---
+    const screen1 = document.getElementById('screen-1');
+    const screen2 = document.getElementById('screen-2');
+    const screen3 = document.getElementById('screen-3');
     
-    // 1. Sürekli arkada süzülen kalpler
-    function createFloatingHearts() {
-        const container = document.getElementById("floatingHearts");
-        const emojis = ['❤️', '💖', '💕', '🌸', '✨'];
-        
-        for (let i = 0; i < 25; i++) {
-            const heart = document.createElement("div");
-            heart.classList.add("heart-emoji");
-            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-            
-            // Rastgele konum ve animasyon süreleri
-            heart.style.left = Math.random() * 100 + "%";
-            heart.style.animationDuration = (Math.random() * 5 + 6) + "s";
-            heart.style.animationDelay = (Math.random() * 5) + "s";
-            heart.style.fontSize = (Math.random() * 15 + 15) + "px";
-            
-            container.appendChild(heart);
-        }
-    }
+    const startBtn = document.getElementById('start-btn');
+    const nextMsgBtn = document.getElementById('next-message-btn');
+    
+    const messageText = document.getElementById('message-text');
+    const dots = document.querySelectorAll('.dot');
+    
+    // --- Messages for the flow ---
+    const messages = [
+        "Aramızda mesafeler olsa da...",
+        "Gözlerimi kapattığımda hep yanımdasın.",
+        "Seninle geçirdiğim her an çok kıymetli.",
+        "Seni çok seviyorum."
+    ];
+    let currentMessageIndex = 0;
 
-    // 2. Evet'e basılınca Tıklanan Yerden Patlayan Kalpler
-    function createCelebrationHearts(x, y) {
-        const emojis = ['❤️', '💖', '🥰', '🎉', '✨'];
-        
-        for (let i = 0; i < 40; i++) {
-            const heart = document.createElement("div");
-            heart.classList.add("celebration-heart");
-            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-            heart.style.left = x + "px";
-            heart.style.top = y + "px";
-            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    // --- State Transitions ---
+    function switchScreen(fromScreen, toScreen) {
+        fromScreen.classList.add('fadeOut');
+        setTimeout(() => {
+            fromScreen.classList.remove('active', 'fadeOut');
+            toScreen.classList.add('active');
             
-            // Rastgele fırlama matematiği
-            const angle = Math.random() * Math.PI * 2;
-            const velocity = 50 + Math.random() * 300; 
-            const tx = Math.cos(angle) * velocity;
-            const ty = Math.sin(angle) * velocity - 100;
-            
-            heart.animate([
-                { transform: `translate(0, 0) scale(1)`, opacity: 1 },
-                { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
-            ], {
-                duration: 1000 + Math.random() * 1000, // 1-2 saniye arası
-                easing: "cubic-bezier(0, .9, .57, 1)",
-                fill: "forwards"
+            // Re-trigger animations if needed
+            const texts = toScreen.querySelectorAll('h1, h2, p, .gallery');
+            texts.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; // trigger reflow
+                el.style.animation = null;
+                el.classList.add('fadeIn');
             });
             
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 2500); // Temizlik
-        }
+            // If we're on the final screen, spawn hearts
+            if (toScreen === screen3) {
+                startHeartParade();
+            }
+            
+        }, 800); // Wait for fadeOut animation
     }
 
-    // Sayfa açıldığında yüzen kalpleri başlat
-    createFloatingHearts();
+    // Update messages in Screen 2
+    function showMessage(index) {
+        // Fade out text softly
+        messageText.style.opacity = '0';
+        messageText.style.transform = 'translateY(10px)';
+        messageText.style.transition = 'all 0.5s ease';
+        
+        setTimeout(() => {
+            messageText.textContent = `"${messages[index]}"`;
+            messageText.style.opacity = '1';
+            messageText.style.transform = 'translateY(0)';
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }, 500);
+    }
+
+    // --- Events ---
+    startBtn.addEventListener('click', () => {
+        switchScreen(screen1, screen2);
+        showMessage(currentMessageIndex);
+    });
+
+    nextMsgBtn.addEventListener('click', () => {
+        currentMessageIndex++;
+        if (currentMessageIndex < messages.length) {
+            showMessage(currentMessageIndex);
+            if (currentMessageIndex === messages.length - 1) {
+                nextMsgBtn.textContent = "Sürprizi Gör";
+            }
+        } else {
+            // Move to Screen 3
+            switchScreen(screen2, screen3);
+        }
+    });
+
+    // --- Background Hearts Animation ---
+    function createHeart() {
+        const heartContainer = document.getElementById('heart-container');
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        
+        // Random shapes/icons
+        const icons = ['❤️', '✨', '💖', '💕'];
+        heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+        
+        // Random position, speed, and size
+        const left = Math.random() * 100;
+        const duration = 5 + Math.random() * 10; // 5s to 15s
+        const scale = 0.5 + Math.random() * 1; // 0.5 to 1.5
+        
+        heart.style.left = `${left}%`;
+        heart.style.animationDuration = `${duration}s`;
+        heart.style.transform = `scale(${scale})`; // Initial scale
+        
+        heartContainer.appendChild(heart);
+        
+        // Remove heart after animation
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }
+    
+    // Spawn some initial hearts slowly
+    setInterval(createHeart, 2000);
+    
+    // Faster spawn rate for the final screen
+    function startHeartParade() {
+        setInterval(createHeart, 600);
+    }
 });

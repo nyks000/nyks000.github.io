@@ -1,32 +1,275 @@
 :root {
-    --primary: #ff4d6d;
-    --primary-hover: #ff2a55;
-    --bg-light: #ffe6ea;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --text-color: #2c3e50;
+    --bg-color-1: #0a0a0a;
+    --bg-color-2: #1a0b1c;
+    --accent-red: #d62828;
+    --accent-pink: #ff758f;
+    --text-primary: #ffffff;
+    --text-secondary: #fcd5ce;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-    color: var(--text-color);
+    background: linear-gradient(135deg, var(--bg-color-1) 0%, var(--bg-color-2) 100%);
     min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    overflow: hidden;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    position: relative;
-    padding: 20px;
 }
 
-/* Yüzen Kalpler */
-.floating-hearts {
+/* Background gradient animation */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(214, 40, 40, 0.15), transparent 60%);
+    animation: pulseBg 8s infinite alternate;
+    z-index: 0;
+}
+
+@keyframes pulseBg {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.screen.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Typography */
+h1.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #ffd166, #ff758f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.romantic-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    min-height: 120px;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.final-message {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-top: 30px;
+    font-weight: 300;
+}
+
+/* Buttons */
+.btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(255, 117, 143, 0.3);
+    border-color: rgba(255, 117, 143, 0.4);
+}
+
+.pulse {
+    animation: pulse-shadow 2s infinite;
+}
+
+@keyframes pulse-shadow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 117, 143, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 117, 143, 0); }
+}
+
+/* Gallery Component */
+.gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent-pink);
+    margin-bottom: 40px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    perspective: 1000px;
+}
+
+.us-heart {
+    font-size: 2rem;
+    animation: heartbeat 1.5s infinite;
+}
+
+.photo-frame {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.left-tilt {
+    transform: rotate(-5deg) translateY(10px);
+}
+
+.right-tilt {
+    transform: rotate(5deg) translateY(10px);
+}
+
+.photo-frame:hover {
+    transform: scale(1.05) rotate(0deg) translateY(0);
+    z-index: 10;
+}
+
+.polaroid {
+    background: #fff;
+    padding: 10px 10px 30px 10px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.polaroid img {
+    width: 130px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.caption {
+    color: #333;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 8px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Animations */
+.fadeIn {
+    animation: fadeIn 1.5s ease forwards;
+}
+
+.fadeDelay {
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards 1s;
+}
+
+.fadeOut {
+    animation: fadeOut 1s ease forwards !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.3); }
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Progress Dots for Messages */
+.progress-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--accent-pink);
+    transform: scale(1.3);
+}
+
+/* Floating Hearts */
+#heart-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -34,137 +277,33 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    overflow: hidden;
 }
 
-.heart-emoji {
+.floating-heart {
     position: absolute;
-    bottom: -50px;
-    animation: floatUp 8s linear infinite;
-    opacity: 0.7;
-    font-size: 24px;
-    user-select: none;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-}
-
-/* Ana Kart */
-.card {
-    background: var(--card-bg);
-    width: 100%;
-    max-width: 500px;
-    padding: 40px 30px;
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    text-align: center;
-    z-index: 10;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Resim Alanı */
-.image-wrapper {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 25px auto;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    border: 5px solid white;
-    background-color: #f1f2f6; /* Resim yüklenene kadar gri arka plan */
-}
-
-.image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Yazı Formatı */
-h1 {
     font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 30px;
+    color: rgba(255, 117, 143, 0.6);
+    bottom: -50px;
+    animation: floatHeart linear forwards;
 }
 
-.highlight {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.2rem;
-    color: var(--primary);
-    display: inline-block;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+@keyframes floatHeart {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg) scale(0.5); opacity: 0; }
 }
 
-/* Buton Alanı */
-.buttons-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-    min-height: 80px;
-    flex-wrap: wrap; /* Taşarsa alta inmesi için */
-}
-
-/* Genel Buton Stili */
-.btn {
-    border: none;
-    padding: 14px 28px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 20;
-}
-
-/* Evet Butonu */
-.btn-yes {
-    background-color: var(--primary);
-    color: white;
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-}
-
-.btn-yes:hover {
-    transform: scale(1.05);
-    background-color: var(--primary-hover);
-}
-
-/* Hayır Butonu */
-.btn-no {
-    background-color: #f1f2f6;
-    color: #57606f;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.btn-no:hover {
-    background-color: #dfe4ea;
-}
-
-/* Mobil Uyum */
-@media (max-width: 500px) {
-    .card { padding: 30px 20px; }
-    h1 { font-size: 1.3rem; }
-    .highlight { font-size: 1.8rem; }
-    .image-wrapper { width: 180px; height: 180px; }
-}
-
-/* Kutlama Kalpleri */
-.celebration-heart {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
+/* Mobile specific tweaks */
+@media (max-width: 380px) {
+    .polaroid img {
+        width: 110px;
+        height: 130px;
+    }
+    .gallery {
+        gap: 5px;
+    }
+    h1.main-title {
+        font-size: 2.2rem;
+    }
 }

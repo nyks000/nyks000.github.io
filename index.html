@@ -2,34 +2,58 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana bir sorum var...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Senin İçin...</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Yüzen kalpler arkada kalacak -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-
-    <div class="card" id="mainCard">
-        <div class="image-wrapper">
-            <!-- Buraya attığın fotoğraf gelecek! Adını resim.jpg yapıp bu klasöre atman yeterli. -->
-            <img id="mainImage" src="resim.jpg" alt="Siz :)">
+    <div id="heart-container"></div>
+    <div class="content-wrapper">
+        <!-- Screen 1: Welcome -->
+        <div id="screen-1" class="screen active">
+            <h1 class="main-title fadeIn">Merhaba Melike...</h1>
+            <p class="subtitle fadeDelay">Senin için küçük bir sürprizim var.</p>
+            <button id="start-btn" class="btn pulse">Tıkla Bana</button>
         </div>
-        
-        <h1 id="questionText">
-            <span class="highlight">Merhaba journeytodevv 🌸</span><br>
-            Seninle tanışmayı çok isterim,<br>bana bir şans verir misin? 👉👈
-        </h1>
-        
-        <div class="buttons-container" id="buttonsContainer">
-            <button class="btn btn-yes" id="yesBtn">Evet! 🥰</button>
-            <button class="btn btn-no" id="noBtn">Hayır... 🥺</button>
+
+        <!-- Screen 2: Emotional messages -->
+        <div id="screen-2" class="screen hidden">
+            <div class="message-container">
+                <p id="message-text" class="romantic-text"></p>
+                <div class="progress-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <button id="next-message-btn" class="btn">Devam Et</button>
+        </div>
+
+        <!-- Screen 3: Gallery -->
+        <div id="screen-3" class="screen hidden">
+            <h2 class="gallery-title">İyi ki varsın sevgilim ❤️</h2>
+            <div class="gallery">
+                <div class="photo-frame left-tilt">
+                    <div class="polaroid">
+                        <img src="rifat.png" alt="Rıfat">
+                        <div class="caption">Ben</div>
+                    </div>
+                </div>
+                <div class="us-heart">❤️</div>
+                <div class="photo-frame right-tilt">
+                    <div class="polaroid">
+                        <img src="melike.png" alt="Melike">
+                        <div class="caption">Sen</div>
+                    </div>
+                </div>
+            </div>
+            <p class="final-message">Aramızdaki kilometreler sadece sayılardan ibaret.<br>Kalbim hep seninle.</p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
