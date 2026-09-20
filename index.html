@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DerinGPT v0.1 - Yapay Zeka Destekli Minimalist Cevap Motoru</title>
+  <meta name="description" content="Derin ile sohbeti simüle eden, 1 kelimelik cevap uzmanı yapay zeka troll motoru." />
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            dark: {
+              950: '#09090b',
+              900: '#121215',
+              850: '#18181b',
+              800: '#27272a',
+              700: '#3f3f46',
+            }
+          },
+          keyframes: {
+            dotPulse: {
+              '0%, 100%': { transform: 'scale(1)', opacity: '0.4' },
+              '50%': { transform: 'scale(1.4)', opacity: '1' }
+            },
+            floatGlow: {
+              '0%, 100%': { opacity: '0.3', transform: 'translateY(0px)' },
+              '50%': { opacity: '0.6', transform: 'translateY(-10px)' }
+            }
+          },
+          animation: {
+            'dot-pulse': 'dotPulse 1.4s infinite ease-in-out',
+            'float-glow': 'floatGlow 6s infinite ease-in-out',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121215;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+
+    /* Message bubble entry animation */
+    .msg-enter {
+      animation: msgPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes msgPop {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Typing animation dots */
+    .typing-dot {
+      animation: bounceDot 1.2s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes bounceDot {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Subtle Glassmorphism */
+    .glass-panel {
+      background: rgba(24, 24, 27, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body class="bg-dark-950 text-zinc-100 min-h-screen font-sans antialiased selection:bg-emerald-500/20 selection:text-emerald-400 relative overflow-x-hidden flex flex-col">
+
+  <!-- Background decorative light gradients -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-emerald-500/10 via-zinc-800/5 to-transparent blur-3xl pointer-events-none -z-10 animate-float-glow"></div>
+  <div class="fixed bottom-0 right-10 w-[500px] h-[300px] bg-gradient-to-t from-zinc-800/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <!-- Main Container -->
+  <div class="max-w-4xl mx-auto w-full px-4 py-6 sm:py-10 flex-1 flex flex-col justify-between">
+    
+    <!-- 1. HEADER SECTION -->
+    <header class="text-center mb-8 relative">
+      <!-- Top Action Row -->
+      <div class="flex items-center justify-between mb-4">
+        <!-- Brand small badge -->
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500/20 to-zinc-800 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/5">
+            <span class="text-xs font-mono font-bold text-emerald-400">D</span>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 tracking-wider">MOCK-AI LABS</span>
+        </div>
+
+        <!-- Audio & Actions -->
+        <div class="flex items-center gap-2">
+          <button id="soundToggleBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-300 transition" title="Ses Aç/Kapat">
+            <svg id="soundIconOn" class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <span id="soundText" class="hidden sm:inline">Ses Açık</span>
+          </button>
+          
+          <button id="resetChatBtn" class="px-3 py-1.5 rounded-full text-xs font-medium bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1" title="Sohbeti Temizle">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span class="hidden sm:inline">Sıfırla</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Title & Badge -->
+      <div class="inline-flex items-center gap-2.5 mb-2.5 flex-wrap justify-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+          DerinGPT <span class="text-sm font-mono font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-md">v0.1</span>
+        </h1>
+        
+        <!-- Ironic Status Badge -->
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 shadow-sm shadow-emerald-900/50">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Durum: Çok Konuşuyor
+        </span>
+      </div>
+
+      <p class="text-zinc-400 text-sm sm:text-base font-normal max-w-lg mx-auto">
+        Yapay Zeka Destekli Minimalist Cevap Motoru
+      </p>
+    </header>
+
+    <!-- 2. MAIN INTERACTION AREA (CHAT CONTAINER) -->
+    <main class="w-full flex-1 flex flex-col mb-8">
+      <div class="glass-panel rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-zinc-800/80">
+        
+        <!-- Chat Terminal Top Bar -->
+        <div class="px-4 py-3 bg-dark-900/90 border-b border-zinc-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="relative">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-600 border border-zinc-500/30 flex items-center justify-center font-semibold text-zinc-100 text-sm shadow">
+                D
+              </div>
+              <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-dark-900 rounded-full"></div>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-zinc-100">Derin</span>
+                <span class="text-[10px] uppercase font-mono px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">Bot</span>
+              </div>
+              <div class="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                <span class="text-emerald-400">Çevrimiçi</span>
+                <span>•</span>
+                <span class="text-zinc-500">son görülme: şimdi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Battery & Status info -->
+          <div class="flex items-center gap-3 text-xs font-mono text-zinc-400">
+            <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded bg-dark-850 border border-zinc-800" title="Şarj durumu">
+              <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>%12 Şarj</span>
+            </div>
+            <span class="text-zinc-600">|</span>
+            <span class="text-[11px] text-zinc-400">Gecikme: 400ms</span>
+          </div>
+        </div>
+
+        <!-- Message Thread Area -->
+        <div id="chatMessages" class="p-4 sm:p-6 space-y-4 min-h-[340px] max-h-[440px] overflow-y-auto flex flex-col">
+          
+          <!-- System context hint -->
+          <div class="text-center my-1">
+            <span class="text-[11px] font-mono text-zinc-500 bg-dark-900/70 border border-zinc-800/80 px-3 py-1 rounded-full">
+              🔒 Derin ile uçtan uca umursamaz şifreleme devrede
+            </span>
+          </div>
+
+          <!-- Default mock exchange -->
+          <!-- User message -->
+          <div class="flex justify-end msg-enter">
+            <div class="max-w-[82%] sm:max-w-[70%] bg-emerald-600/90 text-white px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-md text-sm">
+              <p>Aşkım günün nasıl geçti? Bugün işte çok yoruldum, toplantılar hiç bitmedi sonra eve gelirken arabanın lastiği patladı resmen perişan oldum sen nasılsın neler yaptın?</p>
+              <div class="text-[10px] text-emerald-200/80 text-right mt-1 font-mono">18:24</div>
+            </div>
+          </div>
+
+          <!-- Derin message -->
+          <div class="flex justify-start msg-enter">
+            <div class="max-w-[80%] sm:max-w-[65%] bg-dark-850 border border-zinc-800 text-zinc-200 px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-md text-sm">
+              <p class="font-medium text-base">he</p>
+              <div class="flex items-center justify-end gap-1.5 text-[10px] text-zinc-500 mt-1 font-mono">
+                <span>18:24</span>
+                <span class="text-blue-400" title="Görüldü">✓✓</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Typing Indicator (Hidden by default) -->
+        <div id="typingIndicator" class="px-4 pb-2 hidden">
+          <div class="inline-flex items-center gap-2 bg-dark-850 border border-zinc-800/80 px-3.5 py-2 rounded-2xl rounded-tl-sm text-xs text-zinc-400">
+            <span class="font-medium text-zinc-300">Derin yazıyor</span>
+            <div class="flex items-center gap-1">
+              <span class="typing-dot w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block"></span>
+              <span class="typing-dot w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block"></span>
+              <span class="typing-dot w-1.5 h-1.5 bg-emerald-400 rounded-full inline-block"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Prompts Row -->
+        <div class="px-4 py-2 bg-dark-900/60 border-t border-zinc-800/60 flex items-center gap-2 overflow-x-auto text-xs no-scrollbar">
+          <span class="text-[11px] text-zinc-500 font-mono flex-shrink-0">Örnekler:</span>
+          <button class="quick-prompt px-2.5 py-1 rounded-full bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-300 transition flex-shrink-0 whitespace-nowrap">
+            Akşam buluşalım mı?
+          </button>
+          <button class="quick-prompt px-2.5 py-1 rounded-full bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-300 transition flex-shrink-0 whitespace-nowrap">
+            Beni hiç dinlemiyorsun
+          </button>
+          <button class="quick-prompt px-2.5 py-1 rounded-full bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-300 transition flex-shrink-0 whitespace-nowrap">
+            Neredesin şu an?
+          </button>
+          <button class="quick-prompt px-2.5 py-1 rounded-full bg-dark-850 hover:bg-dark-800 border border-zinc-800 text-zinc-300 transition flex-shrink-0 whitespace-nowrap">
+            Seni çok seviyorum canım
+          </button>
+        </div>
+
+        <!-- Chat Input Form & Simulation Button -->
+        <div class="p-3 sm:p-4 bg-dark-900 border-t border-zinc-800/80 flex flex-col gap-2.5">
+          <!-- Simulation button banner -->
+          <div class="flex justify-between items-center">
+            <button id="simulateBtn" class="w-full py-2 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-emerald-600/30 via-zinc-800 to-zinc-800 hover:from-emerald-600/40 hover:via-zinc-700 hover:to-zinc-700 border border-emerald-500/30 text-emerald-300 transition flex items-center justify-center gap-2 shadow-sm">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>⚡ Derin ile Sohbeti Simüle Et (Rastgele Soru At)</span>
+            </button>
+          </div>
+
+          <form id="chatForm" class="flex items-center gap-2">
+            <div class="relative flex-1">
+              <input 
+                id="messageInput" 
+                type="text" 
+                placeholder="Derin'e bir şeyler anlat..." 
+                autocomplete="off"
+                class="w-full px-4 py-3 rounded-xl bg-dark-850 border border-zinc-700/80 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-sm text-zinc-100 placeholder-zinc-500 transition"
+              />
+            </div>
+            
+            <button 
+              id="sendBtn" 
+              type="submit" 
+              class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-900/30 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span>Gönder</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- 3. STATISTICS DASHBOARD (BUGÜNKÜ ENERJİ TÜKETİM RAPORU) -->
+    <section class="glass-panel rounded-2xl p-5 sm:p-6 border border-zinc-800/80 shadow-xl cursor-pointer hover:border-zinc-700 transition" id="statsCard" title="Detaylı rapor için tıkla">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-zinc-100">Bugünkü Enerji Tüketim Raporu</h2>
+            <p class="text-[11px] text-zinc-400">Gerçek zamanlı duygusal ve fiziksel harcanan efor telemetrisi</p>
+          </div>
+        </div>
+
+        <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-dark-900 border border-zinc-800 text-zinc-400">
+          Canlı Veri
+        </span>
+      </div>
+
+      <!-- Metric Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        
+        <!-- Metric 1: Harcanan Harf Sayısı -->
+        <div class="bg-dark-900/80 border border-zinc-800/80 p-3.5 rounded-xl flex flex-col justify-between hover:border-zinc-700 transition">
+          <div class="text-[11px] font-medium text-zinc-400">Harcanan Harf Sayısı</div>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span id="charCount" class="text-2xl sm:text-3xl font-bold font-mono text-zinc-100">14</span>
+            <span class="text-[10px] font-mono text-zinc-500">harf</span>
+          </div>
+          <div class="mt-2 text-[10px] text-emerald-400 flex items-center gap-1">
+            <span>●</span>
+            <span>Maksimum tasarruf</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: 'He' Oranı -->
+        <div class="bg-dark-900/80 border border-zinc-800/80 p-3.5 rounded-xl flex flex-col justify-between hover:border-zinc-700 transition">
+          <div class="text-[11px] font-medium text-zinc-400">'He' Oranı</div>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span id="heRatio" class="text-2xl sm:text-3xl font-bold font-mono text-emerald-400">%89</span>
+          </div>
+          <div class="mt-2 text-[10px] text-zinc-400">
+            TÜİK standardı (%50+)
+          </div>
+        </div>
+
+        <!-- Metric 3: Sohbeti Ayakta Tutma Çabası -->
+        <div class="bg-dark-900/80 border border-zinc-800/80 p-3.5 rounded-xl flex flex-col justify-between hover:border-zinc-700 transition">
+          <div class="text-[11px] font-medium text-zinc-400">Ayakta Tutma Çabası</div>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="text-2xl sm:text-3xl font-bold font-mono text-zinc-400">%0</span>
+          </div>
+          <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-2 overflow-hidden">
+            <div class="bg-zinc-600 h-full w-0"></div>
+          </div>
+        </div>
+
+        <!-- Metric 4: Ex & Kavga Potansiyeli -->
+        <div class="bg-dark-900/80 border border-zinc-800/80 p-3.5 rounded-xl flex flex-col justify-between hover:border-zinc-700 transition">
+          <div class="text-[11px] font-medium text-zinc-400">Ex & Kavga Potansiyeli</div>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span class="text-2xl sm:text-3xl font-bold font-mono text-rose-500 animate-pulse">%99</span>
+          </div>
+          <div class="mt-2 text-[10px] text-rose-400 flex items-center gap-1 font-semibold">
+            <span>🔥</span>
+            <span>Kritik Eşik Aşıldı</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Toast Prompt -->
+      <div class="mt-4 pt-3 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-500">
+        <span>💡 İpucu: Bu rapora tıklayarak veya sohbet ederek Derin'in 10 dakikalık kotasını doldurabilirsiniz.</span>
+        <span class="text-emerald-400 hover:underline font-mono text-[11px] hidden sm:inline">Detay Gör →</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-zinc-600 font-mono">
+      <p>DerinGPT v0.1 • Yüksek empati içermez • GitHub Pages ile yayında</p>
+    </footer>
+
+  </div>
+
+  <!-- APPLICATION LOGIC SCRIPT -->
+  <script>
+    // State management
+    const state = {
+      soundEnabled: true,
+      harfSayisi: 14,
+      totalResponses: 3,
+      heResponses: 2,
+      isTyping: false,
+    };
+
+    // Response pool definition
+    // "he" has a 50% probability; the rest share the remaining 50%
+    const otherResponses = [
+      "heya",
+      "tabi",
+      "uok",
+      "sarjim bitiyo",
+      "OAYWUAHHA",
+      "patates kziartmasi",
+      "eve giroyofum"
+    ];
+
+    // Simulation prompts list for the simulate button
+    const simulationPrompts = [
+      "Yarın sinemaya gidelim mi?",
+      "Neden mesajlarıma 4 saat sonra cevap veriyorsun?",
+      "Annem seni yemeğe çağırıyor ne diyeyim?",
+      "Bugün saçımı kestirdim nasıl olmuş?",
+      "Hayatının anlamı neence?",
+      "Sana çok kırgınım şu an farkında mısın?",
+      "Hala evde misin yoksa çıktın mı?",
+      "Köpeğimiz olsa adını ne koyardık?"
+    ];
+
+    // DOM Elements
+    const chatMessages = document.getElementById('chatMessages');
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const simulateBtn = document.getElementById('simulateBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const charCountEl = document.getElementById('charCount');
+    const heRatioEl = document.getElementById('heRatio');
+    const statsCard = document.getElementById('statsCard');
+    const toastContainer = document.getElementById('toastContainer');
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundText = document.getElementById('soundText');
+    const soundIconOn = document.getElementById('soundIconOn');
+    const resetChatBtn = document.getElementById('resetChatBtn');
+    const quickPrompts = document.querySelectorAll('.quick-prompt');
+
+    // Web Audio API Synthesizer (No external sound files needed!)
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playBeep(frequency = 587.33, duration = 0.08, type = 'sine') {
+      if (!state.soundEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    // Toggle Sound
+    soundToggleBtn.addEventListener('click', () => {
+      state.soundEnabled = !state.soundEnabled;
+      if (state.soundEnabled) {
+        soundText.textContent = "Ses Açık";
+        soundIconOn.classList.remove('text-zinc-500');
+        soundIconOn.classList.add('text-emerald-400');
+        playBeep(880, 0.05);
+      } else {
+        soundText.textContent = "Sessiz";
+        soundIconOn.classList.remove('text-emerald-400');
+        soundIconOn.classList.add('text-zinc-500');
+      }
+    });
+
+    // Helper: Format current time (HH:mm)
+    function getCurrentTime() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      return `${h}:${m}`;
+    }
+
+    // Toast Generator
+    function showToast(message, subtitle = "") {
+      const toast = document.createElement('div');
+      toast.className = "pointer-events-auto bg-dark-900 border border-emerald-500/40 text-zinc-100 p-4 rounded-xl shadow-2xl flex items-start gap-3 transition-all duration-300 transform translate-y-2 opacity-0";
+      toast.innerHTML = `
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div class="flex-1 pr-2">
+          <div class="text-xs font-bold text-zinc-100">${message}</div>
+          ${subtitle ? `<div class="text-[11px] text-zinc-400 mt-0.5">${subtitle}</div>` : ''}
+        </div>
+        <button class="text-zinc-500 hover:text-zinc-300 text-xs font-mono ml-1" onclick="this.parentElement.remove()">✕</button>
+      `;
+      toastContainer.appendChild(toast);
+      
+      // Animate in
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      // Auto dismiss after 4.5s
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+    }
+
+    // Troll response generator with 50% "he" probability
+    function pickResponse() {
+      const isHe = Math.random() < 0.50; // 50% chance
+      if (isHe) {
+        return "he";
+      } else {
+        const randomIndex = Math.floor(Math.random() * otherResponses.length);
+        return otherResponses[randomIndex];
+      }
+    }
+
+    // Update Statistics
+    function updateStats(newReply) {
+      state.harfSayisi += newReply.length;
+      state.totalResponses += 1;
+      if (newReply === 'he') {
+        state.heResponses += 1;
+      }
+
+      // Harf sayısı update
+      charCountEl.textContent = state.harfSayisi;
+
+      // He oranı update
+      const calculatedRatio = Math.round((state.heResponses / state.totalResponses) * 100);
+      heRatioEl.textContent = `%${calculatedRatio}`;
+
+      // If user reaches 5 replies, show quota alert toast!
+      if (state.totalResponses === 5 || state.totalResponses === 10) {
+        setTimeout(() => {
+          showToast(
+            "Tebrikler, Derin'in 10 dakikalık kota hakkını doldurdunuz!", 
+            "Cihazın aşırı ısınmaması ve beynin yorulmaması için rölantiye alındı."
+          );
+        }, 600);
+      }
+    }
+
+    // Add user message to UI
+    function addUserMessage(text) {
+      const time = getCurrentTime();
+      const msgDiv = document.createElement('div');
+      msgDiv.className = "flex justify-end msg-enter";
+      msgDiv.innerHTML = `
+        <div class="max-w-[82%] sm:max-w-[70%] bg-emerald-600/90 text-white px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-md text-sm">
+          <p class="break-words">${escapeHTML(text)}</p>
+          <div class="text-[10px] text-emerald-200/80 text-right mt-1 font-mono">${time}</div>
+        </div>
+      `;
+      chatMessages.appendChild(msgDiv);
+      scrollToBottom();
+      playBeep(440, 0.05); // low beep for user sent
+    }
+
+    // Add Derin response to UI
+    function addDerinMessage(reply) {
+      const time = getCurrentTime();
+      const msgDiv = document.createElement('div');
+      msgDiv.className = "flex justify-start msg-enter";
+      msgDiv.innerHTML = `
+        <div class="max-w-[80%] sm:max-w-[65%] bg-dark-850 border border-zinc-800 text-zinc-200 px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-md text-sm">
+          <p class="font-medium text-base break-words">${escapeHTML(reply)}</p>
+          <div class="flex items-center justify-end gap-1.5 text-[10px] text-zinc-500 mt-1 font-mono">
+            <span>${time}</span>
+            <span class="text-blue-400" title="Görüldü">✓✓</span>
+          </div>
+        </div>
+      `;
+      chatMessages.appendChild(msgDiv);
+      scrollToBottom();
+      playBeep(880, 0.08, 'triangle'); // playful ping for Derin's answer
+      updateStats(reply);
+    }
+
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    // Handle send message flow with 400ms typing delay
+    function handleSend(text) {
+      if (!text || !text.trim() || state.isTyping) return;
+
+      const cleanedText = text.trim();
+      addUserMessage(cleanedText);
+      messageInput.value = '';
+      
+      // Set typing state
+      state.isTyping = true;
+      sendBtn.disabled = true;
+      simulateBtn.disabled = true;
+      typingIndicator.classList.remove('hidden');
+      scrollToBottom();
+
+      // Realistic 400ms typing delay
+      setTimeout(() => {
+        typingIndicator.classList.add('hidden');
+        const reply = pickResponse();
+        addDerinMessage(reply);
+        state.isTyping = false;
+        sendBtn.disabled = false;
+        simulateBtn.disabled = false;
+        messageInput.focus();
+      }, 400);
+    }
+
+    // Form submit listener
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleSend(messageInput.value);
+    });
+
+    // Simulate button listener
+    simulateBtn.addEventListener('click', () => {
+      const randomPrompt = simulationPrompts[Math.floor(Math.random() * simulationPrompts.length)];
+      handleSend(randomPrompt);
+    });
+
+    // Quick prompt pills listeners
+    quickPrompts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        handleSend(btn.textContent.trim());
+      });
+    });
+
+    // Reset chat button
+    resetChatBtn.addEventListener('click', () => {
+      chatMessages.innerHTML = `
+        <div class="text-center my-1">
+          <span class="text-[11px] font-mono text-zinc-500 bg-dark-900/70 border border-zinc-800/80 px-3 py-1 rounded-full">
+            🔒 Sohbet sıfırlandı. Derin hala hazır ve umursamaz.
+          </span>
+        </div>
+      `;
+      state.harfSayisi = 0;
+      state.totalResponses = 0;
+      state.heResponses = 0;
+      charCountEl.textContent = '0';
+      heRatioEl.textContent = '%0';
+      showToast("Sohbet sıfırlandı!", "Derin'in zihni tertemiz oldu.");
+    });
+
+    // Stats card click trigger toast
+    statsCard.addEventListener('click', () => {
+      showToast(
+        "Tebrikler, Derin'in 10 dakikalık kota hakkını doldurdunuz!",
+        `Şu ana kadar harcanan toplam harf: ${state.harfSayisi}. Daha fazla yormayınız.`
+      );
+    });
+
+    // Focus input on load
+    window.addEventListener('load', () => {
+      messageInput.focus();
+    });
+  </script>
+
+</body>
+</html>
