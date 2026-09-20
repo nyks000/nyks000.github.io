@@ -104,8 +104,39 @@
 
 <body class="bg-dark-950 text-zinc-100 font-sans antialiased selection:bg-emerald-500/20 selection:text-emerald-400 overflow-hidden h-full flex justify-center">
 
+  <!-- Welcome Modal / Alert Overlay -->
+  <div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all duration-300">
+    <div class="bg-dark-900 border border-zinc-700/80 rounded-2xl max-w-xs sm:max-w-sm w-full p-5 sm:p-6 text-center shadow-2xl relative transform transition-all duration-300">
+      <!-- Icon -->
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-zinc-800 border border-emerald-500/30 mx-auto flex items-center justify-center mb-4 text-emerald-400 shadow-lg shadow-emerald-500/10">
+        <span class="text-xl font-bold font-mono">D</span>
+      </div>
+      
+      <!-- Title -->
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 mb-3">
+        DerinGPT v0.1
+      </div>
+
+      <!-- User's Requested Notice -->
+      <p class="text-sm sm:text-base text-zinc-200 font-medium leading-relaxed mb-6 px-1">
+        "Burada seni canlandırdım, kendinle konuşmak nasıl bir bak istedim."
+      </p>
+
+      <!-- Confirmation Button -->
+      <button 
+        id="welcomeConfirmBtn" 
+        class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-semibold text-sm transition shadow-lg shadow-emerald-950 flex items-center justify-center gap-2"
+      >
+        <span>Tamam</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <!-- Toast Notification Overlay -->
-  <div id="toastContainer" class="fixed top-4 left-4 right-4 z-50 flex flex-col gap-2 max-w-sm mx-auto pointer-events-none"></div>
+  <div id="toastContainer" class="fixed top-4 left-4 right-4 z-40 flex flex-col gap-2 max-w-sm mx-auto pointer-events-none"></div>
 
   <!-- Mobile App Frame Container -->
   <div class="w-full max-w-md app-height flex flex-col bg-dark-900 border-x border-zinc-800/60 shadow-2xl relative">
@@ -347,6 +378,8 @@
     ];
 
     // Elements
+    const welcomeModal = document.getElementById('welcomeModal');
+    const welcomeConfirmBtn = document.getElementById('welcomeConfirmBtn');
     const chatMessages = document.getElementById('chatMessages');
     const chatForm = document.getElementById('chatForm');
     const messageInput = document.getElementById('messageInput');
@@ -575,6 +608,17 @@
       charCountEl.textContent = '0';
       heRatioEl.textContent = '%0';
       showToast("Sohbet sıfırlandı!", "Derin'in hafızası temizlendi.");
+    });
+
+    // Welcome modal dismiss handler
+    welcomeConfirmBtn.addEventListener('click', () => {
+      initAudio();
+      playBeep(659.25, 0.08); // welcome ping
+      welcomeModal.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        welcomeModal.remove();
+        messageInput.focus();
+      }, 300);
     });
 
     statsCard.addEventListener('click', () => {
