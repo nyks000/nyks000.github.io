@@ -1,42 +1,37 @@
-# DerinGPT v0.1 🤖
+# Meryem'e Özel ✨ 🧸 Dünyanın En Tatlı Nazlısına
 
-> **Yapay Zeka Destekli Minimalist Cevap Motoru**  
-> Yeni tanışılan Derin ile sohbeti simüle eden, 1 kelimelik cevap uzmanı brutal troll mobil web uygulaması.
+> **Konya'nın en tatlı ama kesinlikle en nazlı kızı Meryem için hazırlanmış sevimli sürpriz web sitesi!**
 
-![DerinGPT Preview](https://img.shields.io/badge/Durum-Çok_Konuşuyor-emerald?style=for-the-badge)
-![He Oranı](https://img.shields.io/badge/'He'_Oranı-%2589-blue?style=for-the-badge)
-![Ghost Riski](https://img.shields.io/badge/Ghost_Riski-%2595-amber?style=for-the-badge)
+![Tasarım](https://img.shields.io/badge/Tasarım-Ayıcıklı_%26_Tatlış-pink?style=for-the-badge)
+![Naz Seviyesi](https://img.shields.io/badge/Naz_Seviyesi-%25100_Maksimum-rose?style=for-the-badge)
+![Konum](https://img.shields.io/badge/Konum-Konya_⇄_Kalp-amber?style=for-the-badge)
 
 ---
 
 ## 📱 Mobil Odaklı Özellikler
 
-- **100% Mobile-First Tasarım**: Telefon ekranına tam oturan (100dvh), kaydırması kolay, akıcı yerel uygulama hissi veren modern karanlık tema.
-- **Yeni Tanışma Konsepti**: Birbirini yeni tanıyan kişilerin gerçekçi diyalogları (kahve içme teklifleri, müzik zevki soruları) ve Derin'in minimalist `"he"` duvarı.
-- **Gerçekçi 400ms Gecikme**: 400 milisaniyelik "Derin yazıyor..." animasyonu.
-- **Matematiksel Dağılım (%50 'he')**:
-  - `%50` ihtimalle: `he`
-  - Kalan `%50` ihtimalle: `heya`, `tabi`, `uok`, `sarjim bitiyo`, `OAYWUAHHA`, `patates kziartmasi`, `eve giroyofum`.
-- **Canlı Enerji Tüketim Raporu**:
-  - *Harcanan Harf Sayısı* (Canlı sayaç)
-  - *'He' Oranı* (Dinamik yüzde)
-  - *Sohbeti Ayakta Tutma Çabası* (`%0`)
-  - *Ghostlanma Riski* (`%95`)
-- **Kota Uyarı Bildirimi**: Rapora tıklandığında veya kota dolduğunda bildirim toast'u.
-- **Web Audio API**: Dışarıdan dosya yüklemeden çalışan tarayıcı içi bildirim sesleri.
-- **Sıfır Bağımlılık (Zero-Config)**: Tek bir `index.html` dosyası. GitHub Pages için hazır.
+- **%100 Mobil Uyumlu (Mobile-First)**: Telefon ekranlarına özel tasarlanmış, iOS & Android safe-area destekli, akıcı pastel tasarım.
+- **İnteraktif Sevimli Ayıcık**:
+  - Dokundukça konuşan, gıdıklanan, utanan ve tepki veren sevimli SVG ayıcık.
+  - Ekrana her dokunulduğunda uçuşan kalpler, yıldızlar ve konfetiler.
+- **Sanal Ayıcık Sarılması**:
+  - Butona bastıkça Meryem'e sarılma gönderen sayaç ve kalp patlamaları.
+- **Resmi Meryem Naz Ölçer (Nazmetre)**:
+  - Konya meteoroloji & naz analiz raporu: Hemşehri indirimi, cevap süreleri ve "Düşürülemez Fabrika Ayarı Naz" esprisi.
+- **Kaçan Buton Oyunu ("Günlük Anlaşma")**:
+  - "Bugünlük naz yapmayıp gülecek misin?" sorusunda parmak değdiği anda ekranda kaçan *Hayır* butonu ve yakalanmayan tatlı animasyonlar!
+- **Günün Meryem Notu & İltifat Kutusu**:
+  - Her tıklamada rastgele tatlı iltifatlar ve şans kurabiyesi tarzı özel mesajlar.
+- **Dahili Müzik Kutusu & Ses Efektleri**:
+  - Web Audio API ile sıfır harici dosya yüküyle anında çalışan sevimli melodi ve tık sesleri.
 
 ---
 
-## 🚀 GitHub Pages ile Canlıya Alma (2 Adımda)
+## 🚀 Canlıya Alma
 
-1. Bu depoyu GitHub'a gönderin (push edin):
-   ```bash
-   git add .
-   git commit -m "feat: mobile-first DerinGPT v0.1"
-   git push origin main
-   ```
-2. GitHub deponuzun **Settings > Pages** sekmesine gidin:
-   - **Source**: `Deploy from a branch`
-   - **Branch**: `main` / `root` seçin ve **Save** butonuna tıklayın.
-   - 1-2 dakika içinde `https://<kullanici-adiniz>.github.io/derin/` adresinde canlıya geçecektir!
+Bu repo GitHub Pages (`nyks000.github.io`) için doğrudan hazırdır:
+```bash
+git add .
+git commit -m "feat: Meryem için ayıcıklı tatlış mobil site ✨🧸"
+git push origin main
+```
