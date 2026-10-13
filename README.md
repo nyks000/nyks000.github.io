@@ -1,25 +1,26 @@
-# Beren'e Özel ✨ 2. Yıl Hatırası 🌸☕
+# Beren'e Özel ✨ 2 Yıllık Didişme & Ateşkes Hatırası 🥊☕
 
-> **Ordu'dan Ankara'ya uzanan 2 yıllık hikayenin şerefine hazırlanmış; samimi, hafif flörtöz ve tatlı mobil web sitesi!**
+> **2 yıldır didişen, tartışan ama bir türlü kopamayanlara özel samimi ve tatlı mobil web sitesi!**
 
-![Tasarım](https://img.shields.io/badge/Aura-Tatlı_%26_Cool-rose?style=for-the-badge)
-![Süre](https://img.shields.io/badge/Zaman-2._Yıl-emerald?style=for-the-badge)
-![Plan](https://img.shields.io/badge/Plan-Ankara_Kahvesi-amber?style=for-the-badge)
+![Dinamik](https://img.shields.io/badge/Dinamik-Didişmeli_%26_Tatlı-rose?style=for-the-badge)
+![Geçmiş](https://img.shields.io/badge/O_Zaman-Hiç_O_Gözle_Bakmıyordum-amber?style=for-the-badge)
+![Şimdi](https://img.shields.io/badge/Şimdi-Kahve_Ateşkesi-emerald?style=for-the-badge)
 
 ---
 
 ## 📱 Özellikler
 
-- **Tatlı & Samimi Maskot**:
-  - Elinde kahve tutan sevimli fındık maskotu, dokundukça doğal ve yüz güldüren espriler.
-- **Beren Hakkında Notlar & Gözlemler**:
-  - Karadeniz inadı, 10/10 sohbet kalitesi ve 2 yıllık samimi gözlemler.
-- **Küçük Samimi Notlar (3D Dönen Kartlar)**:
-  - Dokunulduğunda arkasını dönen anı ve kahve kartları.
-- **2. Yıl Kahve Teklifi Oyunu**:
-  - "Bu hafta bir ara Ankara'da kahve içmeye kaçıyor muyuz?" sorusunda kaçan "Yok, işim var" butonu!
+- **Gerçek Dinamiğe Özel Hikaye**:
+  - *"2 yıldır birbirimizi yemekten başka bir şey yapmadık, o zamanlar hiç o gözle bakmıyordum ama son zamanlarda durum değişti sanki?"*
+- **Didişme Arası İtiraflar (3D Dönen Kartlar)**:
+  - 1. *O Zaman vs Şimdi*: 2 yıl önce hiç o gözle bakmayıp sonradan durumun değiştiğini anlatan samimi itiraf kartı.
+  - 2. *Bitmeyen Atışmalar*: Her konuda zıtlaşsalar da tartışmanın bile başkasıyla konuşmaktan daha çok sardığı tespiti.
+  - 3. *O Meşhur İnat*: Karadeniz inadının tatlı atışmaları.
+  - 4. *Kahve Ateşkesi*: Ankara'da didişmeye bir kahve molası verme teklifi.
+- **Resmi Ateşkes & Kahve Teklifi Oyunu**:
+  - *"Bu hafta didişmeye bir kahve molası verelim mi?"* sorusunda yakalanmayan, kaçan *"Hayır, tartışmaya devam 🥊"* butonu!
 - **Dahili Müzik Kutusu & Ses Efektleri**:
-  - Web Audio API ile sıfır harici dosya yüküyle çalışan sakin, tatlı kalimba melodisi.
+  - Web Audio API ile sıfır harici dosya yüküyle çalışan sakin, tatlı melodi.
 
 ---
 
@@ -27,6 +28,6 @@
 
 ```bash
 git add .
-git commit -m "feat: Beren için samimi ve tatlış ayar güncellemesi ✨"
+git commit -m "feat: Beren icin gercek didisme ve atisma hikayesi ayari 🥊✨"
 git push origin main
 ```
