@@ -1,37 +1,35 @@
-# Meryem'e Özel ✨ 🧸 Dünyanın En Tatlı Nazlısına
+# Beren'e Özel ✨ 2. Yıl Hatırası 🌊🌰
 
-> **Konya'nın en tatlı ama kesinlikle en nazlı kızı Meryem için hazırlanmış sevimli sürpriz web sitesi!**
+> **Ordu'dan Ankara'ya uzanan 2 yıllık tanışıklığın şerefine hazırlanmış özel, tatlı ve estetik mobil web sitesi!**
 
-![Tasarım](https://img.shields.io/badge/Tasarım-Ayıcıklı_%26_Tatlış-pink?style=for-the-badge)
-![Naz Seviyesi](https://img.shields.io/badge/Naz_Seviyesi-%25100_Maksimum-rose?style=for-the-badge)
-![Konum](https://img.shields.io/badge/Konum-Konya_⇄_Kalp-amber?style=for-the-badge)
+![Tasarım](https://img.shields.io/badge/Tasarım-Ordu_Yeşili_%26_Ankara_Işıltısı-teal?style=for-the-badge)
+![Dostluk](https://img.shields.io/badge/Dostluk-2._Yıl_Dönümü-emerald?style=for-the-badge)
+![Konum](https://img.shields.io/badge/Konum-Ordu_➔_Ankara-amber?style=for-the-badge)
 
 ---
 
-## 📱 Mobil Odaklı Özellikler
+## 📱 Özellikler
 
-- **%100 Mobil Uyumlu (Mobile-First)**: Telefon ekranlarına özel tasarlanmış, iOS & Android safe-area destekli, akıcı pastel tasarım.
-- **İnteraktif Sevimli Ayıcık**:
-  - Dokundukça konuşan, gıdıklanan, utanan ve tepki veren sevimli SVG ayıcık.
-  - Ekrana her dokunulduğunda uçuşan kalpler, yıldızlar ve konfetiler.
-- **Sanal Ayıcık Sarılması**:
-  - Butona bastıkça Meryem'e sarılma gönderen sayaç ve kalp patlamaları.
-- **Resmi Meryem Naz Ölçer (Nazmetre)**:
-  - Konya meteoroloji & naz analiz raporu: Hemşehri indirimi, cevap süreleri ve "Düşürülemez Fabrika Ayarı Naz" esprisi.
-- **Kaçan Buton Oyunu ("Günlük Anlaşma")**:
-  - "Bugünlük naz yapmayıp gülecek misin?" sorusunda parmak değdiği anda ekranda kaçan *Hayır* butonu ve yakalanmayan tatlı animasyonlar!
-- **Günün Meryem Notu & İltifat Kutusu**:
-  - Her tıklamada rastgele tatlı iltifatlar ve şans kurabiyesi tarzı özel mesajlar.
+- **%100 Mobil Odaklı (Mobile-First)**: Telefon ekranlarına göre optimize edilmiş, modern pastel yeşil & deniz mavisi tonlarında akıcı arayüz.
+- **Ordu & Ankara Dokunuşları**:
+  - Karadeniz fındığı maskotu (elinde Ankara kahvesiyle!).
+  - Dokundukça Ordu-Ankara esprileri ve tatlı mesajlar veren interaktif konuşma balonu.
+- **Resmi Beren Kimlik Kartı**:
+  - Karadeniz inadı testi, Ankara ayazına dayanıklılık ve 5 yıldızlı dostluk raporu.
+  - "İnadı Düşür" butonu ile çöken eğlenceli hata uyarısı!
+- **2 Yılın Küçük Notları (Açılır Kartlar)**:
+  - Dokunulduğunda arkasını dönen (3D flip) anı kartları (İlk tanışma, Boztepe & fındık, Tunalı kahvesi ve gelecek yıllar).
+- **2. Yıl Dostluk Sözleşmesi & Kaçan İtiraz Butonu**:
+  - "1 yıl daha uzatmayı kabul ediyor musunuz?" sorusunda yakalanmayan, dokundukça kaçan eğlenceli "İtiraz Ediyorum" butonu!
 - **Dahili Müzik Kutusu & Ses Efektleri**:
-  - Web Audio API ile sıfır harici dosya yüküyle anında çalışan sevimli melodi ve tık sesleri.
+  - Web Audio API ile sıfır harici dosya yüküyle anında çalışan sakin, tatlı kalimba melodisi.
 
 ---
 
 ## 🚀 Canlıya Alma
 
-Bu repo GitHub Pages (`nyks000.github.io`) için doğrudan hazırdır:
 ```bash
 git add .
-git commit -m "feat: Meryem için ayıcıklı tatlış mobil site ✨🧸"
+git commit -m "feat: Beren için 2. yıl özel tatlı mobil site ✨"
 git push origin main
 ```
