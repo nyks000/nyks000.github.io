@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#EBF4F6" />
-  <title>Beren'e Özel ✨ 2. Yıl Hatırası</title>
-  <meta name="description" content="Ordu'dan Ankara'ya uzanan 2 yıllık dostluğun en tatlı sürprizi!" />
+  <meta name="theme-color" content="#FFE4E9" />
+  <title>Beren'e Özel ✨ Artık Sadece Arkadaş mıyız?</title>
+  <meta name="description" content="Ordu'dan Ankara'ya uzanan 2 yıllık hikayede çıtayı biraz yükseltme vakti geldi!" />
 
-  <!-- Google Fonts: Fredoka & Outfit for modern, aesthetic, cozy look -->
+  <!-- Google Fonts: Fredoka & Outfit & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -27,29 +27,20 @@
             jakarta: ['Plus Jakarta Sans', 'sans-serif'],
           },
           colors: {
-            ordu: {
-              sea: '#3B82F6',
+            flirt: {
+              rose: '#FF4D6D',
+              lightrose: '#FFF0F3',
+              deeprose: '#C9184A',
+              blush: '#FF758F',
+              peach: '#FFAAA6',
               teal: '#0D9488',
-              emerald: '#10B981',
-              sage: '#E6F4EA',
-              wave: '#E0F2FE',
-            },
-            ankara: {
-              sunset: '#F97316',
-              peach: '#FED7AA',
-              warmgray: '#4B5563',
-            },
-            cozy: {
-              bg: '#F8FAFC',
-              card: 'rgba(255, 255, 255, 0.88)',
-              hazelnut: '#B45309',
-              lightbrown: '#FDF6ED',
+              warmgray: '#374151',
             }
           },
           boxShadow: {
-            'soft': '0 12px 30px -8px rgba(13, 148, 136, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
-            'bubble': '0 6px 0px rgba(13, 148, 136, 0.25)',
-            'glass': '0 8px 32px 0 rgba(148, 163, 184, 0.18)',
+            'glow': '0 10px 25px -5px rgba(255, 77, 109, 0.3), 0 8px 10px -6px rgba(255, 77, 109, 0.15)',
+            'bubble': '0 6px 0px rgba(201, 24, 74, 0.3)',
+            'soft': '0 12px 30px -8px rgba(255, 117, 143, 0.2)',
           }
         }
       }
@@ -63,7 +54,7 @@
     }
 
     body {
-      background: linear-gradient(145deg, #F0FDF4 0%, #F0F9FF 50%, #FFF7ED 100%);
+      background: linear-gradient(145deg, #FFF0F3 0%, #FFE5EC 40%, #F0FDF4 100%);
       font-family: 'Outfit', sans-serif;
       min-height: 100vh;
       min-height: 100dvh;
@@ -72,10 +63,10 @@
     }
 
     /* Floating particles */
-    .floating-leaf {
+    .floating-item {
       position: absolute;
       pointer-events: none;
-      animation: floatMotion 9s linear infinite;
+      animation: floatMotion 8s linear infinite;
       opacity: 0.65;
     }
 
@@ -84,335 +75,298 @@
         transform: translateY(105vh) rotate(0deg) scale(0.6);
         opacity: 0;
       }
-      20% { opacity: 0.8; }
-      80% { opacity: 0.8; }
+      20% { opacity: 0.85; }
+      80% { opacity: 0.85; }
       100% {
         transform: translateY(-10vh) rotate(360deg) scale(1.1);
         opacity: 0;
       }
     }
 
-    /* Gentle floating pulse */
-    @keyframes gentleFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-7px) rotate(1.5deg); }
+    /* Pulse and heartbeat */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.08); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.15); }
     }
-    .float-anim {
-      animation: gentleFloat 4s infinite ease-in-out;
-    }
-
-    /* Wave effect */
-    @keyframes waveRoll {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-15px); }
-      100% { transform: translateX(0); }
-    }
-    .wave-line {
-      animation: waveRoll 3s infinite ease-in-out;
+    .heart-pulse {
+      animation: heartbeat 1.5s infinite ease-in-out;
     }
 
     /* Tap feedback sparkle */
     .tap-sparkle {
       position: absolute;
       pointer-events: none;
-      font-size: 22px;
+      font-size: 24px;
       animation: popFade 0.85s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
       z-index: 9999;
     }
     @keyframes popFade {
       0% { opacity: 1; transform: scale(0.4) translateY(0); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-30px); }
-      100% { opacity: 0; transform: scale(0.8) translateY(-60px); }
+      50% { opacity: 1; transform: scale(1.25) translateY(-32px); }
+      100% { opacity: 0; transform: scale(0.8) translateY(-65px); }
     }
 
     /* Glass card styling */
-    .glass-box {
-      background: rgba(255, 255, 255, 0.85);
+    .glass-card {
+      background: rgba(255, 255, 255, 0.86);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1.5px solid rgba(255, 255, 255, 0.95);
     }
 
     /* Flip card effect */
-    .flip-card {
-      perspective: 1000px;
-    }
+    .flip-card { perspective: 1000px; }
     .flip-card-inner {
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
     }
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
     .flip-card-front, .flip-card-back {
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
     }
-    .flip-card-back {
-      transform: rotateY(180deg);
-    }
+    .flip-card-back { transform: rotateY(180deg); }
 
-    /* Safe areas for mobile devices */
+    /* Safe areas for mobile */
     .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
     .pt-safe { padding-top: env(safe-area-inset-top, 16px); }
   </style>
 </head>
-<body class="flex flex-col items-center justify-between text-gray-800 relative selection:bg-teal-100">
+<body class="flex flex-col items-center justify-between text-gray-800 relative selection:bg-rose-200">
 
-  <!-- Floating Particles Canvas -->
-  <div id="leaves-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+  <!-- Background Animated Particles -->
+  <div id="particles-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
 
   <!-- Header Bar -->
   <header class="w-full max-w-md px-4 pt-safe pt-3 flex justify-between items-center z-20">
-    <div class="flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-teal-100 shadow-sm">
+    <div class="flex items-center gap-1.5 bg-white/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-200 shadow-sm">
       <span class="text-xs">🌊</span>
-      <span class="text-[11px] font-fredoka font-semibold text-teal-800 tracking-wide">Ordu ➔ Ankara Hattı</span>
+      <span class="text-[11px] font-fredoka font-semibold text-rose-700 tracking-wide">Ordu ➔ Ankara Hattı</span>
+      <span class="text-xs">💘</span>
     </div>
 
     <div class="flex items-center gap-2">
       <!-- Melodi Butonu -->
-      <button id="music-toggle-btn" class="flex items-center gap-1.5 bg-white/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-teal-200 shadow-sm active:scale-95 transition-all text-xs font-semibold text-teal-700">
+      <button id="music-toggle-btn" class="flex items-center gap-1.5 bg-white/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-rose-200 shadow-sm active:scale-95 transition-all text-xs font-semibold text-rose-600">
         <span id="music-icon" class="text-xs">🎵</span>
         <span id="music-text">Melodi</span>
       </button>
 
       <!-- Ses Aç/Kapa Butonu -->
-      <button id="sfx-toggle-btn" class="w-8 h-8 rounded-full bg-white/85 backdrop-blur-md border border-teal-200 flex items-center justify-center text-xs shadow-sm active:scale-95 text-teal-800">
+      <button id="sfx-toggle-btn" class="w-8 h-8 rounded-full bg-white/85 backdrop-blur-md border border-rose-200 flex items-center justify-center text-xs shadow-sm active:scale-95 text-rose-700">
         <span id="sfx-icon">🔔</span>
       </button>
     </div>
   </header>
 
-  <!-- Main Mobile App Frame (Max 440px) -->
+  <!-- Main Mobile App Frame -->
   <main class="w-full max-w-md px-4 py-2 z-10 flex-1 flex flex-col justify-start">
 
-    <!-- TAB 1: ANA SAYFA & 2. YIL VİTRİNİ -->
+    <!-- TAB 1: ANA SAYFA & FLÖRT BAŞLANGICI -->
     <div id="tab-home" class="tab-content flex flex-col items-center gap-4 transition-opacity duration-300">
       
-      <!-- 2. Yıl Rozeti -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-teal-50 via-emerald-50 to-amber-50 border border-teal-200 shadow-sm animate-pulse">
-        <span class="text-xs">✨</span>
-        <span class="text-xs font-fredoka font-bold text-teal-800 tracking-wider">Tanışalı Neredeyse 2 Yıl Oldu!</span>
-        <span class="text-xs">🎉</span>
+      <!-- Teaser Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-100 via-pink-100 to-rose-100 border border-rose-300 shadow-sm animate-pulse">
+        <span class="text-xs">👀</span>
+        <span class="text-xs font-fredoka font-bold text-rose-700 tracking-wider">2 Yıldır Arkadaşız Ama... Çıtayı Yükseltelim mi? 😉</span>
       </div>
 
-      <!-- Hero Karakter / İllüstrasyon (Ordu & Ankara Köprüsü) -->
+      <!-- Mascot / Hero Illustration (Flirty Cute Hazelnut with Heart) -->
       <div class="relative mt-1 cursor-pointer group" id="hero-character-box" title="Dokun bakalım!">
         
-        <!-- Konuşma Baloncuğu -->
-        <div id="character-speech" class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white/95 text-teal-900 font-fredoka text-xs px-3.5 py-1.5 rounded-2xl shadow-soft border border-teal-200 whitespace-nowrap transition-all duration-300 transform scale-100 pointer-events-none flex items-center gap-1">
-          <span>Selam Beren! Dokun bakalım 🍃</span>
+        <!-- Speech Bubble -->
+        <div id="character-speech" class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white/95 text-rose-700 font-fredoka text-xs px-3.5 py-1.5 rounded-2xl shadow-soft border border-rose-200 whitespace-nowrap transition-all duration-300 transform scale-100 pointer-events-none flex items-center gap-1">
+          <span>Beren baksana, bu aralar çok mu güzelsin ne? 👀✨</span>
         </div>
 
-        <!-- Custom SVG Mascot: Karadeniz Fındığı & Boztepe / Kuğulu Park Dostu -->
-        <div class="w-52 h-52 mx-auto drop-shadow-lg float-anim">
+        <!-- SVG Mascot: Flirty Ordu Nut Holding Heart in Ankara -->
+        <div class="w-52 h-52 mx-auto drop-shadow-xl heart-pulse">
           <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
             <defs>
-              <linearGradient id="nutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="flirtNut" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#D97706" />
                 <stop offset="60%" stop-color="#B45309" />
                 <stop offset="100%" stop-color="#78350F" />
+              </linearGradient>
+              <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF4D6D" />
+                <stop offset="100%" stop-color="#C9184A" />
               </linearGradient>
               <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#34D399" />
                 <stop offset="100%" stop-color="#059669" />
               </linearGradient>
-              <linearGradient id="capGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#A7F3D0" />
-                <stop offset="100%" stop-color="#6EE7B7" />
-              </linearGradient>
             </defs>
 
-            <!-- Arka Dalgalar (Ordu Deniz Esintisi) -->
-            <path d="M 20 180 Q 60 170 100 180 T 180 180 T 220 180" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round" opacity="0.4" class="wave-line"/>
-            <path d="M 30 195 Q 70 188 110 195 T 190 195" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+            <!-- Arka Işıltı Çemberi -->
+            <circle cx="120" cy="130" r="75" fill="#FFE4E9" opacity="0.6"/>
 
-            <!-- Tatlı Fındık Şapkası / Yeşil Yaprak Taç (Ordu Fındık Kabuğu/Yaprağı) -->
+            <!-- Yeşil Fındık Yaprakları -->
             <g id="nut-leaves">
-              <!-- Sol Yaprak -->
-              <path d="M 120 70 C 80 40 50 65 65 95 C 80 85 105 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2" />
-              <!-- Sağ Yaprak -->
-              <path d="M 120 70 C 160 40 190 65 175 95 C 160 85 135 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2" />
-              <!-- Tepe Filiz -->
-              <path d="M 120 70 Q 120 45 132 40" stroke="#047857" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M 120 70 C 80 40 50 65 65 95 C 80 85 105 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2"/>
+              <path d="M 120 70 C 160 40 190 65 175 95 C 160 85 135 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2"/>
+              <path d="M 120 70 Q 120 45 132 40" stroke="#047857" stroke-width="3" stroke-linecap="round" fill="none"/>
               <circle cx="132" cy="40" r="3.5" fill="#34D399"/>
             </g>
 
-            <!-- Gövde: Sevimli Parlak Fındık Karakter -->
-            <path d="M 70 100 C 60 150 75 195 120 205 C 165 195 180 150 170 100 C 150 90 90 90 70 100 Z" fill="url(#nutGrad)" stroke="#78350F" stroke-width="3"/>
+            <!-- Fındık Gövdesi -->
+            <path d="M 70 100 C 60 150 75 195 120 205 C 165 195 180 150 170 100 C 150 90 90 90 70 100 Z" fill="url(#flirtNut)" stroke="#78350F" stroke-width="3"/>
+            <ellipse cx="95" cy="120" rx="9" ry="22" transform="rotate(-25 95 120)" fill="#FBBF24" opacity="0.4"/>
 
-            <!-- Fındık Işıltısı -->
-            <ellipse cx="95" cy="120" rx="10" ry="24" transform="rotate(-25 95 120)" fill="#FBBF24" opacity="0.35"/>
+            <!-- Göz Kırpan / Sevimli Çapkın Bakış -->
+            <!-- Sol Göz: Açık & Parlak -->
+            <ellipse cx="98" cy="138" rx="8" ry="10" fill="#1E293B"/>
+            <circle cx="95" cy="134" r="3.5" fill="#FFFFFF"/>
+            <circle cx="100" cy="141" r="1.5" fill="#FFFFFF"/>
 
-            <!-- Gözler -->
-            <g id="mascot-eyes">
-              <!-- Sol Göz -->
-              <ellipse cx="98" cy="138" rx="8" ry="10" fill="#1E293B"/>
-              <circle cx="95" cy="134" r="3.5" fill="#FFFFFF"/>
-              <circle cx="100" cy="141" r="1.5" fill="#FFFFFF"/>
+            <!-- Sağ Göz: Göz Kırpıyor ;) -->
+            <path d="M 136 138 Q 143 130 150 138" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
 
-              <!-- Sağ Göz -->
-              <ellipse cx="142" cy="138" rx="8" ry="10" fill="#1E293B"/>
-              <circle cx="139" cy="134" r="3.5" fill="#FFFFFF"/>
-              <circle cx="144" cy="141" r="1.5" fill="#FFFFFF"/>
+            <!-- Utangaç Kızaran Yanaklar -->
+            <ellipse cx="85" cy="154" rx="12" ry="8" fill="#FF4D6D" opacity="0.55"/>
+            <ellipse cx="155" cy="154" rx="12" ry="8" fill="#FF4D6D" opacity="0.55"/>
+
+            <!-- Çapkın Gülümseme -->
+            <path d="M 113 153 Q 122 165 130 155" stroke="#451A03" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+
+            <!-- Kolların Arasında Tutsun: Büyük Parlak Kalp -->
+            <g transform="translate(120, 175) scale(0.9)">
+              <path d="M 0 -10 C -16 -28, -36 -6, 0 28 C 36 -6, 16 -28, 0 -10 Z" fill="url(#heartGrad)" stroke="#B7094C" stroke-width="2"/>
+              <ellipse cx="-8" cy="-8" rx="4" ry="9" transform="rotate(-30 -8 -8)" fill="#FFFFFF" opacity="0.45"/>
             </g>
 
-            <!-- Utangaç Pembe Yanaklar -->
-            <ellipse cx="85" cy="154" rx="11" ry="7" fill="#F43F5E" opacity="0.4"/>
-            <ellipse cx="155" cy="154" rx="11" ry="7" fill="#F43F5E" opacity="0.4"/>
-
-            <!-- Sevimli Ağız -->
-            <path d="M 112 153 Q 120 162 128 153" stroke="#451A03" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-
-            <!-- Küçük Patiler / Kollar -->
-            <ellipse cx="78" cy="170" rx="10" ry="8" fill="#B45309" stroke="#78350F" stroke-width="2"/>
-            <ellipse cx="162" cy="170" rx="10" ry="8" fill="#B45309" stroke="#78350F" stroke-width="2"/>
-
-            <!-- Elinde Tuttuğu Küçük Kahve Fincanı (Ankara Klasiği) -->
-            <g transform="translate(108, 162)">
-              <rect x="0" y="0" width="24" height="20" rx="5" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
-              <!-- Kulp -->
-              <path d="M 24 4 C 29 4 29 16 24 16" stroke="#0D9488" stroke-width="2" fill="none"/>
-              <!-- Kahve Buharı -->
-              <path d="M 6 -5 Q 8 -9 6 -12" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
-              <path d="M 14 -5 Q 16 -9 14 -12" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
-            </g>
+            <!-- Patiler -->
+            <ellipse cx="88" cy="174" rx="11" ry="9" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+            <ellipse cx="152" cy="174" rx="11" ry="9" fill="#B45309" stroke="#78350F" stroke-width="2"/>
           </svg>
         </div>
       </div>
 
-      <!-- Küçük Dokunma İpucu -->
-      <p class="text-[11px] text-teal-600 font-semibold -mt-2 flex items-center gap-1 animate-bounce">
-        <span>👆</span> Fındığa dokun, bakalım ne diyecek!
+      <!-- Tap Hint -->
+      <p class="text-[11px] text-rose-600 font-semibold -mt-2 flex items-center gap-1 animate-bounce">
+        <span>👆</span> Dokun bakalım, sana bir şey söylemek istiyor!
       </p>
 
-      <!-- Karşılama Kartı -->
-      <div class="glass-box w-full rounded-3xl p-5 shadow-soft text-center flex flex-col items-center gap-3">
+      <!-- Flirty Welcome Card -->
+      <div class="glass-card w-full rounded-3xl p-5 shadow-soft text-center flex flex-col items-center gap-3">
         <h1 class="font-fredoka text-2xl font-bold text-gray-800 tracking-tight">
-          Selam <span class="text-teal-600 underline decoration-wavy decoration-teal-300">Beren</span>! 🌊
+          Selam <span class="text-rose-600 underline decoration-wavy decoration-rose-300">Beren</span>! 🌸
         </h1>
         <p class="text-xs text-gray-600 leading-relaxed font-outfit font-medium px-2">
-          "Ordu'nun fındığı, yeşili, deniz havası bir yanda... Ankara'nın soğuk ayazı diğer yanda."<br>
-          Ama en güzeli ne biliyor musun? Bu iki şehrin arasında tam <b>2 yıldır</b> süren bu güzel tanışıklık! ✨
+          "Ordu'nun fındığı meşhur derler ama senin o gülüşünün yanında fındığın zerre şansı yok."<br>
+          Tam <b>2 yıldır</b> tanışıyoruz, Ankara ayazında içimi ısıtan nadir insanlardansın... E artık sadece "arkadaşız" demek biraz haksızlık olmuyor mu? 😉
         </p>
 
-        <!-- 2 Yıllık Zaman İstatistiği -->
-        <div class="grid grid-cols-3 gap-2 w-full mt-1">
-          <div class="bg-teal-50/90 rounded-2xl p-2.5 border border-teal-100 flex flex-col items-center">
-            <span class="text-base">⏳</span>
-            <span class="text-[10px] font-bold text-teal-800">Dostluk Süresi</span>
-            <span class="text-xs font-fredoka font-bold text-teal-600">~2. Yıl</span>
+        <!-- Flirt Meter Chips -->
+        <div class="grid grid-cols-2 gap-2 w-full mt-1">
+          <div class="bg-rose-50/90 rounded-2xl p-2.5 border border-rose-200 flex flex-col items-center">
+            <span class="text-base">💘</span>
+            <span class="text-[10px] font-bold text-rose-800">Sana Düşme Oranı</span>
+            <span class="text-xs font-fredoka font-bold text-rose-600">%99.9 Tehlikeli</span>
           </div>
-          <div class="bg-emerald-50/90 rounded-2xl p-2.5 border border-emerald-100 flex flex-col items-center">
-            <span class="text-base">🌰</span>
-            <span class="text-[10px] font-bold text-emerald-800">Ordu Ruhu</span>
-            <span class="text-xs font-fredoka font-bold text-emerald-600">%100 Orijinal</span>
-          </div>
-          <div class="bg-amber-50/90 rounded-2xl p-2.5 border border-amber-100 flex flex-col items-center">
+          <div class="bg-amber-50/90 rounded-2xl p-2.5 border border-amber-200 flex flex-col items-center">
             <span class="text-base">☕</span>
-            <span class="text-[10px] font-bold text-amber-800">Ankara Ayazı</span>
-            <span class="text-xs font-fredoka font-bold text-amber-600">0 Etki ☀️</span>
+            <span class="text-[10px] font-bold text-amber-800">Baş Başa Kahve</span>
+            <span class="text-xs font-fredoka font-bold text-amber-700">Çok Yakında 👀</span>
           </div>
         </div>
 
-        <!-- Buton: Fındık / Kahve Ismarla -->
-        <button id="send-coffee-btn" class="w-full mt-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-500 text-white font-fredoka font-bold text-sm tracking-wide shadow-bubble hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2">
-          <span>☕</span>
-          <span>Beren'e Sanal Ankara Kahvesi Ismarla</span>
+        <!-- Action Button: Kalp Çarpıntısı Gönder -->
+        <button id="send-heart-btn" class="w-full mt-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-500 text-white font-fredoka font-bold text-sm tracking-wide shadow-bubble hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2">
+          <span>💖</span>
+          <span>Beren'e Kalp Çarpıntısı Yolla</span>
           <span>✨</span>
         </button>
 
-        <!-- Kahve Sayacı -->
+        <!-- Kalp Sayacı -->
         <div class="text-[11px] text-gray-500 font-medium flex items-center gap-1.5">
-          <span>Islatılan Sanal Kahveler:</span>
-          <span id="coffee-counter" class="font-fredoka text-teal-700 font-bold text-sm bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">2</span>
+          <span>Beren İçin Hızlanan Kalp Atışı:</span>
+          <span id="heart-counter" class="font-fredoka text-rose-600 font-bold text-sm bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">120 BPM</span>
         </div>
       </div>
 
     </div>
 
-    <!-- TAB 2: KARAKTER KARTI (Beren Dedektörü) -->
+    <!-- TAB 2: DEDEKTÖR & RAPOR (Beren'e Düşme İstatistiği) -->
     <div id="tab-detector" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
-      <div class="glass-box w-full rounded-3xl p-5 shadow-soft flex flex-col gap-4 text-center">
+      <div class="glass-card w-full rounded-3xl p-5 shadow-soft flex flex-col gap-4 text-center">
         
         <div class="flex items-center justify-center gap-2">
-          <span class="text-2xl">📋</span>
-          <h2 class="font-fredoka text-xl font-bold text-gray-800">Resmi Beren Kimlik Kartı</h2>
+          <span class="text-2xl">🔍</span>
+          <h2 class="font-fredoka text-xl font-bold text-gray-800">Resmi Beren Çekicilik Raporu</h2>
         </div>
         <p class="text-xs text-gray-500 font-medium -mt-2">
-          Ordu-Ankara Dostluk Enstitüsü Onaylı Rapor 🔍
+          Ankara-Ordu Kalp Çarpıntısı Enstitüsü Analizi 📊
         </p>
 
-        <!-- Profile Card -->
-        <div class="bg-gradient-to-br from-teal-500/10 via-emerald-500/10 to-amber-500/10 p-4 rounded-2xl border border-teal-200 text-left space-y-3">
+        <!-- Stats Card -->
+        <div class="bg-gradient-to-br from-rose-500/10 via-pink-500/10 to-amber-500/10 p-4 rounded-2xl border border-rose-200 text-left space-y-3">
           
-          <div class="flex justify-between items-center border-b border-teal-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">İsim / Kod Adı:</span>
-            <span class="text-xs font-fredoka font-bold text-teal-800">Beren (Karadeniz Rüzgarı)</span>
+          <div class="flex justify-between items-center border-b border-rose-100 pb-2">
+            <span class="text-xs font-bold text-gray-500">Hedef Kişi:</span>
+            <span class="text-xs font-fredoka font-bold text-rose-800">Beren (Karadeniz Güzeli) 🌊</span>
           </div>
 
-          <div class="flex justify-between items-center border-b border-teal-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Memleket:</span>
-            <span class="text-xs font-bold text-gray-700 flex items-center gap-1">
-              <span>Ordu</span> <span class="text-emerald-600 font-semibold">(Boztepe & Fındık) 🌰</span>
-            </span>
+          <div class="flex justify-between items-center border-b border-rose-100 pb-2">
+            <span class="text-xs font-bold text-gray-500">Gülüşünün Etkisi:</span>
+            <span class="text-xs font-bold text-rose-600">Richter Ölçeğinde 8.9 Deprem 💥</span>
           </div>
 
-          <div class="flex justify-between items-center border-b border-teal-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Şu Anki Konum:</span>
-            <span class="text-xs font-bold text-gray-700 flex items-center gap-1">
-              <span>Ankara</span> <span class="text-amber-600 font-semibold">(Kuğulu Park & Ayaz) 🏛️</span>
-            </span>
+          <div class="flex justify-between items-center border-b border-rose-100 pb-2">
+            <span class="text-xs font-bold text-gray-500">Arkadaş Kalma İhtimali:</span>
+            <span class="text-xs font-fredoka font-bold text-amber-600">%0.1 (Zorlama seviyesi) 😅</span>
           </div>
 
-          <div class="flex justify-between items-center border-b border-teal-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Tanışıklık Süresi:</span>
-            <span class="text-xs font-fredoka font-bold text-teal-600">2. Yıl Dönümü 🎉</span>
+          <div class="flex justify-between items-center border-b border-rose-100 pb-2">
+            <span class="text-xs font-bold text-gray-500">Tanışıklık:</span>
+            <span class="text-xs font-fredoka font-bold text-teal-700">2. Yıl (Artık level atlama vakti)</span>
           </div>
 
           <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-gray-500">Dostluk Notu:</span>
-            <span class="text-xs font-bold text-emerald-600">⭐⭐⭐⭐⭐ (10/10 Yıldız)</span>
+            <span class="text-xs font-bold text-gray-500">Teşhis:</span>
+            <span class="text-xs font-bold text-rose-700">"Aşırı derecede etkileyici, gözlerini kaçırtır."</span>
           </div>
 
         </div>
 
         <!-- Fun Facts List -->
         <div class="space-y-2 text-left text-xs">
-          <div class="bg-white/80 p-3 rounded-2xl border border-teal-100 flex items-start gap-2.5">
-            <span class="text-base mt-0.5">🌊</span>
+          <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
+            <span class="text-base mt-0.5">🌰</span>
             <div>
-              <p class="font-bold text-gray-800">Karadeniz İnadı Teşhisi:</p>
-              <p class="text-gray-500 text-[11px]">Bazen o Ordu inadı tutuyor ama kabul edelim, o tatlı inatçılık olmasa Beren Beren olmazdı! 😄</p>
+              <p class="font-bold text-gray-800">Ordu Geni & Karadeniz İnadı:</p>
+              <p class="text-gray-500 text-[11px]">Bazen o inatçı hallerin tutuyor ama yalan yok, sana inat bile çok yakışıyor. 😉</p>
             </div>
           </div>
 
-          <div class="bg-white/80 p-3 rounded-2xl border border-teal-100 flex items-start gap-2.5">
+          <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
             <span class="text-base mt-0.5">❄️</span>
             <div>
-              <p class="font-bold text-gray-800">Ankara Ayazına Dayanıklılık:</p>
-              <p class="text-gray-500 text-[11px]">Ankara'nın kuru soğuğuna rağmen enerjisiyle etrafındakilerin içini ısıtabilen ender insanlardan.</p>
+              <p class="font-bold text-gray-800">Ankara Ayazını Eritme Yeteneği:</p>
+              <p class="text-gray-500 text-[11px]">Şehir gri, hava buz... Ama senin bir cümlen tüm günü aydınlatmaya yetiyor.</p>
             </div>
           </div>
 
-          <div class="bg-white/80 p-3 rounded-2xl border border-teal-100 flex items-start gap-2.5">
-            <span class="text-base mt-0.5">💬</span>
+          <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
+            <span class="text-base mt-0.5">☕</span>
             <div>
-              <p class="font-bold text-gray-800">2 Yıllık Özet:</p>
-              <p class="text-gray-500 text-[11px]">"Zaman su gibi aktı geçti ama seninle sohbet etmek ilk günkü gibi keyifli." ✨</p>
+              <p class="font-bold text-gray-800">Gizli Amaç:</p>
+              <p class="text-gray-500 text-[11px]">Bu site sadece 'tatlı bir hatıra' değil; Ankara'da baş başa bir kahve randevusunun resmi davetiyesi! 💌</p>
             </div>
           </div>
         </div>
 
-        <!-- İnat Düşürme Butonu (Şaka) -->
+        <!-- "Sadece Arkadaş Kalalım" Butonu (Kaçan Şaka) -->
         <div class="relative w-full pt-1">
-          <button id="reduce-stubborn-btn" class="w-full py-3 px-4 rounded-2xl bg-emerald-50 text-emerald-800 font-fredoka font-semibold text-xs border border-emerald-200 active:scale-95 transition-all flex items-center justify-center gap-2">
-            <span>📉</span>
-            <span>Ordu İnadını %10 Düşür</span>
+          <button id="friendzone-btn" class="w-full py-3 px-4 rounded-2xl bg-gray-100 text-gray-600 font-fredoka font-semibold text-xs border border-gray-300 active:scale-95 transition-all flex items-center justify-center gap-2">
+            <span>🛡️</span>
+            <span>"Ama Biz Sadece Arkadaşız" Butonu</span>
           </button>
-          <p id="stubborn-error-msg" class="text-[11px] text-amber-600 font-bold mt-2 hidden animate-pulse">
-            ❌ Hata: Karadeniz kanı taşıyan birinin inadı düşürülemez! Sistem çöktü. 🌰🌊
+          <p id="friendzone-msg" class="text-[11px] text-rose-600 font-bold mt-2 hidden animate-pulse">
+            ❌ Hata 403: Friendzone erişimi engellendi! 2 yıllık kontenjan doldu Beren hanım. 😜💘
           </p>
         </div>
 
@@ -420,17 +374,17 @@
 
     </div>
 
-    <!-- TAB 3: ANILAR & FLIP KARTLAR (Boztepe'den Ankara'ya) -->
+    <!-- TAB 3: ANILAR & İLTİFAT KARTLARI (3D Flip Kartlar) -->
     <div id="tab-cards" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
-      <div class="glass-box w-full rounded-3xl p-5 shadow-soft flex flex-col gap-3 text-center">
+      <div class="glass-card w-full rounded-3xl p-5 shadow-soft flex flex-col gap-3 text-center">
         
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl">💌</span>
-          <h2 class="font-fredoka text-xl font-bold text-gray-800">2 Yılın Küçük Notları</h2>
+          <h2 class="font-fredoka text-xl font-bold text-gray-800">Beren'e Özel İtiraflar</h2>
         </div>
         <p class="text-xs text-gray-500 font-medium -mt-1">
-          Kartlara dokun ve arkasındaki mesajı oku 👆
+          Kartlara dokun, içimdekileri oku bakalım 👆
         </p>
 
         <!-- 4 Flip Cards Grid -->
@@ -439,14 +393,14 @@
           <!-- Card 1 -->
           <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
-              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🌱</span>
-                <span class="font-fredoka text-xs font-bold text-teal-800">İlk Tanışma</span>
-                <span class="text-[10px] text-teal-600">(Dokun aç)</span>
+              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-rose-50 to-pink-100 border border-rose-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
+                <span class="text-2xl">👀</span>
+                <span class="font-fredoka text-xs font-bold text-rose-800">İlk Tanıştığımızda</span>
+                <span class="text-[10px] text-rose-600">(Dokun aç)</span>
               </div>
-              <div class="flip-card-back absolute inset-0 bg-white border border-teal-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
-                <p class="text-[11px] text-gray-700 font-medium leading-snug">
-                  "2 koca yıl geçmiş... Başta bu kadar uzun süreceğini tahmin etmezdim ama iyi ki tanışmışız!" ✨
+              <div class="flip-card-back absolute inset-0 bg-white border border-rose-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                <p class="text-[11px] text-gray-700 font-semibold leading-snug">
+                  "2 yıl önce 'Sıradan bir tanışma' sanmıştım... Hayatımın en tatlı sürprizi oldun." ✨
                 </p>
               </div>
             </div>
@@ -456,13 +410,13 @@
           <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
               <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🌰</span>
+                <span class="text-2xl">🌊</span>
                 <span class="font-fredoka text-xs font-bold text-amber-800">Ordu Havası</span>
                 <span class="text-[10px] text-amber-600">(Dokun aç)</span>
               </div>
               <div class="flip-card-back absolute inset-0 bg-white border border-amber-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
-                <p class="text-[11px] text-gray-700 font-medium leading-snug">
-                  "Bir gün Boztepe'ye çıkarsan manzarayı izlerken fındık yemeyi unutma, bana da foto at! 📸"
+                <p class="text-[11px] text-gray-700 font-semibold leading-snug">
+                  "Karadeniz'in hırçınlığı sende öyle tatlı duruyor ki, insan tartışırken bile gülümser." 🌰
                 </p>
               </div>
             </div>
@@ -471,14 +425,14 @@
           <!-- Card 3 -->
           <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
-              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-sky-50 to-blue-100 border border-sky-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
+              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-100 border border-purple-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
                 <span class="text-2xl">☕</span>
-                <span class="font-fredoka text-xs font-bold text-sky-800">Ankara Günleri</span>
-                <span class="text-[10px] text-sky-600">(Dokun aç)</span>
+                <span class="font-fredoka text-xs font-bold text-purple-800">Ankara Randevusu</span>
+                <span class="text-[10px] text-purple-600">(Dokun aç)</span>
               </div>
-              <div class="flip-card-back absolute inset-0 bg-white border border-sky-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
-                <p class="text-[11px] text-gray-700 font-medium leading-snug">
-                  "Tunalı'da ya da Kızılay'da kahve içerken aklına bu site gelsin, yüzün gülsün istedim. ☕"
+              <div class="flip-card-back absolute inset-0 bg-white border border-purple-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                <p class="text-[11px] text-gray-700 font-semibold leading-snug">
+                  "Tunalı'da bir kahve içerken gözlerinin içine bakıp gülüşünü izlemek fena olmazdı hani..." 😉
                 </p>
               </div>
             </div>
@@ -487,14 +441,14 @@
           <!-- Card 4 -->
           <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
-              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-rose-50 to-pink-100 border border-rose-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🎉</span>
-                <span class="font-fredoka text-xs font-bold text-rose-800">Gelecek Yıllar</span>
-                <span class="text-[10px] text-rose-600">(Dokun aç)</span>
+              <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
+                <span class="text-2xl">🤫</span>
+                <span class="font-fredoka text-xs font-bold text-teal-800">Küçük Bir Sır</span>
+                <span class="text-[10px] text-teal-600">(Dokun aç)</span>
               </div>
-              <div class="flip-card-back absolute inset-0 bg-white border border-rose-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
-                <p class="text-[11px] text-gray-700 font-medium leading-snug">
-                  "Umarım 3. ve 4. yıllarda da aynı şekilde gülümseyerek hatırlarız bu günleri! 🤍"
+              <div class="flip-card-back absolute inset-0 bg-white border border-teal-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
+                <p class="text-[11px] text-gray-700 font-semibold leading-snug">
+                  "Farkında mısın bilmiyorum ama son zamanlarda aklıma eskisinden çok daha fazla geliyorsun..." 💕
                 </p>
               </div>
             </div>
@@ -506,58 +460,48 @@
 
     </div>
 
-    <!-- TAB 4: ANLAŞMA (2. Yıl Sözleşmesi & Kaçan Buton) -->
+    <!-- TAB 4: RANDEVU TEKLİFİ (Kaçan Hayır Butonu Oyunu!) -->
     <div id="tab-contract" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
-      <div class="glass-box w-full rounded-3xl p-5 shadow-soft flex flex-col gap-4 text-center relative overflow-hidden">
+      <div class="glass-card w-full rounded-3xl p-5 shadow-soft flex flex-col gap-4 text-center relative overflow-hidden">
         
-        <div class="inline-flex items-center justify-center gap-1.5 self-center bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-[11px] font-bold">
-          <span>📜</span> 2. Yıl Dostluk Sözleşmesi
+        <div class="inline-flex items-center justify-center gap-1.5 self-center bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-[11px] font-bold">
+          <span>☕</span> Resmi Kahve & Baş Başa Randevu Teklifi
         </div>
 
         <h3 class="font-fredoka text-lg font-bold text-gray-800 leading-snug">
-          Beren Hanım, bu dostluğu 1 yıl daha uzatmayı kabul ediyor musunuz? ✍️
+          Beren Hanım, bu hafta Ankara'da benimle baş başa tatlı bir kahveye çıkıyor musunuz? 🥺
         </h3>
 
-        <!-- Contract Terms -->
-        <div class="bg-white/80 p-3.5 rounded-2xl border border-teal-100 text-left space-y-2 text-xs">
-          <p class="font-bold text-gray-700">Maddeler:</p>
-          <p class="text-gray-600 text-[11px] flex items-center gap-2">
-            <span>1️⃣</span> Mesajlara sebepsiz yere 3 gün sonra dönmemek 😇
-          </p>
-          <p class="text-gray-600 text-[11px] flex items-center gap-2">
-            <span>2️⃣</span> Ordu'dan hakiki taze fındık getirme sözünü unutmamak 🌰
-          </p>
-          <p class="text-gray-600 text-[11px] flex items-center gap-2">
-            <span>3️⃣</span> Ankara'da kahve içerken güler yüzü eksik etmemek ☕
-          </p>
-        </div>
+        <p class="text-xs text-gray-500 font-medium -mt-2">
+          Bak 2 yıldır tanışıyoruz, bahane üretmek yok!
+        </p>
 
         <!-- Interactive Question Arena (Relative container for running button) -->
-        <div id="contract-arena" class="relative w-full h-44 bg-teal-50/60 rounded-2xl border border-teal-200/80 p-3 flex flex-col justify-end items-center overflow-hidden">
+        <div id="contract-arena" class="relative w-full h-48 bg-rose-50/70 rounded-2xl border border-rose-200/80 p-3 flex flex-col justify-end items-center overflow-hidden">
           
           <!-- Success Message after Yes -->
           <div id="contract-success" class="absolute inset-0 bg-white/95 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center p-4 gap-2 hidden z-30">
-            <span class="text-4xl animate-bounce">🎉📜✨</span>
-            <p class="font-fredoka text-base font-bold text-teal-700">Sözleşme Onaylandı!</p>
+            <span class="text-4xl animate-bounce">🎉☕💘</span>
+            <p class="font-fredoka text-base font-bold text-rose-600">Harika! Sözünü Aldım!</p>
             <p class="text-xs text-gray-600 font-semibold text-center">
-              Tebrikler Beren! 2. yıl resmi olarak başarıyla yenilendi. Önümüzdeki yıl görüşmek üzere! 🤝
+              Plan bende, mekan bende... Sen sadece hazırlanıp geliyorsun. Çok güzel bir gün olacak! 🥰
             </p>
-            <button id="reset-contract-btn" class="mt-2 text-xs font-bold text-teal-600 underline">Tekrar Oyna</button>
+            <button id="reset-contract-btn" class="mt-2 text-xs font-bold text-rose-600 underline">Tekrar Oyna</button>
           </div>
 
           <!-- THE ACCEPT BUTTON -->
-          <button id="btn-accept" class="w-3/4 py-3 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-transform z-10 flex items-center justify-center gap-2">
-            <span>Kabul Ediyorum! ✍️</span>
+          <button id="btn-accept" class="w-3/4 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-transform z-10 flex items-center justify-center gap-2">
+            <span>Evet, çıkıyorum! 🥰☕</span>
           </button>
 
           <!-- THE RUNAWAY REJECT BUTTON -->
           <button id="btn-reject" class="absolute py-2 px-4 rounded-xl bg-gray-200 text-gray-600 font-fredoka font-bold text-xs border border-gray-300 shadow-sm transition-all duration-150 z-20" style="top: 25px; left: 35%;">
-            <span>İtiraz Ediyorum 😜</span>
+            <span>Hayır, sadece arkadaşız 😒</span>
           </button>
 
           <p class="text-[10px] text-gray-400 mt-2 font-medium">
-            (Not: İtiraz butonu Karadeniz hızıyla kaçabilir!)
+            (İpucu: Hayır demeye çalışan parmaklar yanılabilir!)
           </p>
         </div>
 
@@ -569,30 +513,30 @@
 
   <!-- Mobile Bottom Navigation Bar -->
   <nav class="w-full max-w-md px-4 pb-safe pb-3 pt-2 z-20">
-    <div class="bg-white/90 backdrop-blur-xl border border-teal-200/90 rounded-3xl p-2 shadow-soft flex justify-around items-center">
+    <div class="bg-white/90 backdrop-blur-xl border border-rose-200/90 rounded-3xl p-2 shadow-soft flex justify-around items-center">
       
       <!-- Nav Item 1: Ana Sayfa -->
-      <button class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-teal-600 transition-all" data-tab="tab-home">
-        <span class="text-xl">🍃</span>
-        <span class="text-[10px] font-fredoka font-bold">2. Yıl</span>
+      <button class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-rose-600 transition-all" data-tab="tab-home">
+        <span class="text-xl">💘</span>
+        <span class="text-[10px] font-fredoka font-bold">Giriş</span>
       </button>
 
       <!-- Nav Item 2: Karakter Raporu -->
-      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-teal-500 transition-all" data-tab="tab-detector">
-        <span class="text-xl">📋</span>
+      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-detector">
+        <span class="text-xl">🔍</span>
         <span class="text-[10px] font-fredoka font-bold">Rapor</span>
       </button>
 
-      <!-- Nav Item 3: Notlar / Kartlar -->
-      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-teal-500 transition-all" data-tab="tab-cards">
+      <!-- Nav Item 3: İtiraflar -->
+      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-cards">
         <span class="text-xl">💌</span>
-        <span class="text-[10px] font-fredoka font-bold">Notlar</span>
+        <span class="text-[10px] font-fredoka font-bold">İtiraflar</span>
       </button>
 
-      <!-- Nav Item 4: Sözleşme -->
-      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-teal-500 transition-all" data-tab="tab-contract">
-        <span class="text-xl">📜</span>
-        <span class="text-[10px] font-fredoka font-bold">Sözleşme</span>
+      <!-- Nav Item 4: Randevu -->
+      <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-contract">
+        <span class="text-xl">☕</span>
+        <span class="text-[10px] font-fredoka font-bold">Randevu</span>
       </button>
 
     </div>
@@ -616,7 +560,7 @@
     }
 
     // Gentle Pop Sound
-    function playPop(freq = 540) {
+    function playPop(freq = 580) {
       if (!sfxEnabled) return;
       initAudio();
       try {
@@ -624,7 +568,7 @@
         const gain = audioCtx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq * 1.4, audioCtx.currentTime + 0.08);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.45, audioCtx.currentTime + 0.08);
 
         gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.09);
@@ -642,14 +586,14 @@
       if (!sfxEnabled) return;
       initAudio();
       try {
-        const notes = [440.00, 554.37, 659.25, 880.00]; // A4, C#5, E5, A5 (Cozy major chord)
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
         notes.forEach((freq, idx) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.07);
 
-          gain.gain.setValueAtTime(0.15, audioCtx.currentTime + idx * 0.07);
+          gain.gain.setValueAtTime(0.18, audioCtx.currentTime + idx * 0.07);
           gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.07 + 0.35);
 
           osc.connect(gain);
@@ -670,7 +614,7 @@
         const gain = audioCtx.createGain();
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(260, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.15);
+        osc.frequency.exponentialRampToValueAtTime(620, audioCtx.currentTime + 0.15);
 
         gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
@@ -683,15 +627,15 @@
       } catch (e) {}
     }
 
-    // Calm Acoustic / Kalimba Melody (Warm chord progression)
+    // Romantic Sweet Celesta / Music Box Melody
     const melody = [
-      { note: 587.33, dur: 450 }, // D5
+      { note: 523.25, dur: 450 }, // C5
       { note: 659.25, dur: 450 }, // E5
-      { note: 739.99, dur: 450 }, // F#5
+      { note: 783.99, dur: 450 }, // G5
       { note: 880.00, dur: 700 }, // A5
-      { note: 739.99, dur: 450 }, // F#5
-      { note: 587.33, dur: 450 }, // D5
-      { note: 440.00, dur: 800 }, // A4
+      { note: 783.99, dur: 450 }, // G5
+      { note: 659.25, dur: 450 }, // E5
+      { note: 587.33, dur: 800 }, // D5
     ];
     let melIdx = 0;
 
@@ -705,7 +649,7 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(item.note, audioCtx.currentTime);
 
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (item.dur / 1000) * 0.85);
 
         osc.connect(gain);
@@ -727,12 +671,12 @@
       const text = document.getElementById('music-text');
 
       if (musicPlaying) {
-        btn.classList.add('bg-teal-100', 'border-teal-400');
+        btn.classList.add('bg-rose-100', 'border-rose-400');
         icon.textContent = '🎶';
         text.textContent = 'Çalıyor';
         playMelodyLoop();
       } else {
-        btn.classList.remove('bg-teal-100', 'border-teal-400');
+        btn.classList.remove('bg-rose-100', 'border-rose-400');
         icon.textContent = '🎵';
         text.textContent = 'Melodi';
         clearTimeout(musicTimer);
@@ -750,17 +694,17 @@
     });
 
     // Floating background particles
-    const leavesContainer = document.getElementById('leaves-container');
-    const particleIcons = ['🍃', '🌰', '🌊', '☕', '✨', '☁️'];
-    for (let i = 0; i < 15; i++) {
+    const particlesContainer = document.getElementById('particles-container');
+    const particleIcons = ['💖', '✨', '☕', '🌰', '🌸', '💫'];
+    for (let i = 0; i < 16; i++) {
       const p = document.createElement('div');
-      p.className = 'floating-leaf';
+      p.className = 'floating-item';
       p.textContent = particleIcons[Math.floor(Math.random() * particleIcons.length)];
       p.style.left = `${Math.random() * 100}vw`;
       p.style.animationDelay = `${Math.random() * 7}s`;
-      p.style.animationDuration = `${7 + Math.random() * 6}s`;
-      p.style.fontSize = `${13 + Math.random() * 13}px`;
-      leavesContainer.appendChild(p);
+      p.style.animationDuration = `${6 + Math.random() * 6}s`;
+      p.style.fontSize = `${13 + Math.random() * 14}px`;
+      particlesContainer.appendChild(p);
     }
 
     // Tap Anywhere Sparkle Effect
@@ -769,7 +713,7 @@
 
       const sp = document.createElement('div');
       sp.className = 'tap-sparkle';
-      const emojis = ['✨', '🍃', '☕', '🌰', '🌊'];
+      const emojis = ['💘', '✨', '☕', '🌸', '💖'];
       sp.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       sp.style.left = `${e.pageX - 12}px`;
       sp.style.top = `${e.pageY - 12}px`;
@@ -788,10 +732,10 @@
         const targetTab = btn.getAttribute('data-tab');
 
         navButtons.forEach(b => {
-          b.classList.remove('active', 'text-teal-600');
+          b.classList.remove('active', 'text-rose-600');
           b.classList.add('text-gray-400');
         });
-        btn.classList.add('active', 'text-teal-600');
+        btn.classList.add('active', 'text-rose-600');
         btn.classList.remove('text-gray-400');
 
         tabContents.forEach(tab => {
@@ -806,14 +750,14 @@
       });
     });
 
-    // Interactive Mascot Speech Quotes
-    const mascotQuotes = [
-      "2 koca yıldır buradayız, zaman ne hızlı aktı! ⏳",
-      "Ordu'nun fındığı mı meşhur, senin inadın mı? 😂",
-      "Ankara ayazı serttir ama sohbetin ısıtır ☕",
-      "Boztepe'den Ankara'ya selamlar olsun! 🌊",
-      "Beren! İyi ki varsın, 2. yılımız kutlu olsun ✨",
-      "Kahvemi yudumluyorum, senin de günün güzel geçsin! 🍃"
+    // Interactive Mascot Speech Quotes (Flirty & Teasing)
+    const flirtQuotes = [
+      "Beren baksana, bu aralar çok mu güzelsin ne? 👀",
+      "2 yıldır arkadaşız dedik ama kalbim öyle demiyor sanki? 💓",
+      "Ordu'nun fındığı değil, senin gülüşün meşhur olmalıymış!",
+      "Ankara ayazında montum var ama senin gülüşün daha sıcak ☕",
+      "Bir kahveye bakar... Var mısın? 😉",
+      "Gözlerini benden kaçırınca daha da tatlı oluyorsun haberin olsun! ✨"
     ];
     let quoteIndex = 0;
 
@@ -822,8 +766,8 @@
 
     heroBox.addEventListener('click', () => {
       playPop(750);
-      quoteIndex = (quoteIndex + 1) % mascotQuotes.length;
-      heroSpeech.innerHTML = `<span>${mascotQuotes[quoteIndex]}</span>`;
+      quoteIndex = (quoteIndex + 1) % flirtQuotes.length;
+      heroSpeech.innerHTML = `<span>${flirtQuotes[quoteIndex]}</span>`;
 
       heroBox.style.transform = 'scale(1.08)';
       setTimeout(() => {
@@ -832,46 +776,46 @@
 
       try {
         confetti({
-          particleCount: 18,
-          spread: 50,
+          particleCount: 22,
+          spread: 55,
           origin: { y: 0.4 },
-          colors: ['#0D9488', '#10B981', '#F59E0B', '#38BDF8']
+          colors: ['#FF4D6D', '#FF758F', '#F59E0B', '#FFAAA6']
         });
       } catch (e) {}
     });
 
-    // Send Coffee Button
-    const coffeeBtn = document.getElementById('send-coffee-btn');
-    const coffeeCounter = document.getElementById('coffee-counter');
-    let coffees = 2;
+    // Send Heart / BPM Button
+    const heartBtn = document.getElementById('send-heart-btn');
+    const heartCounter = document.getElementById('heart-counter');
+    let bpm = 120;
 
-    coffeeBtn.addEventListener('click', () => {
-      coffees++;
-      coffeeCounter.textContent = coffees;
+    heartBtn.addEventListener('click', () => {
+      bpm += 8;
+      heartCounter.textContent = `${bpm} BPM 🔥`;
       playChime();
 
       try {
         confetti({
-          particleCount: 35,
-          spread: 60,
+          particleCount: 45,
+          spread: 65,
           origin: { y: 0.6 },
-          colors: ['#0D9488', '#34D399', '#FBBF24']
+          colors: ['#FF4D6D', '#FF758F', '#FFD166']
         });
       } catch (e) {}
 
-      coffeeBtn.innerHTML = `<span>☕ Beren'e +1 Kahve Gönderildi! ✨</span>`;
+      heartBtn.innerHTML = `<span>💘 Kalp Çarpıntısı İletildi! 💕</span>`;
       setTimeout(() => {
-        coffeeBtn.innerHTML = `<span>☕</span><span>Beren'e Sanal Ankara Kahvesi Ismarla</span><span>✨</span>`;
+        heartBtn.innerHTML = `<span>💖</span><span>Beren'e Kalp Çarpıntısı Yolla</span><span>✨</span>`;
       }, 1200);
     });
 
-    // Reduce Stubborn Prank
-    const reduceStubbornBtn = document.getElementById('reduce-stubborn-btn');
-    const stubbornErrorMsg = document.getElementById('stubborn-error-msg');
+    // Friendzone Button Prank
+    const friendzoneBtn = document.getElementById('friendzone-btn');
+    const friendzoneMsg = document.getElementById('friendzone-msg');
 
-    reduceStubbornBtn.addEventListener('click', () => {
+    friendzoneBtn.addEventListener('click', () => {
       playBoing();
-      stubbornErrorMsg.classList.remove('hidden');
+      friendzoneMsg.classList.remove('hidden');
     });
 
     // Flip Card Toggle
@@ -880,7 +824,7 @@
       cardElement.classList.toggle('flipped');
     }
 
-    // Runaway "İtiraz Ediyorum" Button in Contract
+    // Runaway "Sadece Arkadaşız" Button in Date Offer
     const btnReject = document.getElementById('btn-reject');
     const btnAccept = document.getElementById('btn-accept');
     const contractArena = document.getElementById('contract-arena');
@@ -888,12 +832,12 @@
     const resetContractBtn = document.getElementById('reset-contract-btn');
 
     const taunts = [
-      "İtiraz Ediyorum 😜",
+      "Hayır, sadece arkadaşız 😒",
       "Hop kaçtım!",
-      "İtiraz hakkı yok!",
-      "2 yıl hatırına kabul et!",
-      "Yakalayamazsın ki 🏃‍♂️",
-      "Kabul et işte! ✨"
+      "Yalan söyleme istiyorsun 😉",
+      "2 yıl bekledim kaçamazsın!",
+      "Bir kahve sadece yaa ☕",
+      "Kabul et işte! 💕"
     ];
     let tauntIdx = 0;
 
@@ -927,8 +871,8 @@
       contractSuccess.classList.remove('hidden');
       try {
         confetti({
-          particleCount: 90,
-          spread: 85,
+          particleCount: 100,
+          spread: 90,
           origin: { y: 0.6 }
         });
       } catch (e) {}
@@ -939,7 +883,7 @@
       contractSuccess.classList.add('hidden');
       btnReject.style.top = '25px';
       btnReject.style.left = '35%';
-      btnReject.querySelector('span').textContent = 'İtiraz Ediyorum 😜';
+      btnReject.querySelector('span').textContent = 'Hayır, sadece arkadaşız 😒';
     });
   </script>
 </body>
