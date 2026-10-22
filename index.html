@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#FFF5F7" />
-  <title>Beren'e Özel ✨ 1.5 Yıl Hatırası</title>
-  <meta name="description" content="Ordu'dan Ankara'ya uzanan 1.5 yıllık hikayenin tatlı sürprizi." />
+  <title>Konya'dan Ağrı'ya ✨ Acil Moral Paketi</title>
+  <meta name="description" content="Konya'dan Ağrı'ya uzanan, dünyanın en tatlı inatçısı için özel can sıkıntısı savar sürpriz." />
 
   <!-- Google Fonts: Fredoka & Outfit for modern, clean, cozy aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,11 +83,21 @@
 
     /* Gentle breathe animation */
     @keyframes gentlePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      0%, 100% { transform: scale(1) translateY(0px); }
+      50% { transform: scale(1.04) translateY(-4px); }
     }
     .mascot-breathe {
       animation: gentlePulse 3s infinite ease-in-out;
+    }
+
+    /* Sun spin slow */
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .sun-rays {
+      transform-origin: 180px 52px;
+      animation: spinSlow 14s linear infinite;
     }
 
     /* Tap feedback sparkle */
@@ -137,10 +147,10 @@
 
   <!-- Header Bar -->
   <header class="w-full max-w-md px-4 pt-safe pt-3 flex justify-between items-center z-20">
-    <div class="flex items-center gap-1.5 bg-white/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-100 shadow-sm">
-      <span class="text-xs">🌊</span>
-      <span class="text-[11px] font-fredoka font-semibold text-rose-700 tracking-wide">Ordu ⇄ Ankara</span>
-      <span class="text-xs">✨</span>
+    <div id="route-badge" class="flex items-center gap-1.5 bg-white/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-rose-100 shadow-sm cursor-pointer active:scale-95 transition-transform" title="Mesafe sadece haritada!">
+      <span class="text-xs">🌾</span>
+      <span class="text-[11px] font-fredoka font-semibold text-rose-700 tracking-wide">Konya ⇄ Ağrı</span>
+      <span class="text-xs">🏔️</span>
     </div>
 
     <div class="flex items-center gap-2">
@@ -160,173 +170,193 @@
   <!-- Main Mobile App Frame -->
   <main class="w-full max-w-md px-4 py-2 z-10 flex-1 flex flex-col justify-start">
 
-    <!-- TAB 1: ANA SAYFA & 1.5 YIL VİTRİNİ -->
-    <div id="tab-home" class="tab-content flex flex-col items-center gap-4 transition-opacity duration-300">
+    <!-- TAB 1: ANA SAYFA & MORAL HATTI -->
+    <div id="tab-home" class="tab-content flex flex-col items-center gap-3.5 transition-opacity duration-300">
       
       <!-- Top Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-rose-200 shadow-sm">
-        <span class="text-xs">🥊</span>
-        <span class="text-xs font-fredoka font-semibold text-rose-600 tracking-wide">1.5 Yıldır Birbirimizi Yiyoruz Ama... 👀</span>
-        <span class="text-xs">✨</span>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 border border-rose-200 shadow-sm">
+        <span class="text-xs">🚨</span>
+        <span class="text-xs font-fredoka font-semibold text-rose-600 tracking-wide">Ağrı'da Tatlı Birinin Canı Sıkkınmış!</span>
+        <span class="text-xs">🌤️</span>
       </div>
 
-      <!-- Mascot Hero Illustration (Sweet Hazelnut & Coffee) -->
-      <div class="relative mt-1 cursor-pointer group" id="hero-character-box" title="Dokun bakalım!">
+      <!-- Mascot Hero Illustration (Cute Fluffy Cloud/Bear Chasing Away Bad Mood with Sun & Warm Cup) -->
+      <div class="relative mt-2 cursor-pointer group" id="hero-character-box" title="Dokun bakalım!">
         
         <!-- Speech Bubble -->
-        <div id="character-speech" class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white/95 text-rose-800 font-fredoka text-xs px-3.5 py-1.5 rounded-2xl shadow-cozy border border-rose-200 whitespace-nowrap transition-all duration-300 transform scale-100 pointer-events-none flex items-center gap-1">
-          <span>Selam Beren! Baksana bi 🥊</span>
+        <div id="character-speech" class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white/95 text-rose-800 font-fredoka text-[11px] px-3.5 py-1.5 rounded-2xl shadow-cozy border border-rose-200 whitespace-nowrap transition-all duration-300 transform scale-100 pointer-events-none flex items-center gap-1 z-20">
+          <span>Şşt! O asık suratı Konya'dan gördüm, düzeltelim hemen! 🌤️</span>
         </div>
 
-        <!-- Custom SVG Mascot: Cozy Ordu Nut & Ankara Coffee -->
+        <!-- Custom SVG Mascot: Cozy Cheer-Up Fluffy Mascot with Sun & Heart Mug -->
         <div class="w-52 h-52 mx-auto drop-shadow-md mascot-breathe">
           <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
             <defs>
-              <linearGradient id="cozyNut" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#D97706" />
-                <stop offset="60%" stop-color="#B45309" />
-                <stop offset="100%" stop-color="#78350F" />
+              <linearGradient id="cozyBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF1F2" />
+                <stop offset="60%" stop-color="#FFE4E6" />
+                <stop offset="100%" stop-color="#FECDD3" />
               </linearGradient>
-              <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#34D399" />
-                <stop offset="100%" stop-color="#059669" />
+              <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FDE047" />
+                <stop offset="100%" stop-color="#F59E0B" />
+              </linearGradient>
+              <linearGradient id="crownGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FB7185" />
+                <stop offset="100%" stop-color="#E11D48" />
               </linearGradient>
             </defs>
 
-            <!-- Arka Dalgalar / Esinti -->
-            <path d="M 25 185 Q 65 178 105 185 T 185 185" stroke="#BAE6FD" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+            <!-- Arka Plan Gökkuşağı / Moral Haresi -->
+            <path d="M 35 165 A 85 85 0 0 1 205 165" stroke="#FDA4AF" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.5"/>
+            <path d="M 48 165 A 72 72 0 0 1 192 165" stroke="#FCD34D" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
 
-            <!-- Yeşil Fındık Yaprağı Şapka -->
-            <g id="nut-leaves">
-              <path d="M 120 70 C 80 40 50 65 65 95 C 80 85 105 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2"/>
-              <path d="M 120 70 C 160 40 190 65 175 95 C 160 85 135 85 120 70 Z" fill="url(#leafGrad)" stroke="#047857" stroke-width="2"/>
-              <path d="M 120 70 Q 120 45 132 40" stroke="#047857" stroke-width="3" stroke-linecap="round" fill="none"/>
-              <circle cx="132" cy="40" r="3.5" fill="#34D399"/>
+            <!-- Sağ Üstte Parlayan Güneş (Can Sıkıntısı Savar) -->
+            <g class="sun-rays">
+              <line x1="180" y1="24" x2="180" y2="30" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="180" y1="74" x2="180" y2="80" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="152" y1="52" x2="158" y2="52" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="202" y1="52" x2="208" y2="52" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="160" y1="32" x2="165" y2="37" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="195" y1="67" x2="200" y2="72" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="200" y1="32" x2="195" y2="37" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="165" y1="67" x2="160" y2="72" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+            <circle cx="180" cy="52" r="16" fill="url(#sunGrad)" stroke="#D97706" stroke-width="2"/>
+
+            <!-- Tatlı Yuvarlak Kulaklar -->
+            <circle cx="75" cy="88" r="20" fill="url(#cozyBody)" stroke="#F43F5E" stroke-width="2.5"/>
+            <circle cx="75" cy="88" r="10" fill="#FDA4AF" opacity="0.6"/>
+            <circle cx="165" cy="88" r="20" fill="url(#cozyBody)" stroke="#F43F5E" stroke-width="2.5"/>
+            <circle cx="165" cy="88" r="10" fill="#FDA4AF" opacity="0.6"/>
+
+            <!-- Pamuk Gövde -->
+            <path d="M 62 115 C 52 162 72 202 120 205 C 168 202 188 162 178 115 C 168 82 72 82 62 115 Z" fill="url(#cozyBody)" stroke="#F43F5E" stroke-width="2.5"/>
+
+            <!-- Kafadaki Minik İnatçı/Tatlı Filiz & Kalp -->
+            <path d="M 120 88 Q 120 65 132 58" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M 120 75 C 106 65 102 78 120 83 Z" fill="#34D399" stroke="#059669" stroke-width="1.5"/>
+            <path d="M 132 58 C 127 52 121 55 132 64 C 143 55 137 52 132 58 Z" fill="url(#crownGrad)"/>
+
+            <!-- Işıltılı Samimi Gözler -->
+            <ellipse cx="96" cy="134" rx="7.5" ry="9" fill="#1E293B"/>
+            <circle cx="93" cy="130" r="3.2" fill="#FFFFFF"/>
+            <circle cx="99" cy="137" r="1.5" fill="#FFFFFF"/>
+
+            <ellipse cx="144" cy="134" rx="7.5" ry="9" fill="#1E293B"/>
+            <circle cx="141" cy="130" r="3.2" fill="#FFFFFF"/>
+            <circle cx="147" cy="137" r="1.5" fill="#FFFFFF"/>
+
+            <!-- Tatlı Pembe Yanaklar -->
+            <ellipse cx="80" cy="148" rx="11" ry="6.5" fill="#FB7185" opacity="0.5"/>
+            <ellipse cx="160" cy="148" rx="11" ry="6.5" fill="#FB7185" opacity="0.5"/>
+
+            <!-- Minik Burun ve Tatlı Gülümseme -->
+            <ellipse cx="120" cy="142" rx="4" ry="3" fill="#E11D48"/>
+            <path d="M 112 150 Q 120 159 128 150" stroke="#881337" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+            <!-- Sıcak Moral Kupası (Üzerinde Kalp) -->
+            <g transform="translate(106, 162)">
+              <rect x="0" y="2" width="28" height="22" rx="6" fill="#FFFFFF" stroke="#E11D48" stroke-width="2"/>
+              <path d="M 28 6 C 34 6 34 18 28 18" stroke="#E11D48" stroke-width="2" fill="none"/>
+              <path d="M 14 15 C 10 10 6 13 14 19 C 22 13 18 10 14 15 Z" fill="#FB7185"/>
+              <!-- Sıcak Buhar -->
+              <path d="M 9 -2 Q 11 -7 9 -11" stroke="#FB7185" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+              <path d="M 19 -2 Q 21 -7 19 -11" stroke="#FB7185" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
             </g>
 
-            <!-- Fındık Gövdesi -->
-            <path d="M 70 100 C 60 150 75 195 120 205 C 165 195 180 150 170 100 C 150 90 90 90 70 100 Z" fill="url(#cozyNut)" stroke="#78350F" stroke-width="2.5"/>
-            <ellipse cx="95" cy="120" rx="9" ry="22" transform="rotate(-25 95 120)" fill="#FBBF24" opacity="0.35"/>
-
-            <!-- Samimi / Tatlı Bakış -->
-            <ellipse cx="98" cy="138" rx="7.5" ry="9.5" fill="#1E293B"/>
-            <circle cx="95" cy="134" r="3.2" fill="#FFFFFF"/>
-            <circle cx="100" cy="141" r="1.4" fill="#FFFFFF"/>
-
-            <ellipse cx="142" cy="138" rx="7.5" ry="9.5" fill="#1E293B"/>
-            <circle cx="139" cy="134" r="3.2" fill="#FFFFFF"/>
-            <circle cx="144" cy="141" r="1.4" fill="#FFFFFF"/>
-
-            <!-- Hafif Pembe Yanaklar -->
-            <ellipse cx="86" cy="153" rx="10" ry="6" fill="#FB7185" opacity="0.45"/>
-            <ellipse cx="154" cy="153" rx="10" ry="6" fill="#FB7185" opacity="0.45"/>
-
-            <!-- Gülümseme -->
-            <path d="M 114 153 Q 120 162 126 153" stroke="#451A03" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-
-            <!-- Kollar & Kahve Fincanı (Üzerinde Minik Kalp) -->
-            <g transform="translate(108, 163)">
-              <rect x="0" y="0" width="24" height="20" rx="5" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.8"/>
-              <!-- Kulp -->
-              <path d="M 24 4 C 29 4 29 16 24 16" stroke="#E11D48" stroke-width="1.8" fill="none"/>
-              <!-- Kalp İkonu Fincanda -->
-              <path d="M 12 13 C 9 9 6 11 12 16 C 18 11 15 9 12 13 Z" fill="#FB7185"/>
-              <!-- Buhar -->
-              <path d="M 7 -4 Q 9 -8 7 -11" stroke="#F97316" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
-              <path d="M 15 -4 Q 17 -8 15 -11" stroke="#F97316" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
-            </g>
-
-            <!-- Patiler -->
-            <ellipse cx="88" cy="172" rx="10" ry="8" fill="#B45309" stroke="#78350F" stroke-width="2"/>
-            <ellipse cx="152" cy="172" rx="10" ry="8" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+            <!-- Minik Patiler -->
+            <ellipse cx="88" cy="174" rx="11" ry="8.5" fill="#FFE4E6" stroke="#F43F5E" stroke-width="2"/>
+            <ellipse cx="152" cy="174" rx="11" ry="8.5" fill="#FFE4E6" stroke="#F43F5E" stroke-width="2"/>
           </svg>
         </div>
       </div>
 
       <!-- Tap Hint -->
       <p class="text-[11px] text-rose-500 font-medium -mt-2 flex items-center gap-1">
-        <span>👆</span> Tıkla bakalım, ne anlatacak
+        <span>👆</span> Maskota dokun bakalım, Konya'dan sana ne diyor!
       </p>
 
-      <!-- Welcome Card (Real Bickering Dynamic) -->
+      <!-- Welcome Card -->
       <div class="glass-card w-full rounded-3xl p-5 shadow-cozy text-center flex flex-col items-center gap-3">
         <h1 class="font-fredoka text-2xl font-bold text-gray-800 tracking-tight">
-          Selam <span class="text-rose-500 underline decoration-wavy decoration-rose-300">Beren</span>! 🌸
+          Hey <span class="text-rose-500 underline decoration-wavy decoration-rose-300">İnatçı Ama Tatlı</span> Şey! 🌸
         </h1>
-        <p class="text-xs text-gray-600 leading-relaxed font-outfit font-medium px-2">
-          "Kabul edelim, <b>1.5 yıldır</b> birbirimizi yemekten ve didişmekten başka pek bir şey yapmadık. 😂<br>
-          Normalde insan bu kadar zıtlaştığı biriyle 2 gün bile konuşamaz ama nedense seninle tartışmak bile ayrı bir sarıyor. Birbirimizi gıcık etmeyi seviyoruz galiba, ne dersin?" 😉
+        <p class="text-xs text-gray-600 leading-relaxed font-outfit font-medium px-1">
+          "Bugün Ağrı'da tatlı birinin canının sıkkın olduğu haberi <b>Konya'ya kadar</b> ulaştı. 🚨<br>
+          Eğer senin o güzel canını ben sıktıysam <b>gerçekten çok özür dilerim, kusura bakma... İnan hiç isteyerek olmadı.</b> 🥺🤍<br>
+          Şimdi inat edip <i>'yok bir şeyim, keyfim yerine gelmez'</i> diye diretiyorsundur ama o güzel yüzünün asık kalmasına Konya'dan razı olamam! 😌✨"
         </p>
 
         <!-- Dynamic Mini Stats -->
         <div class="grid grid-cols-2 gap-2 w-full mt-1">
           <div class="bg-rose-50/80 rounded-2xl p-2.5 border border-rose-100 flex flex-col items-center">
-            <span class="text-base">🥊</span>
-            <span class="text-[10px] font-bold text-rose-800">Tartışma Sayısı</span>
-            <span class="text-xs font-fredoka font-bold text-rose-600">Saymayı Bıraktık</span>
+            <span class="text-base">🏔️</span>
+            <span class="text-[10px] font-bold text-rose-800">İnat Seviyesi</span>
+            <span class="text-xs font-fredoka font-bold text-rose-600">Ağrı Dağı Kadar</span>
           </div>
           <div class="bg-amber-50/80 rounded-2xl p-2.5 border border-amber-100 flex flex-col items-center">
-            <span class="text-base">☕</span>
-            <span class="text-[10px] font-bold text-amber-800">Barışma İhtimali</span>
-            <span class="text-xs font-fredoka font-bold text-amber-600">Bir Kahveye Bakar</span>
+            <span class="text-base">🍬</span>
+            <span class="text-[10px] font-bold text-amber-800">Tatlılık Oranı</span>
+            <span class="text-xs font-fredoka font-bold text-amber-600">İnadını Unutturuyor</span>
           </div>
         </div>
 
-        <!-- Action Button: Gülümseme / Kalp Yolla -->
-        <button id="send-smile-btn" class="w-full mt-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 text-white font-fredoka font-bold text-xs tracking-wide shadow-bubble hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2">
-          <span>✨</span>
-          <span>Beren'e Tatlı Bir Selam Gönder</span>
+        <!-- Action Button: Moral Yolla -->
+        <button id="send-smile-btn" class="w-full mt-1.5 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 text-white font-fredoka font-bold text-xs tracking-wide shadow-bubble hover:brightness-105 active:translate-y-1 transition-all flex items-center justify-center gap-2">
+          <span>🚀</span>
+          <span>Konya'dan Ağrı'ya Moral Paketi Fırlat</span>
           <span>💖</span>
         </button>
 
         <!-- Sayaç -->
         <div class="text-[11px] text-gray-500 font-medium flex items-center gap-1.5">
-          <span>Gönderilen Samimi Selamlar:</span>
+          <span id="counter-label">Ulaşan Acil Moral Paketi:</span>
           <span id="smile-counter" class="font-fredoka text-rose-600 font-bold text-sm bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">1</span>
         </div>
       </div>
 
     </div>
 
-    <!-- TAB 2: RAPOR & ÖZELLİKLER (Kafa Dengi Raporu) -->
+    <!-- TAB 2: RAPOR & ÖZELLİKLER (İnat & Tatlılık Raporu) -->
     <div id="tab-detector" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
-      <div class="glass-card w-full rounded-3xl p-5 shadow-cozy flex flex-col gap-4 text-center">
+      <div class="glass-card w-full rounded-3xl p-5 shadow-cozy flex flex-col gap-3.5 text-center">
         
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl">📋</span>
-          <h2 class="font-fredoka text-xl font-bold text-gray-800">Beren Hakkında Notlar</h2>
+          <h2 class="font-fredoka text-xl font-bold text-gray-800">Acil Durum Analiz Raporu</h2>
         </div>
         <p class="text-xs text-gray-500 font-medium -mt-2">
-          1.5 Yıllık Didişme ve Gözlem Raporu 🧐
+          Konya ⇄ Ağrı Uzaktan Moral & İnat Gözlem Merkezi 🧐
         </p>
 
         <!-- Stats List -->
-        <div class="bg-gradient-to-br from-rose-50/80 to-pink-50/80 p-4 rounded-2xl border border-rose-200 text-left space-y-3">
+        <div class="bg-gradient-to-br from-rose-50/80 to-pink-50/80 p-4 rounded-2xl border border-rose-200 text-left space-y-2.5">
           
           <div class="flex justify-between items-center border-b border-rose-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Kişi:</span>
-            <span class="text-xs font-fredoka font-bold text-rose-700">Beren 🌸</span>
+            <span class="text-xs font-bold text-gray-500">Hedef Kişi:</span>
+            <span class="text-xs font-fredoka font-bold text-rose-700">Dünyanın En Tatlı İnatçısı 🌸</span>
           </div>
 
           <div class="flex justify-between items-center border-b border-rose-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Memleket:</span>
-            <span class="text-xs font-bold text-gray-700">Ordu (Karadeniz İnadı %90) 🌰</span>
+            <span class="text-xs font-bold text-gray-500">Hat / Mesafe:</span>
+            <span class="text-xs font-bold text-gray-700">Konya 🌾 ➔ Ağrı 🏔️ (~1050 km)</span>
           </div>
 
           <div class="flex justify-between items-center border-b border-rose-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">İkamet:</span>
-            <span class="text-xs font-bold text-gray-700">Ankara 🏛️</span>
+            <span class="text-xs font-bold text-gray-500">Karakter Karışımı:</span>
+            <span class="text-xs font-bold text-gray-700">%50 Keçi İnadı, %50 Pamuk Şeker 🍭</span>
           </div>
 
           <div class="flex justify-between items-center border-b border-rose-100 pb-2">
-            <span class="text-xs font-bold text-gray-500">Tartışma Sarma Oranı:</span>
-            <span class="text-xs font-fredoka font-bold text-emerald-600">10 / 10 (Sarıyor)</span>
+            <span class="text-xs font-bold text-gray-500">Somurtma Yakışma Oranı:</span>
+            <span class="text-xs font-fredoka font-bold text-rose-600">0 / 10 (Hiç Yakışmıyor!)</span>
           </div>
 
           <div class="flex justify-between items-center">
             <span class="text-xs font-bold text-gray-500">Teşhis:</span>
-            <span class="text-xs font-bold text-rose-600">"Sürekli zıtlaşıyoruz ama kopamıyoruz da."</span>
+            <span class="text-xs font-bold text-emerald-600">"İnat ediyor ama birazdan gülecek." 😉</span>
           </div>
 
         </div>
@@ -334,26 +364,26 @@
         <!-- 3 Realistic Fun Facts -->
         <div class="space-y-2 text-left text-xs">
           <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
-            <span class="text-base mt-0.5">🌰</span>
+            <span class="text-base mt-0.5">🐐</span>
             <div>
-              <p class="font-bold text-gray-800">Ordu Damarı:</p>
-              <p class="text-gray-500 text-[11px]">Bazen haksız olduğunu bilsen bile sırf inat olsun diye uzatıyorsun ya... o halin bile eğlenceli açıkçası. 😄</p>
+              <p class="font-bold text-gray-800">O Meşhur İnatçı Tarafın:</p>
+              <p class="text-gray-500 text-[11px]">Kafana bir şeyi koyduğun zaman veya modun düştüğünde Nuh deyip peygamber demiyorsun ya... O inatçı halin bile ayrı bir tatlı duruyor napayım. 😄</p>
             </div>
           </div>
 
           <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
-            <span class="text-base mt-0.5">🥊</span>
+            <span class="text-base mt-0.5">🏳️</span>
             <div>
-              <p class="font-bold text-gray-800">Zıtlaşma Seviyesi:</p>
-              <p class="text-gray-500 text-[11px]">Farklı fikirlerde olsak bile seninle atışmak başkasıyla normal konuşmaktan daha çok keyif veriyor.</p>
+              <p class="font-bold text-gray-800">Konya'dan Beyaz Bayrak & Özür:</p>
+              <p class="text-gray-500 text-[11px]">Canını sıktıysam, modunu düşürdüysem gerçekten kusura bakma, özür dilerim... Vallahi isteyerek olmadı. Seni üzmek isteyeceğim en son şey bile değil. 🥺🤍</p>
             </div>
           </div>
 
           <div class="bg-white/80 p-3 rounded-2xl border border-rose-100 flex items-start gap-2.5">
             <span class="text-base mt-0.5">👀</span>
             <div>
-              <p class="font-bold text-gray-800">Alttan Gelen Not:</p>
-              <p class="text-gray-500 text-[11px]">"Normalde bu kadar zıtlaştığım biriyle 1.5 gün konuşamam, seninle 1.5 yıl oldu maşallah." 😄</p>
+              <p class="font-bold text-gray-800">Gizli Tebessüm Tespiti:</p>
+              <p class="text-gray-500 text-[11px]">"Şu an bunları okurken bir yandan 'deli mi ne ya' deyip bir yandan da içten içe hoşuna gittiğini ikimiz de biliyoruz." 😌✨</p>
             </div>
           </div>
         </div>
@@ -361,11 +391,11 @@
         <!-- Fun Prank Button -->
         <div class="relative w-full pt-1">
           <button id="stubborn-btn" class="w-full py-3 px-4 rounded-2xl bg-rose-50 text-rose-700 font-fredoka font-semibold text-xs border border-rose-200 active:scale-95 transition-all flex items-center justify-center gap-2">
-            <span>📉</span>
-            <span>Beren'in İnadını Biraz Azalt</span>
+            <span>🛠️</span>
+            <span>İnadını ve Can Sıkıntısını Sıfırla</span>
           </button>
-          <p id="stubborn-msg" class="text-[11px] text-rose-600 font-bold mt-2 hidden animate-pulse">
-            ❌ Hata: Karadeniz inadı düşürülemez! Fabrika çıkışı böyle gelmiş. 🌰🌊
+          <p id="stubborn-msg" class="text-[11px] text-rose-600 font-bold mt-2 hidden animate-pulse leading-snug">
+            ❌ Sistem Uyarısı: Can sıkıntısı başarıyla silindi ama İNAT seviyesi Ağrı Dağı ile yarıştığı için düşürülemiyor! Fabrika çıkışı fazla tatlı ve inatçı. 🏔️🌸
           </p>
         </div>
 
@@ -373,81 +403,81 @@
 
     </div>
 
-    <!-- TAB 3: ANILAR & NOTLAR (Flip Kartlar) -->
+    <!-- TAB 3: MORAL KARTLARI (Flip Kartlar) -->
     <div id="tab-cards" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
       <div class="glass-card w-full rounded-3xl p-5 shadow-cozy flex flex-col gap-3 text-center">
         
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl">💌</span>
-          <h2 class="font-fredoka text-xl font-bold text-gray-800">Didişme Arası İtiraflar</h2>
+          <h2 class="font-fredoka text-xl font-bold text-gray-800">Can Sıkıntısı Savar Kartlar</h2>
         </div>
         <p class="text-xs text-gray-500 font-medium -mt-1">
-          Kartlara dokun bakalım, arkasında ne yazıyor 👆
+          Sırayla kartlara dokun bakalım, arkasında senin için ne var 👆
         </p>
 
         <!-- 4 Flip Cards Grid -->
         <div class="grid grid-cols-2 gap-3 w-full mt-2">
           
           <!-- Card 1 -->
-          <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
+          <div class="flip-card h-40 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
               <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-rose-50 to-pink-100 border border-rose-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🙃</span>
-                <span class="font-fredoka text-xs font-bold text-rose-800">1.5 Yılın Özeti</span>
+                <span class="text-2xl">😤</span>
+                <span class="font-fredoka text-xs font-bold text-rose-800">"Modum Yok" İnadı</span>
                 <span class="text-[10px] text-rose-600">(Dokun çevir)</span>
               </div>
               <div class="flip-card-back absolute inset-0 bg-white border border-rose-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
                 <p class="text-[11px] text-gray-700 font-semibold leading-snug">
-                  "1.5 yıldır kedi-köpek gibiyiz kabul... Ama bunca inatlaşmaya rağmen hala en çok seninle konuşmak sarıyor." ✨
+                  "İstediğin kadar 'bugün keyfim gelmez' diye inat et... O güzel yüzünü güldürene kadar pes etmeye niyetim yok! ✨"
                 </p>
               </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
+          <div class="flip-card h-40 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
               <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🥊</span>
-                <span class="font-fredoka text-xs font-bold text-amber-800">Bitmeyen Atışmalar</span>
+                <span class="text-2xl">✈️</span>
+                <span class="font-fredoka text-xs font-bold text-amber-800">Konya ⇄ Ağrı</span>
                 <span class="text-[10px] text-amber-600">(Dokun çevir)</span>
               </div>
               <div class="flip-card-back absolute inset-0 bg-white border border-amber-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
                 <p class="text-[11px] text-gray-700 font-semibold leading-snug">
-                  "Hemen her konuda zıtlaşabiliyoruz ama seninle tartışmak bile başkasıyla konuşmaktan daha çok sarıyor."
+                  "Ben Konya'dayım sen Ağrı'da olabilirsin ama canın sıkıldığında yanındaymışım gibi keyfini yerine getirmek boynumun borcu. 🌤️"
                 </p>
               </div>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
+          <div class="flip-card h-40 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
               <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">🌰</span>
-                <span class="font-fredoka text-xs font-bold text-emerald-800">O Meşhur İnat</span>
+                <span class="text-2xl">🥺</span>
+                <span class="font-fredoka text-xs font-bold text-emerald-800">Özür & Beyaz Bayrak</span>
                 <span class="text-[10px] text-emerald-600">(Dokun çevir)</span>
               </div>
               <div class="flip-card-back absolute inset-0 bg-white border border-emerald-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
                 <p class="text-[11px] text-gray-700 font-semibold leading-snug">
-                  "Bazen sırf inat olsun diye uzatıyorsun ya... Önceden sinir oluyordum belki ama şimdi izlerken gülüyorum napayım."
+                  "Canını sıktıysam çok özür dilerim, kusura bakma... İnan hiç isteyerek olmadı. Senin moralini bozmak dünyada isteyeceğim son şey bile değil. 🤍🌸"
                 </p>
               </div>
             </div>
           </div>
 
           <!-- Card 4 -->
-          <div class="flip-card h-36 cursor-pointer" onclick="toggleFlip(this)">
+          <div class="flip-card h-40 cursor-pointer" onclick="toggleFlip(this)">
             <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-sm">
               <div class="flip-card-front absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-100 border border-purple-200 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-center">
-                <span class="text-2xl">☕</span>
-                <span class="font-fredoka text-xs font-bold text-purple-800">Kahve Ateşkesi</span>
+                <span class="text-2xl">🌸</span>
+                <span class="font-fredoka text-xs font-bold text-purple-800">Küçük Bir İtiraf</span>
                 <span class="text-[10px] text-purple-600">(Dokun çevir)</span>
               </div>
               <div class="flip-card-back absolute inset-0 bg-white border border-purple-300 rounded-2xl p-3 flex flex-col items-center justify-center text-center">
                 <p class="text-[11px] text-gray-700 font-semibold leading-snug">
-                  "Bu hafta didişmeye Ankara'da bir kahve molası verelim mi? Söz, bu sefer ilk 10 dakika her şeye 'haklısın' dicem. 😉"
+                  "Hem bu kadar inatçı olup hem de bu kadar tatlı olmayı nasıl başarıyorsun bilmiyorum ama... yüzün hep gülsün, sana gülmek çok yakışıyor. 💖"
                 </p>
               </div>
             </div>
@@ -459,48 +489,48 @@
 
     </div>
 
-    <!-- TAB 4: KAHVE TEKLİFİ (Tatlı & Kaçan Buton) -->
+    <!-- TAB 4: İNAT & GÜLÜMSEME TESTİ (Tatlı & Kaçan Buton) -->
     <div id="tab-coffee" class="tab-content hidden flex-col items-center gap-4 transition-opacity duration-300">
       
       <div class="glass-card w-full rounded-3xl p-5 shadow-cozy flex flex-col gap-4 text-center relative overflow-hidden">
         
         <div class="inline-flex items-center justify-center gap-1.5 self-center bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-[11px] font-bold">
-          <span>☕</span> Resmi Ateşkes & Kahve Teklifi
+          <span>🏳️</span> Resmi Özür & Barışma Sözleşmesi
         </div>
 
         <h3 class="font-fredoka text-lg font-bold text-gray-800 leading-snug">
-          Beren Hanım, bu hafta didişmeye bir kahve molası verip Ankara'da kahve içmeye kaçıyor muyuz? ☕
+          Canını sıktığım için tekrar özür dilerim, vallahi isteyerek olmadı... 🥺 İnadı bırakıp kusuruma bakmıyorsun ve barışıyoruz değil mi? 😊✨
         </h3>
 
         <p class="text-xs text-gray-500 font-medium -mt-2">
-          Kahveler benden, bu sefer söz tartışmayacağız (en azından ilk 10 dakika deneriz 😂)
+          Sakın inat edip gri butona basmaya çalışma, Konya'dan özel koruma kalkanı koydum 😂
         </p>
 
         <!-- Arena for Running Button -->
-        <div id="coffee-arena" class="relative w-full h-48 bg-rose-50/60 rounded-2xl border border-rose-200/80 p-3 flex flex-col justify-end items-center overflow-hidden">
+        <div id="coffee-arena" class="relative w-full h-52 bg-rose-50/60 rounded-2xl border border-rose-200/80 p-3 flex flex-col justify-end items-center overflow-hidden">
           
           <!-- Success Message after Yes -->
           <div id="coffee-success" class="absolute inset-0 bg-white/95 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center p-4 gap-2 hidden z-30">
-            <span class="text-4xl animate-bounce">🎉☕✨</span>
-            <p class="font-fredoka text-base font-bold text-rose-600">Ateşkes İmzalandı!</p>
-            <p class="text-xs text-gray-600 font-semibold text-center">
-              Harika! O zaman günü ve saati ayarlamak sende, kahveci bende. Bakalım kaç dakika tartışmadan durabileceğiz! 😂
+            <span class="text-4xl animate-bounce">🎉🤍✨</span>
+            <p class="font-fredoka text-base font-bold text-rose-600">Özrüm Kabul Edildi, İnat Yenildi!</p>
+            <p class="text-xs text-gray-600 font-semibold text-center leading-relaxed">
+              Biliyordum! O tatlı yüzüne somurtmak hiç yakışmıyordu zaten. İstemeden canını sıktığım için tekrar kusura bakma... Şimdi bana mesaj atıp <b>"Tamam affettim, keyfim yerine geldi"</b> diyebilirsin! 😂💖
             </p>
-            <button id="reset-coffee-btn" class="mt-2 text-xs font-bold text-rose-600 underline">Tekrar Oyna</button>
+            <button id="reset-coffee-btn" class="mt-1 text-xs font-bold text-rose-600 underline">Tekrar Oyna</button>
           </div>
 
           <!-- THE ACCEPT BUTTON -->
-          <button id="btn-accept" class="w-3/4 py-3.5 rounded-2xl bg-gradient-to-r from-rose-400 to-pink-500 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-transform z-10 flex items-center justify-center gap-2">
-            <span>Tamam, bir kahve molası verelim ☕</span>
+          <button id="btn-accept" class="w-4/5 py-3.5 rounded-2xl bg-gradient-to-r from-rose-400 to-pink-500 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-transform z-10 flex items-center justify-center gap-2">
+            <span>Tamam affettim, gülümsedim! 😊🌸</span>
           </button>
 
           <!-- THE RUNAWAY REJECT BUTTON -->
-          <button id="btn-reject" class="absolute py-2 px-4 rounded-xl bg-gray-200 text-gray-600 font-fredoka font-bold text-xs border border-gray-300 shadow-sm transition-all duration-150 z-20" style="top: 25px; left: 35%;">
-            <span>Hayır, tartışmaya devam 🥊</span>
+          <button id="btn-reject" class="absolute py-2 px-3.5 rounded-xl bg-gray-200 text-gray-600 font-fredoka font-bold text-xs border border-gray-300 shadow-sm transition-all duration-150 z-20" style="top: 25px; left: 22%;">
+            <span>Hayır, inatla trip atacağım! 😤</span>
           </button>
 
           <p class="text-[10px] text-gray-400 mt-2 font-medium">
-            (İpucu: Tartışmaya devam etmek isteyen parmaklar yanılabilir!)
+            (İpucu: Somurtmaya devam etmek isteyen inatçı parmaklar boşa kürek çekebilir!)
           </p>
         </div>
 
@@ -514,28 +544,28 @@
   <nav class="w-full max-w-md px-4 pb-safe pb-3 pt-2 z-20">
     <div class="bg-white/90 backdrop-blur-xl border border-rose-200/90 rounded-3xl p-2 shadow-cozy flex justify-around items-center">
       
-      <!-- Nav Item 1: 1.5 Yıl -->
+      <!-- Nav Item 1: Moral Hattı -->
       <button class="nav-btn active flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-rose-600 transition-all" data-tab="tab-home">
-        <span class="text-xl">🌸</span>
-        <span class="text-[10px] font-fredoka font-bold">1.5 Yıl</span>
+        <span class="text-xl">🌤️</span>
+        <span class="text-[10px] font-fredoka font-bold">Moral Hattı</span>
       </button>
 
       <!-- Nav Item 2: Rapor -->
       <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-detector">
         <span class="text-xl">📋</span>
-        <span class="text-[10px] font-fredoka font-bold">Rapor</span>
+        <span class="text-[10px] font-fredoka font-bold">Tespitler</span>
       </button>
 
-      <!-- Nav Item 3: Notlar -->
+      <!-- Nav Item 3: Kartlar -->
       <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-cards">
         <span class="text-xl">💌</span>
         <span class="text-[10px] font-fredoka font-bold">Notlar</span>
       </button>
 
-      <!-- Nav Item 4: Kahve -->
+      <!-- Nav Item 4: İnat Testi -->
       <button class="nav-btn flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-2xl text-gray-400 hover:text-rose-500 transition-all" data-tab="tab-coffee">
-        <span class="text-xl">☕</span>
-        <span class="text-[10px] font-fredoka font-bold">Kahve</span>
+        <span class="text-xl">😊</span>
+        <span class="text-[10px] font-fredoka font-bold">İnat Testi</span>
       </button>
 
     </div>
@@ -585,7 +615,7 @@
       if (!sfxEnabled) return;
       initAudio();
       try {
-        const notes = [493.88, 587.33, 659.25, 880.00]; // B4, D5, E5, A5
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
         notes.forEach((freq, idx) => {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
@@ -626,15 +656,15 @@
       } catch (e) {}
     }
 
-    // Cozy Soft Melody
+    // Cozy Soft Music Box Melody
     const melody = [
-      { note: 523.25, dur: 450 }, // C5
-      { note: 659.25, dur: 450 }, // E5
-      { note: 783.99, dur: 450 }, // G5
-      { note: 880.00, dur: 700 }, // A5
-      { note: 783.99, dur: 450 }, // G5
-      { note: 659.25, dur: 450 }, // E5
-      { note: 587.33, dur: 800 }, // D5
+      { note: 523.25, dur: 420 }, // C5
+      { note: 659.25, dur: 420 }, // E5
+      { note: 783.99, dur: 420 }, // G5
+      { note: 880.00, dur: 650 }, // A5
+      { note: 783.99, dur: 420 }, // G5
+      { note: 659.25, dur: 420 }, // E5
+      { note: 587.33, dur: 750 }, // D5
     ];
     let melIdx = 0;
 
@@ -692,9 +722,24 @@
       if (sfxEnabled) playPop(600);
     });
 
+    // Route Badge Easter Egg
+    const routeBadge = document.getElementById('route-badge');
+    const routeTexts = [
+      'Konya ⇄ Ağrı',
+      '1050 km vız gelir! 🚀',
+      'Moral Hattı Aktif ✨',
+      'İnatçıya Özel 🌸'
+    ];
+    let routeIdx = 0;
+    routeBadge.addEventListener('click', () => {
+      playPop(680);
+      routeIdx = (routeIdx + 1) % routeTexts.length;
+      routeBadge.querySelectorAll('span')[1].textContent = routeTexts[routeIdx];
+    });
+
     // Floating background particles
     const particlesContainer = document.getElementById('particles-container');
-    const particleIcons = ['🌸', '✨', '☕', '🌰', '💖', '🌱'];
+    const particleIcons = ['🌸', '✨', '🌤️', '💖', '🍬', '🏔️'];
     for (let i = 0; i < 15; i++) {
       const p = document.createElement('div');
       p.className = 'floating-item';
@@ -712,7 +757,7 @@
 
       const sp = document.createElement('div');
       sp.className = 'tap-sparkle';
-      const emojis = ['💖', '✨', '☕', '🌸', '🍃'];
+      const emojis = ['💖', '✨', '🌤️', '🌸', '🍬'];
       sp.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       sp.style.left = `${e.pageX - 12}px`;
       sp.style.top = `${e.pageY - 12}px`;
@@ -749,14 +794,15 @@
       });
     });
 
-    // Interactive Mascot Speech Quotes (Bickering & Chemistry)
+    // Interactive Mascot Speech Quotes (Stubborn & Sweet Cheering Up + Sincere Apology)
     const mascotQuotes = [
-      "1.5 yıldır didişiyoruz ama kopamıyoruz da napcaz böyle? 🙃",
-      "Normalde bu kadar tartışmaya çoktan engellemiştim, yine şanslısın 😂",
-      "Bazen sırf gıcıklığına tartışıyorsun ama yakışıyor napalım 🥊",
-      "Bir kahve borcun var hala, orada da tartışırız gerekirse ☕",
-      "Yine hangi konuda inatlaşacağız acaba Beren hanım? 🌰",
-      "Seninle didişmek bile başkasıyla konuşmaktan daha çok sarıyor 😉"
+      "Şşt! O asık suratı Konya'dan gördüm, düzeltelim hemen! 🌤️",
+      "Canını sıktıysam çok özür dilerim, vallahi isteyerek olmadı 🥺🤍",
+      "Kesin şu an inat edip 'yok bir şeyim, gülmicem' diyorsundur 😂",
+      "Hadi kusura bakma be, Konya'dan beyaz bayrak sallıyorum 🏳️🌸",
+      "Ağrı Dağı kadar inadın var ama bir o kadar da tatlısın napcaz? 🏔️🌸",
+      "Bak hala gülmemek için direniyor... Dudak kenarın kıvrıldı gördüm! 😉",
+      "İstemeden kırdıysam affet, senin gülüşün her şeyden önemli 💖"
     ];
     let quoteIndex = 0;
 
@@ -775,7 +821,7 @@
 
       try {
         confetti({
-          particleCount: 20,
+          particleCount: 22,
           spread: 55,
           origin: { y: 0.4 },
           colors: ['#FB7185', '#F43F5E', '#34D399', '#FBBF24']
@@ -783,10 +829,17 @@
       } catch (e) {}
     });
 
-    // Send Smile / Greet Button
+    // Send Smile / Moral Package Button
     const smileBtn = document.getElementById('send-smile-btn');
     const smileCounter = document.getElementById('smile-counter');
     let smiles = 1;
+
+    const moralFeedback = [
+      "✨ Ağrı'ya Moral Paketi Ulaştı! 🌸",
+      "🚀 İnat Duvarı Çatırdıyor! 😂",
+      "🌤️ Ağrı Semalarında Güneş Açtı!",
+      "💖 Gülümseme Tespit Edildi! 😉"
+    ];
 
     smileBtn.addEventListener('click', () => {
       smiles++;
@@ -796,25 +849,34 @@
       try {
         confetti({
           particleCount: 35,
-          spread: 60,
+          spread: 65,
           origin: { y: 0.6 },
           colors: ['#FB7185', '#FDA4AF', '#FBBF24']
         });
       } catch (e) {}
 
-      smileBtn.innerHTML = `<span>✨ Beren'e Selam Ulaştı! 🌸</span>`;
+      const msg = moralFeedback[(smiles - 2) % moralFeedback.length];
+      smileBtn.innerHTML = `<span>${msg}</span>`;
       setTimeout(() => {
-        smileBtn.innerHTML = `<span>✨</span><span>Beren'e Tatlı Bir Selam Gönder</span><span>💖</span>`;
-      }, 1200);
+        smileBtn.innerHTML = `<span>🚀</span><span>Konya'dan Ağrı'ya Moral Paketi Fırlat</span><span>💖</span>`;
+      }, 1250);
     });
 
-    // Stubborn Prank
+    // Stubborn Prank Button in Tab 2
     const stubbornBtn = document.getElementById('stubborn-btn');
     const stubbornMsg = document.getElementById('stubborn-msg');
+    const stubbornErrors = [
+      "❌ Sistem Uyarısı: Can sıkıntısı başarıyla silindi ama İNAT seviyesi Ağrı Dağı ile yarıştığı için düşürülemiyor! Fabrika çıkışı fazla tatlı ve inatçı. 🏔️🌸",
+      "⚠️ Tekrar Denendi: İnat kilidi kırılamadı! Ama neyse ki tatlılık seviyesi %100 olduğu için sistem bu hatayı görmezden geliyor. 😄🍬",
+      "🚨 Sonuç: İnatçı keçi modu devrede! Yine de şu an bıyık altından gülümsediğin tespit edildi. 😉✨"
+    ];
+    let errIdx = 0;
 
     stubbornBtn.addEventListener('click', () => {
       playBoing();
+      stubbornMsg.textContent = stubbornErrors[errIdx];
       stubbornMsg.classList.remove('hidden');
+      errIdx = (errIdx + 1) % stubbornErrors.length;
     });
 
     // Flip Card Toggle
@@ -823,7 +885,7 @@
       cardElement.classList.toggle('flipped');
     }
 
-    // Runaway "Hayır, tartışmaya devam" Button in Coffee Offer
+    // Runaway "Hayır, inatla somurtacağım" Button in Tab 4
     const btnReject = document.getElementById('btn-reject');
     const btnAccept = document.getElementById('btn-accept');
     const coffeeArena = document.getElementById('coffee-arena');
@@ -831,12 +893,13 @@
     const resetCoffeeBtn = document.getElementById('reset-coffee-btn');
 
     const taunts = [
-      "Hayır, tartışmaya devam 🥊",
-      "Hop kaçtım!",
-      "Biraz ateşkes yapalım ya ☕",
-      "Tartışmayı bırak!",
-      "Söz bu sefer haklısın dicem 😉",
-      "Kabul et işte! ✨"
+      "Hayır, inatla trip atacağım! 😤",
+      "Ya valla isteyerek olmadı, kaçma! 🥺",
+      "Hadi kusura bakma, affet gitsin! 🌸",
+      "Ağrı inadı yapma, özür diledik işte! 🏔️😂",
+      "Gülümsediğini Konya'dan gördüm! 👀",
+      "Hadi pembe butona bas, barışalım! 🏳️💖",
+      "Boşuna uğraşma, bugün barışılacak! ✨"
     ];
     let tauntIdx = 0;
 
@@ -847,8 +910,8 @@
       const arenaRect = coffeeArena.getBoundingClientRect();
       const btnRect = btnReject.getBoundingClientRect();
 
-      const maxX = arenaRect.width - btnRect.width - 20;
-      const maxY = arenaRect.height - btnRect.height - 50;
+      const maxX = Math.max(20, arenaRect.width - btnRect.width - 16);
+      const maxY = Math.max(20, arenaRect.height - btnRect.height - 65);
 
       const randomX = Math.max(10, Math.floor(Math.random() * maxX));
       const randomY = Math.max(10, Math.floor(Math.random() * maxY));
@@ -870,7 +933,7 @@
       coffeeSuccess.classList.remove('hidden');
       try {
         confetti({
-          particleCount: 85,
+          particleCount: 90,
           spread: 85,
           origin: { y: 0.6 }
         });
@@ -881,8 +944,8 @@
       playPop(500);
       coffeeSuccess.classList.add('hidden');
       btnReject.style.top = '25px';
-      btnReject.style.left = '35%';
-      btnReject.querySelector('span').textContent = 'Hayır, tartışmaya devam 🥊';
+      btnReject.style.left = '22%';
+      btnReject.querySelector('span').textContent = 'Hayır, inatla trip atacağım! 😤';
     });
   </script>
 </body>

@@ -1,33 +1,22 @@
-# Beren'e Özel ✨ 1.5 Yıllık Didişme & Ateşkes Hatırası 🥊☕
+# Konya'dan Ağrı'ya ✨ Acil Moral & Can Sıkıntısı Savar Paketi 🌤️🌸
 
-> **1.5 yıldır didişen, tartışan ama bir türlü kopamayanlara özel samimi ve tatlı mobil web sitesi!**
+> **Dünyanın en inatçı ama bir o kadar da tatlı kişisinin can sıkıntısını dağıtmak için Konya'dan Ağrı'ya özel olarak hazırlanmış interaktif mobil sürpriz!**
 
-![Dinamik](https://img.shields.io/badge/Dinamik-Didişmeli_%26_Tatlı-rose?style=for-the-badge)
-![Süre](https://img.shields.io/badge/Süre-1.5_Yıl-amber?style=for-the-badge)
-![Plan](https://img.shields.io/badge/Plan-Kahve_Ateşkesi-emerald?style=for-the-badge)
+![Hat](https://img.shields.io/badge/Hat-Konya_⇄_Ağrı-rose?style=for-the-badge)
+![Karakter](https://img.shields.io/badge/Karakter-İnatçı_%26_Tatlı-amber?style=for-the-badge)
+![Görev](https://img.shields.io/badge/Görev-Gülümsetmek-emerald?style=for-the-badge)
 
 ---
 
 ## 📱 Özellikler
 
-- **Samimi ve Gerçekçi Dinamik**:
-  - *"1.5 yıldır birbirimizi yemekten başka bir şey yapmadık kabul, ama bunca inatlaşmaya rağmen hala en çok seninle konuşmak sarıyor."*
-- **Didişme Arası İtiraflar (3D Dönen Kartlar)**:
-  - 1. *1.5 Yılın Özeti*: Kedi-köpek gibi didişmeye rağmen sohbetin sarması.
-  - 2. *Bitmeyen Atışmalar*: Her konuda zıtlaşsalar da tartışmanın bile başkasıyla konuşmaktan daha çok sardığı tespiti.
-  - 3. *O Meşhur İnat*: Karadeniz inadının tatlı atışmaları.
-  - 4. *Kahve Ateşkesi*: Ankara'da didişmeye bir kahve molası verme teklifi.
-- **Resmi Ateşkes & Kahve Teklifi Oyunu**:
-  - *"Bu hafta didişmeye bir kahve molası verelim mi?"* sorusunda yakalanmayan, kaçan *"Hayır, tartışmaya devam 🥊"* butonu!
+- **Konya ⇄ Ağrı Acil Moral Hattı & İnteraktif Maskot**:
+  - Dokundukça Konya'dan Ağrı'ya tatlı ve şakacı sözler söyleyen, inatçılığına tatlı tatlı takılan özel tasarım maskot ve moral paketi sayacı.
+- **Acil Durum Analiz Raporu (İnat & Tatlılık Gözlem Merkezi)**:
+  - *"Ağrı Dağı kadar inatçı ama %100 tatlı"* teşhisleri ve tıkladıkça komik sistem hataları veren **"İnadını ve Can Sıkıntısını Sıfırla"** butonu.
+- **Can Sıkıntısı Savar 3D Dönen Kartlar**:
+  - Dokundukça 3 boyutlu dönen, arkasından bol eğlenceli ve moral verici notlar çıkan 4 özel kart.
+- **Resmi Moral & İnat Sözleşmesi (Kaçan Buton Oyunu)**:
+  - *"Şimdi dürüst olalım, gülümsedin değil mi?"* sorusunda asla yakalanmayan, dokundukça kaçan **"Hayır, inatla somurtacağım! 😤"** butonu!
 - **Dahili Müzik Kutusu & Ses Efektleri**:
-  - Web Audio API ile sıfır harici dosya yüküyle çalışan sakin, tatlı melodi.
-
----
-
-## 🚀 Canlıya Alma
-
-```bash
-git add .
-git commit -m "feat: 1.5 yil ve dogal didisme ayarlamalari 🥊✨"
-git push origin main
-```
+  - Web Audio API ile sıfır harici dosya yüküyle çalışan tatlı melodi ve ses efektleri.
