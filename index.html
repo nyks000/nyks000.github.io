@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#FCE7F3" />
-  <title>Helin'e Özel 🌸 Pembe Çiçek Buketi & Mektup</title>
-  <meta name="description" content="Ağrı'nın en tatlı ve en güzel çiçeği Helin için özel 3D pembe çiçek buketi ve sürpriz mektup." />
+  <title>Helin'e Özel 🧸🌸 Pembiş Ayıcık, Çiçek Buketi & Sürpriz</title>
+  <meta name="description" content="Helin için özel 3D pembiş ayıcık, çiçek buketi, yan yana polaroid köşemiz ve tatlı sürprizler." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,22 +28,10 @@
             fredoka: ['Fredoka', 'sans-serif'],
             quicksand: ['Quicksand', 'sans-serif'],
           },
-          colors: {
-            blush: {
-              50: '#FFF5F8',
-              100: '#FCE7F3',
-              200: '#FBCFE8',
-              300: '#F9A8D4',
-              400: '#F472B6',
-              500: '#EC4899',
-              600: '#DB2777',
-              700: '#BE185D',
-            }
-          },
           boxShadow: {
-            'pink-glow': '0 12px 32px -6px rgba(236, 72, 153, 0.32), 0 4px 12px -2px rgba(244, 114, 182, 0.2)',
-            'polaroid': '0 18px 40px -10px rgba(190, 24, 93, 0.22), 0 4px 14px rgba(0, 0, 0, 0.06)',
-            'pill': '0 6px 0px rgba(190, 24, 93, 0.28)',
+            'pink-glow': '0 14px 35px -6px rgba(236, 72, 153, 0.32), 0 4px 14px -2px rgba(244, 114, 182, 0.22)',
+            'polaroid': '0 14px 30px -8px rgba(190, 24, 93, 0.25), 0 4px 10px rgba(0, 0, 0, 0.06)',
+            'pill': '0 5px 0px rgba(190, 24, 93, 0.3)',
           }
         }
       }
@@ -54,120 +42,110 @@
     * {
       -webkit-tap-highlight-color: transparent;
       box-sizing: border-box;
+      user-select: none;
     }
 
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       overflow-x: hidden;
-      background: radial-gradient(circle at 50% 25%, #FFF7FA 0%, #FCE7F3 48%, #FBCFE8 100%);
+      background: linear-gradient(160deg, #FFF5F8 0%, #FCE7F3 45%, #FBCFE8 100%);
       font-family: 'Quicksand', sans-serif;
       color: #4A1D34;
     }
 
-    /* Three.js Canvas Layer */
-    #three-container {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 5;
-      touch-action: none;
-      transition: height 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* When letter panel is open on mobile, keep 3D bouquet interactive in upper area or full background */
-    body.letter-mode #three-container {
-      pointer-events: auto;
-    }
-
     /* Glassmorphic Pink Cards */
     .pink-glass {
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.95);
     }
 
-    .pink-glass-soft {
-      background: rgba(255, 245, 249, 0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(251, 207, 232, 0.85);
+    .pink-card-inner {
+      background: linear-gradient(145deg, rgba(255, 245, 248, 0.92), rgba(252, 231, 243, 0.78));
+      border: 1.5px solid rgba(249, 168, 212, 0.65);
     }
 
-    /* Polaroid Frame */
-    .polaroid-frame {
+    /* Couple Polaroid Frames */
+    .polaroid-card {
       background: #FFFFFF;
-      padding: 12px 12px 22px 12px;
-      border-radius: 18px;
-      box-shadow: 0 18px 40px -10px rgba(190, 24, 93, 0.24), 0 4px 12px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(251, 207, 232, 0.9);
-      transform: rotate(-1.5deg);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      padding: 8px 8px 16px 8px;
+      border-radius: 16px;
+      box-shadow: 0 14px 28px -8px rgba(190, 24, 93, 0.24), 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: 1.5px solid rgba(251, 207, 232, 0.95);
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
     }
-    .polaroid-frame:hover, .polaroid-frame:active {
-      transform: rotate(0deg) scale(1.02);
-      box-shadow: 0 22px 45px -8px rgba(236, 72, 153, 0.35);
+    .polaroid-left {
+      transform: rotate(-3.5deg);
+    }
+    .polaroid-right {
+      transform: rotate(3.5deg);
+    }
+    .couple-merged .polaroid-left {
+      transform: rotate(-1deg) translateX(6px) scale(1.03);
+      box-shadow: 0 18px 36px -6px rgba(236, 72, 153, 0.4);
+    }
+    .couple-merged .polaroid-right {
+      transform: rotate(1deg) translateX(-6px) scale(1.03);
+      box-shadow: 0 18px 36px -6px rgba(236, 72, 153, 0.4);
     }
 
     /* Washi tape on top of Polaroid */
     .washi-tape {
       position: absolute;
-      top: -11px;
+      top: -9px;
       left: 50%;
       transform: translateX(-50%) rotate(-2deg);
-      width: 96px;
-      height: 24px;
+      width: 68px;
+      height: 18px;
       background: repeating-linear-gradient(
         45deg,
-        rgba(249, 168, 212, 0.78),
-        rgba(249, 168, 212, 0.78) 8px,
-        rgba(253, 242, 248, 0.82) 8px,
-        rgba(253, 242, 248, 0.82) 16px
+        rgba(244, 114, 182, 0.72),
+        rgba(244, 114, 182, 0.72) 6px,
+        rgba(253, 242, 248, 0.85) 6px,
+        rgba(253, 242, 248, 0.85) 12px
       );
       border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(190, 24, 93, 0.12);
+      box-shadow: 0 2px 5px rgba(190, 24, 93, 0.12);
       z-index: 10;
     }
 
-    /* Floating 2D Sakura Petals */
+    /* Ambient Falling Sakura & Hearts */
     .sakura-petal {
       position: fixed;
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
       animation: petalFall linear infinite;
     }
-
     @keyframes petalFall {
       0% {
         transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.8);
         opacity: 0;
       }
-      15% {
-        opacity: 0.85;
-      }
-      85% {
-        opacity: 0.85;
-      }
+      15% { opacity: 0.85; }
+      85% { opacity: 0.85; }
       100% {
-        transform: translateY(108vh) translateX(45px) rotate(360deg) scale(1.05);
+        transform: translateY(108vh) translateX(40px) rotate(360deg) scale(1.05);
         opacity: 0;
       }
     }
 
-    /* Pulse ring for envelope tap prompt */
-    @keyframes softPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45); }
-      50% { transform: scale(1.04); box-shadow: 0 0 0 14px rgba(236, 72, 153, 0); }
+    /* Heartbeat animation */
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.22); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.16); }
     }
-    .pulse-cta {
-      animation: softPulse 2.2s infinite ease-in-out;
+    .heart-beat {
+      animation: heartBeat 1.6s infinite ease-in-out;
     }
 
-    /* Floating tap sparkle / compliment bubble */
+    /* Floating tap compliment bubble */
     .tap-float {
       position: fixed;
       pointer-events: none;
@@ -177,308 +155,325 @@
     @keyframes floatUpFade {
       0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
       20% { opacity: 1; transform: translate(-50%, -14px) scale(1.05); }
-      80% { opacity: 1; transform: translate(-50%, -44px) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -68px) scale(0.9); }
+      80% { opacity: 1; transform: translate(-50%, -42px) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -65px) scale(0.9); }
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 5px;
+    /* 3D Canvas Viewer Box */
+    #three-stage-wrapper {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      touch-action: pan-y;
     }
-    ::-webkit-scrollbar-track {
-      background: rgba(252, 231, 243, 0.4);
+    #three-container {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
     }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(244, 114, 182, 0.6);
-      border-radius: 9999px;
+    #three-container:active {
+      cursor: grabbing;
     }
 
     .pt-safe { padding-top: max(12px, env(safe-area-inset-top)); }
-    .pb-safe { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+    .pb-safe { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
   </style>
 </head>
-<body class="relative select-none">
+<body class="relative">
 
-  <!-- Ambient 2D Sakura Petals Background -->
+  <!-- Ambient 2D Falling Petals & Hearts -->
   <div id="petals-bg" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-  <!-- Three.js 3D Scene Container -->
-  <div id="three-container"></div>
-
-  <!-- Top Navigation / Status Header -->
-  <header class="fixed top-0 left-0 right-0 z-30 pt-safe px-4 pointer-events-none">
+  <!-- Top Sticky Header -->
+  <header class="sticky top-0 z-40 pt-safe px-4 pb-2">
     <div class="max-w-md mx-auto flex items-center justify-between">
-      <!-- Left Location/Name Badge -->
-      <div id="top-badge" class="pointer-events-auto flex items-center gap-1.5 pink-glass px-3.5 py-1.5 rounded-full shadow-sm border border-pink-200 cursor-pointer active:scale-95 transition-transform">
-        <span class="text-sm">🌸</span>
-        <span class="text-xs font-fredoka font-semibold text-pink-700 tracking-wide">Ağrı'nın En Güzel Çiçeği: Helin</span>
-        <span class="text-xs">💗</span>
+      <div id="top-badge" class="flex items-center gap-1.5 pink-glass px-3.5 py-1.5 rounded-full shadow-sm border border-pink-200 cursor-pointer active:scale-95 transition-transform">
+        <span class="text-sm">🧸</span>
+        <span class="text-xs font-fredoka font-semibold text-pink-700 tracking-wide">Helin'in Pembiş Dünyası v2.0</span>
+        <span class="text-xs">🌸</span>
       </div>
 
-      <!-- Right Action Buttons -->
-      <div class="pointer-events-auto flex items-center gap-2">
+      <div class="flex items-center gap-2">
         <button id="music-btn" class="flex items-center gap-1.5 pink-glass px-3 py-1.5 rounded-full border border-pink-200 shadow-sm active:scale-95 transition-all text-xs font-fredoka font-semibold text-pink-600">
           <span id="music-icon">🎵</span>
           <span id="music-label">Melodi</span>
         </button>
-        <button id="shower-btn" title="Çiçek Yağmuru" class="w-8 h-8 rounded-full pink-glass border border-pink-200 flex items-center justify-center text-sm shadow-sm active:scale-90 transition-transform">
-          ✨
+        <button id="shower-btn" title="Pembiş Konfeti" class="w-8 h-8 rounded-full pink-glass border border-pink-200 flex items-center justify-center text-sm shadow-sm active:scale-90 transition-transform">
+          💖
         </button>
       </div>
     </div>
   </header>
 
-  <!-- STAGE 1 OVERLAY: Closed Envelope Prompt -->
-  <div id="stage-envelope-ui" class="fixed inset-x-0 bottom-0 z-20 pb-safe px-5 pointer-events-none flex flex-col items-center justify-end h-full pb-10 transition-all duration-700">
-    <!-- Top floating title -->
-    <div class="mb-auto mt-16 text-center px-4 pointer-events-auto">
-      <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/80 border border-pink-200 shadow-sm text-[11px] font-semibold text-pink-600 mb-2">
-        <span>💌</span>
-        <span>Konya'dan Ağrı'ya Özel Pembe Sürpriz</span>
-        <span>🌷</span>
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="relative z-10 w-full max-w-md mx-auto px-4 pb-safe space-y-5">
+
+    <!-- HERO SECTION: 3D PINK TEDDY BEAR HOLDING FLOWER BOUQUET -->
+    <section class="pink-glass rounded-[32px] p-4 shadow-pink-glow relative overflow-hidden">
+      <!-- Top Ribbon Tag -->
+      <div class="flex flex-col items-center text-center mb-1">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-100 border border-pink-300 text-[11px] font-fredoka font-semibold text-pink-700 mb-1">
+          <span>🚨</span>
+          <span>"Yine Aynısı" Trip Savar Özel Güncellemesi!</span>
+          <span>🌷</span>
+        </div>
+        <h1 class="font-script text-3xl sm:text-4xl font-bold text-pink-700 leading-tight">
+          Pembiş Ayıcık & Çiçeklerin Geldi!
+        </h1>
       </div>
-      <h1 class="font-script text-4xl sm:text-5xl font-bold text-pink-700 drop-shadow-sm">
-        Helin'e Özel...
-      </h1>
-      <p class="text-xs sm:text-sm font-medium text-pink-800/80 mt-1 max-w-xs mx-auto">
-        Pembeleri seven o tatlı kıza, içinde küçük bir itiraf ve kocaman bir buket saklı bir zarf geldi 🌸
-      </p>
-    </div>
 
-    <!-- Bottom CTA Button to Open Envelope -->
-    <div class="w-full max-w-xs flex flex-col items-center gap-2.5 pointer-events-auto">
-      <button id="open-envelope-btn" class="pulse-cta w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 text-white font-fredoka font-bold text-base tracking-wide shadow-pink-glow flex items-center justify-center gap-2.5 active:scale-95 transition-transform">
-        <span class="text-xl">💌</span>
-        <span>Mektuba Dokun ve Aç</span>
-        <span class="text-lg">🌸</span>
+      <!-- Speech Bubble from the 3D Teddy Bear -->
+      <div class="relative z-20 mx-auto max-w-[92%] mt-1">
+        <div id="bear-speech-bubble" class="bg-white/95 border-2 border-pink-300 rounded-2xl px-3.5 py-2 text-center shadow-sm transition-all duration-300">
+          <p id="bear-speech-text" class="text-xs font-fredoka font-semibold text-pink-700 leading-snug">
+            "Şşşt Helin! 'Aynısı bu' diye hafif trip atmışsın duyduk! 🙈 Bak sana elimde dev pembe buketle geldim, bana dokun bakalım! 🧸🌸"
+          </p>
+        </div>
+        <div class="w-3 h-3 bg-white border-r-2 border-b-2 border-pink-300 rotate-45 mx-auto -mt-1.5"></div>
+      </div>
+
+      <!-- 3D Three.js Stage (Pink Teddy Bear + Flower Bouquet) -->
+      <div id="three-stage-wrapper" class="-my-2">
+        <div id="three-container"></div>
+      </div>
+
+      <!-- 3D Scene Controls -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+        <button id="bear-hug-btn" class="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 text-white font-fredoka font-semibold text-xs shadow-sm active:scale-95 transition-all flex items-center gap-1.5">
+          <span>🧸</span>
+          <span>Ayıcığı Zıplat & Sev</span>
+        </button>
+        <button id="bear-bouquet-btn" class="px-3.5 py-2 rounded-2xl bg-pink-100 text-pink-700 border border-pink-300 font-fredoka font-semibold text-xs active:scale-95 transition-all flex items-center gap-1.5">
+          <span>💐</span>
+          <span id="mode-switch-label">Bukete Yakınlaş</span>
+        </button>
+      </div>
+      <p class="text-[10px] text-center text-pink-500 font-semibold mt-2">
+        👆 3D Pembiş Ayıcığı parmağınla 360° çevirebilir veya üstüne dokunabilirsin!
+      </p>
+    </section>
+
+    <!-- SECTION 2: THE UNCLICKABLE "HAYIR" QUESTION ("BENİ SEVİYORSUN DEĞİL Mİ?") -->
+    <section id="love-question-card" class="pink-glass rounded-[32px] p-5 shadow-pink-glow border-2 border-pink-300 relative overflow-hidden">
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-600 font-fredoka text-xs font-bold">
+          <span>💘</span>
+          <span>ZORUNLU DÜRÜSTLÜK TESTİ</span>
+          <span>🧸</span>
+        </div>
+
+        <h2 class="font-fredoka text-xl sm:text-2xl font-bold text-pink-800 leading-snug">
+          Helin, şimdi trip atmadan doğruyu söyle... <br/>
+          <span class="text-pink-600 underline decoration-wavy decoration-pink-300">Beni seviyorsun</span> değil mi? 🥺🌸
+        </h2>
+
+        <p id="question-subtext" class="text-xs text-pink-700/80 font-semibold">
+          (İstersen "Hayır" butonuna basmayı dene bakalım basabiliyor musun... 😌)
+        </p>
+
+        <!-- Dodge Counter Badge -->
+        <div id="dodge-counter-wrap" class="hidden items-center justify-center gap-1.5 py-1">
+          <span class="px-3 py-0.5 rounded-full bg-pink-100 border border-pink-300 text-[11px] font-fredoka font-bold text-pink-700">
+            🏃‍♀️ Kaçan Trip Denemesi: <span id="dodge-count">0</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Interactive Button Arena -->
+      <div id="runaway-arena" class="relative w-full min-h-[150px] mt-3 rounded-2xl pink-card-inner p-4 flex flex-col items-center justify-center gap-3 overflow-hidden">
+        
+        <!-- YES BUTTON (Grows bigger each time she tries to click No!) -->
+        <button id="yes-love-btn" class="z-20 py-3.5 px-7 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-pink-500 text-white font-fredoka font-bold text-sm sm:text-base shadow-pill active:translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+          <span>💖</span>
+          <span id="yes-love-text">Evet, hem de çok! 😊🌸</span>
+        </button>
+
+        <!-- NO BUTTON (Runs away on touch / hover / click!) -->
+        <button id="no-runaway-btn" class="z-30 py-2.5 px-5 rounded-xl bg-white text-pink-700 border-2 border-pink-300 font-fredoka font-semibold text-xs shadow-sm transition-all duration-200 flex items-center gap-1.5">
+          <span>😤</span>
+          <span id="no-runaway-text">Hayır, trip atacağım!</span>
+        </button>
+      </div>
+
+      <!-- Celebration Box (Revealed when she clicks YES!) -->
+      <div id="love-accepted-box" class="hidden mt-4 bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-3xl p-5 text-center shadow-lg space-y-2.5">
+        <div class="text-3xl">🧸💖💐🎉🌸</div>
+        <h3 class="font-fredoka text-lg font-bold">
+          BİLİYORDUM! İTİRAF KAYITLARA GEÇTİ! 😍✨
+        </h3>
+        <p class="text-xs leading-relaxed font-medium text-pink-50">
+          Artık geri dönüşü yok Helin Hanım, kendi ellerinle <b>"Evet, hem de çok!"</b> butonuna bastın! 😌💗 Pembiş ayıcık da şahidimiz! Yüzündeki o tatlı gülümseme hiç solmasın...
+        </p>
+        <div class="inline-block bg-white/20 backdrop-blur-sm px-3.5 py-1 rounded-full text-[11px] font-fredoka font-semibold">
+          📜 Resmi Onay: Helin ❤️ Pembiş Sürpriz
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SIDE-BY-SIDE COUPLE POLAROIDS (BEN.PNG & HELIN.PNG) -->
+    <section class="pink-glass rounded-[32px] p-5 shadow-pink-glow space-y-4 relative overflow-hidden">
+      <div class="text-center space-y-1">
+        <span class="inline-block px-3 py-0.5 rounded-full bg-pink-100 text-pink-600 font-fredoka text-[11px] font-semibold">
+          📸 YAN YANA BİZİM KÖŞEMİZ
+        </span>
+        <h2 class="font-script text-3xl font-bold text-pink-700">
+          Sert Görünümlü Çocuk & Pembe Peri Kızı
+        </h2>
+        <p class="text-xs text-pink-800/80 font-medium">
+          İki fotoğraf yan yana gelince ortaya çıkan o tatlı tezatlık... 🌸
+        </p>
+      </div>
+
+      <!-- Side by Side Polaroids Container -->
+      <div id="couple-polaroid-stage" class="relative grid grid-cols-2 gap-3 items-center pt-2 px-1">
+        
+        <!-- Left Polaroid: User's Photo (ben.png) -->
+        <div id="my-polaroid" class="polaroid-card polaroid-left cursor-pointer">
+          <div class="washi-tape"></div>
+          <div class="w-full aspect-[3/4] rounded-xl overflow-hidden bg-pink-50 border border-pink-100">
+            <img src="ben.png" alt="Ben" class="w-full h-full object-cover object-top" />
+          </div>
+          <div class="pt-2 text-center">
+            <p class="font-fredoka text-[11px] font-bold text-pink-800">Dışarıdan Ciddi 🪖</p>
+            <p class="text-[9.5px] text-pink-500 font-semibold">Ama sana gelince...</p>
+          </div>
+        </div>
+
+        <!-- Center Floating Beating Heart Connector -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+          <div id="center-heart-badge" class="w-11 h-11 rounded-full bg-white shadow-pink-glow border-2 border-pink-300 flex items-center justify-center text-xl heart-beat">
+            💗
+          </div>
+        </div>
+
+        <!-- Right Polaroid: Helin's Photo (helin.png) -->
+        <div id="helin-polaroid" class="polaroid-card polaroid-right cursor-pointer">
+          <div class="washi-tape"></div>
+          <div class="w-full aspect-[3/4] rounded-xl overflow-hidden bg-pink-50 border border-pink-100">
+            <img src="helin.png" alt="Helin" class="w-full h-full object-cover object-top" />
+          </div>
+          <div class="pt-2 text-center">
+            <p class="font-fredoka text-[11px] font-bold text-pink-800">Pembe Peri Kızı 🌸</p>
+            <p class="text-[9.5px] text-pink-500 font-semibold">Kalp yumuşatan detay</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Funny & Romantic Contrast Note -->
+      <div class="pink-card-inner rounded-2xl p-3.5 text-center space-y-2">
+        <p id="couple-note-text" class="text-xs font-semibold text-pink-900 leading-relaxed">
+          "Soldaki fotoğrafta ne kadar ciddi ve sert durursam durayım; sağdaki o <b>beyaz elbiseli</b>, <b>gözlüklü</b> ve <b>saçında mor-pembe çiçekli</b> tatlı kıza bakınca içerideki o <b>pembiş peluş ayıcığa</b> dönüşüyorum... 🧸💘"
+        </p>
+
+        <!-- Merge / Compatibility Button -->
+        <button id="merge-photos-btn" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-pink-400 to-rose-400 text-white font-fredoka font-bold text-xs shadow-sm active:scale-95 transition-all flex items-center justify-center gap-1.5">
+          <span>✨</span>
+          <span id="merge-btn-label">Fotoğrafları Yakınlaştır & Uyumu Ölç (%100)</span>
+          <span>💞</span>
+        </button>
+
+        <!-- Hidden Compatibility Meter -->
+        <div id="compatibility-bar-wrap" class="hidden pt-1 space-y-1">
+          <div class="flex justify-between text-[11px] font-fredoka font-bold text-pink-700">
+            <span>Konya ⇄ Ağrı Tatlılık Uyumu:</span>
+            <span>%1000 Kusursuz! 🌸</span>
+          </div>
+          <div class="w-full h-3 bg-white rounded-full overflow-hidden border border-pink-300 p-0.5">
+            <div class="h-full bg-gradient-to-r from-pink-400 via-rose-500 to-pink-500 rounded-full w-full animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: INTERACTIVE PINK FLOWER FORTUNE ("PEMBE ÇİÇEK FALI") -->
+    <section class="pink-glass rounded-[32px] p-5 shadow-pink-glow space-y-3.5 text-center">
+      <div class="space-y-1">
+        <span class="inline-block px-3 py-0.5 rounded-full bg-pink-100 text-pink-600 font-fredoka text-[11px] font-semibold">
+          🌷 PEMBİŞ ÇİÇEK FALI
+        </span>
+        <h2 class="font-fredoka text-lg font-bold text-pink-800">
+          Yaprakları Tek Tek Kopar Bakalım Ne Çıkacak? 🌸
+        </h2>
+      </div>
+
+      <!-- Visual Flower Petals Ring -->
+      <div class="relative w-44 h-44 mx-auto flex items-center justify-center my-1">
+        <div id="fortune-petals-ring" class="absolute inset-0 flex items-center justify-center">
+          <!-- Dynamically populated 6 clickable pink petals -->
+        </div>
+        <!-- Center Golden Heart of Flower -->
+        <div id="fortune-center" class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 to-yellow-400 border-4 border-white shadow-md flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform">
+          <span class="text-lg">😊</span>
+          <span id="petals-left-badge" class="text-[9px] font-fredoka font-bold text-amber-900">6 Yaprak</span>
+        </div>
+      </div>
+
+      <!-- Result Box for Each Plucked Petal -->
+      <div class="pink-card-inner rounded-2xl p-3 min-h-[60px] flex items-center justify-center">
+        <p id="fortune-status-text" class="text-xs font-fredoka font-semibold text-pink-800">
+          👆 Çiçeğin pembe yapraklarına veya aşağıdaki butona dokunarak falına bak!
+        </p>
+      </div>
+
+      <button id="pluck-petal-btn" class="w-full py-2.5 px-5 rounded-2xl bg-pink-100 hover:bg-pink-200 text-pink-700 border border-pink-300 font-fredoka font-bold text-xs active:scale-95 transition-all flex items-center justify-center gap-1.5">
+        <span>🌸</span>
+        <span id="pluck-btn-text">Bir Pembe Yaprak Kopar</span>
       </button>
-      <p class="text-[11px] font-semibold text-pink-700/80 flex items-center gap-1">
-        <span>👆</span> 3D zarfa veya butona dokunabilirsin
-      </p>
-    </div>
-  </div>
+    </section>
 
-  <!-- STAGE 2 OVERLAY: Bouquet Controls + Scrollable Letter & Polaroid Sheet -->
-  <div id="stage-opened-ui" class="relative z-20 w-full min-h-screen flex flex-col items-center pointer-events-none opacity-0 translate-y-8 transition-all duration-700 hidden">
-    
-    <!-- Top 3D Bouquet Interactive Viewport Spacer (lets user spin & tap the 3D bouquet!) -->
-    <div id="bouquet-viewport-spacer" class="w-full h-[46vh] sm:h-[50vh] flex flex-col items-center justify-between pt-14 pb-3 px-4 pointer-events-none transition-all duration-500">
-      <!-- Floating status pill above bouquet -->
-      <div class="pink-glass-soft px-4 py-1.5 rounded-full shadow-sm flex items-center gap-2 pointer-events-auto">
-        <span class="text-xs">💐</span>
-        <span id="bouquet-hint-text" class="text-[11px] font-fredoka font-semibold text-pink-700">
-          Buketi parmağınla çevir veya çiçeklere dokun! ✨
+    <!-- SECTION 5: HER PHOTO DETAILS & SWEET LETTER -->
+    <section class="pink-glass rounded-[32px] p-5 shadow-pink-glow space-y-4">
+      <div class="flex items-center justify-between border-b border-pink-100 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">💌</span>
+          <span class="font-fredoka text-sm font-bold text-pink-700">Helin'e Özel Pembiş Not</span>
+        </div>
+        <span class="text-[10px] font-semibold text-pink-500 bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">
+          Trip Savar Mektup 🌸
         </span>
       </div>
 
-      <!-- View Toggle Pill at base of 3D Bouquet -->
-      <div class="flex items-center gap-2 pointer-events-auto">
-        <button id="toggle-fullscreen-bouquet" class="pink-glass px-3.5 py-1.5 rounded-full text-xs font-fredoka font-semibold text-pink-700 shadow-sm border border-pink-200 flex items-center gap-1.5 active:scale-95 transition-all">
-          <span id="toggle-bouquet-icon">🔍</span>
-          <span id="toggle-bouquet-text">Buketi Tam Ekran İncele</span>
-        </button>
-        <button id="bloom-more-btn" class="bg-gradient-to-r from-pink-400 to-rose-400 text-white px-3.5 py-1.5 rounded-full text-xs font-fredoka font-semibold shadow-sm flex items-center gap-1 active:scale-95 transition-all">
-          <span>🌸</span>
-          <span>Çiçek Saç</span>
-        </button>
+      <div class="space-y-2.5 text-xs sm:text-[13px] text-gray-700 leading-relaxed font-medium">
+        <p>
+          Selam <b class="text-pink-600">Tatlı Tripçi Helin</b>, 🧸🌸
+        </p>
+        <p>
+          "Bu sefer aynısı" diye hafif trip attığını duyunca dedim ki; pembeleri bu kadar seven tatlı bir kıza sıradan bir şey yakışmaz! Hemen elinde pembe çiçek buketi tutan 3 boyutlu <b class="text-pink-600">pembiş bir ayıcık</b>, yan yana <b class="text-pink-600">fotoğraf köşemiz</b> ve asla "Hayır" diyemeyeceğin bir sürpriz hazırladım. 😌✨
+        </p>
+        <p>
+          Şaka bir yana Helin; o fotoğrafındaki <b class="text-pink-600">beyaz elbisen</b>, <b class="text-pink-600">gözlüğünün</b> arkasındaki o güzel bakışın ve kulağının arkasına taktığın o <b class="text-pink-600">çiçek</b>... Hepsi o kadar zarif ve tatlı ki, insan baktıkça gülümsüyor.
+        </p>
+        <p class="bg-pink-50 p-3 rounded-2xl border border-pink-200 text-pink-800 font-semibold">
+          Bana istediğin kadar tatlı tatlı trip atabilirsin ama gerçeği değiştiremezsin: Senden ve o güzel enerjinden <span class="text-pink-600 underline decoration-wavy">gerçekten çok hoşlanıyorum.</span> 💗🧸
+        </p>
       </div>
-    </div>
+    </section>
 
-    <!-- Main Letter & Polaroid Card Container -->
-    <main id="letter-sheet" class="w-full max-w-md px-4 pb-safe pb-12 pointer-events-auto transition-all duration-500">
-      <div class="pink-glass rounded-[32px] p-5 sm:p-6 shadow-pink-glow border-2 border-white flex flex-col items-center gap-5 relative overflow-hidden">
-        
-        <!-- Decorative Corner Blossoms -->
-        <div class="absolute -top-6 -right-6 w-24 h-24 bg-pink-200/40 rounded-full blur-xl pointer-events-none"></div>
-        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-rose-200/40 rounded-full blur-xl pointer-events-none"></div>
-
-        <!-- Header of the Letter -->
-        <div class="text-center space-y-1">
-          <span class="inline-block px-3 py-0.5 rounded-full bg-pink-100 text-pink-600 font-fredoka text-[11px] font-semibold tracking-wide">
-            💌 ZARFTAN ÇIKAN SÜRPRİZ
-          </span>
-          <h2 class="font-script text-3xl sm:text-4xl font-bold text-pink-700">
-            Saçındaki Tek Çiçek Yetmez Dedim...
-          </h2>
-        </div>
-
-        <!-- POLAROID PHOTO OF HELIN -->
-        <div class="relative mt-2 w-full max-w-[270px] mx-auto">
-          <div class="washi-tape"></div>
-          <div id="polaroid-card" class="polaroid-frame cursor-pointer relative group" title="Fotoğrafa dokun!">
-            <!-- Image Container -->
-            <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-pink-50 border border-pink-100">
-              <img 
-                src="helin.png" 
-                alt="Helin" 
-                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <!-- Subtle golden-pink vignette overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-pink-900/25 via-transparent to-transparent pointer-events-none"></div>
-              
-              <!-- Floating badge on corner of photo -->
-              <div class="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-fredoka font-semibold text-pink-600 shadow-sm flex items-center gap-1">
-                <span>🌺</span>
-                <span>En Güzel Detay</span>
-              </div>
-            </div>
-
-            <!-- Polaroid Handwritten Caption -->
-            <div class="pt-3 pb-0.5 text-center">
-              <p id="polaroid-caption" class="font-script text-2xl font-bold text-pink-700 leading-tight">
-                Ağrı'nın En Güzel Manzarası 🌸
-              </p>
-              <p class="text-[10px] text-pink-400 font-semibold mt-0.5">
-                (Fotoğrafa her dokunduğunda içimden geçen bir not değişir ✨)
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- INTERACTIVE PHOTO DETAIL COMPLIMENTS (Saçındaki Çiçek, Gözlüğü, Beyaz Elbisesi, Gülüşü) -->
-        <div class="w-full space-y-2.5">
-          <div class="flex items-center justify-center gap-1.5">
-            <span class="text-xs">✨</span>
-            <h3 class="font-fredoka text-xs font-bold text-pink-700 uppercase tracking-wider">
-              Bu Fotoğraftaki Favori Detaylarım (Dokun Bakalım)
-            </h3>
-            <span class="text-xs">✨</span>
-          </div>
-
-          <!-- 4 Detail Pills -->
-          <div class="grid grid-cols-2 gap-2">
-            <button data-detail="flower" class="detail-btn active-detail flex items-center gap-2 p-2.5 rounded-2xl bg-pink-100/90 border-2 border-pink-400 text-left transition-all active:scale-95">
-              <span class="text-lg bg-white w-8 h-8 rounded-xl flex items-center justify-center shadow-sm shrink-0">🌺</span>
-              <div>
-                <div class="font-fredoka text-xs font-bold text-pink-800">Saçındaki Çiçek</div>
-                <div class="text-[10px] text-pink-600 font-semibold">Buketin ilhamı</div>
-              </div>
-            </button>
-
-            <button data-detail="glasses" class="detail-btn flex items-center gap-2 p-2.5 rounded-2xl bg-white/80 border-2 border-pink-100 text-left transition-all active:scale-95">
-              <span class="text-lg bg-pink-50 w-8 h-8 rounded-xl flex items-center justify-center shadow-sm shrink-0">👓</span>
-              <div>
-                <div class="font-fredoka text-xs font-bold text-pink-800">Gözlüğün & Bakışın</div>
-                <div class="text-[10px] text-pink-500 font-semibold">Çok yakışıyor</div>
-              </div>
-            </button>
-
-            <button data-detail="dress" class="detail-btn flex items-center gap-2 p-2.5 rounded-2xl bg-white/80 border-2 border-pink-100 text-left transition-all active:scale-95">
-              <span class="text-lg bg-pink-50 w-8 h-8 rounded-xl flex items-center justify-center shadow-sm shrink-0">🤍</span>
-              <div>
-                <div class="font-fredoka text-xs font-bold text-pink-800">Beyaz Elbisen</div>
-                <div class="text-[10px] text-pink-500 font-semibold">Kuğu gibi zarif</div>
-              </div>
-            </button>
-
-            <button data-detail="smile" class="detail-btn flex items-center gap-2 p-2.5 rounded-2xl bg-white/80 border-2 border-pink-100 text-left transition-all active:scale-95">
-              <span class="text-lg bg-pink-50 w-8 h-8 rounded-xl flex items-center justify-center shadow-sm shrink-0">😊</span>
-              <div>
-                <div class="font-fredoka text-xs font-bold text-pink-800">Tatlı Tebessümün</div>
-                <div class="text-[10px] text-pink-500 font-semibold">İç ısıtan detay</div>
-              </div>
-            </button>
-          </div>
-
-          <!-- Dynamic Detail Compliment Box -->
-          <div id="detail-compliment-box" class="bg-gradient-to-br from-pink-50 via-rose-50/70 to-pink-100/60 p-3.5 rounded-2xl border border-pink-200 text-center transition-all duration-300">
-            <p id="detail-compliment-text" class="text-xs sm:text-[13px] font-semibold text-pink-900 leading-relaxed">
-              "Kulağının arkasına taktığın o mor-pembe çiçek sana o kadar yakışmış ki... O tek çiçek yalnız kalmasın diye sana pembe güllerle ve şakayıklarla dolu kocaman bir buket hazırladım. Gerçi hiçbir çiçek senin yanında başrol olamaz. 🌸💗"
-            </p>
-          </div>
-        </div>
-
-        <!-- THE ROMANTIC & FLIRTY LETTER -->
-        <div class="w-full bg-white/95 rounded-3xl p-5 border border-pink-200 shadow-sm space-y-3 relative">
-          <div class="flex items-center justify-between border-b border-pink-100 pb-2.5">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">💌</span>
-              <span class="font-fredoka text-sm font-bold text-pink-700">Helin'e Küçük Bir İtiraf...</span>
-            </div>
-            <span class="text-[11px] font-semibold text-pink-400 bg-pink-50 px-2.5 py-0.5 rounded-full">Pembe Özel Seri 🌸</span>
-          </div>
-
-          <div class="space-y-2.5 text-xs sm:text-[13.5px] text-gray-700 leading-relaxed font-medium">
-            <p>
-              Selam <b class="text-pink-600">Helin</b>, 🌸
-            </p>
-            <p>
-              Doğrusunu söylemek gerekirse, bu fotoğrafına her baktığımda insanın yüzünde istemsizce bir tebessüm oluşuyor. Yeşilliklerin içinde o <b class="text-pink-600">beyaz elbisenle</b> duruşun, <b class="text-pink-600">gözlüğünün</b> arkasındaki o huzurlu bakışın ve saçına iliştirdiğin o <b class="text-pink-600">küçük çiçek</b>... Her detayın ayrı zarif, ayrı tatlı.
-            </p>
-            <p>
-              Pembeleri çok sevdiğini biliyorum; o yüzden sana asla solmayacak, istediğin zaman açıp bakabileceğin <b class="text-pink-600">pembe bir çiçek buketi</b> yapmak istedim. Ama bu mektubun asıl sebebi sadece çiçekler değil...
-            </p>
-            <p class="bg-pink-50/90 p-3 rounded-2xl border border-pink-200/80 text-pink-900 font-semibold">
-              Lafı çok dolandırmaya gerek yok; senin o tatlı enerjinden, gülüşünden ve kendinden <span class="text-pink-600 underline decoration-wavy decoration-pink-400">gerçekten çok hoşlanıyorum Helin.</span> 💗✨
-            </p>
-            <p>
-              Ağrı ne kadar uzak ya da soğuk olursa olsun, senin o güzel tebessümün bence her yeri ısıtmaya yeter. Yüzündeki o tatlı gülüş hiç solmasın... 🌷
-            </p>
-          </div>
-
-          <div class="pt-1 flex justify-end">
-            <span class="font-script text-xl font-bold text-pink-600">
-              Sana hayran biri... 🤍🌸
-            </span>
-          </div>
-        </div>
-
-        <!-- INTERACTIVE MINI QUESTION / FLIRTY RESPONSE -->
-        <div class="w-full bg-gradient-to-br from-pink-100/80 to-rose-100/80 rounded-3xl p-4 border border-pink-200 text-center space-y-3">
-          <p class="font-fredoka text-sm font-bold text-pink-800">
-            Şimdi dürüst olalım Helin... Buketi ve mektubu okurken yüzünde tatlı bir gülümseme oluştu mu? 😊🌸
-          </p>
-
-          <div id="response-buttons-area" class="flex flex-col sm:flex-row items-center justify-center gap-2.5 relative min-h-[52px]">
-            <button id="yes-smile-btn" class="w-full sm:w-auto flex-1 py-3 px-5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-pink-500 text-white font-fredoka font-bold text-xs shadow-pill active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5">
-              <span>😊</span>
-              <span>Evet, çok tatlı olmuş! Gülümsetti 💖</span>
-            </button>
-
-            <button id="shy-btn" class="w-full sm:w-auto py-2.5 px-4 rounded-2xl bg-white text-pink-700 border border-pink-300 font-fredoka font-semibold text-xs transition-all">
-              <span>🙈</span>
-              <span id="shy-btn-text">Şımartıyorsun beni...</span>
-            </button>
-          </div>
-
-          <!-- Hidden celebration message after clicking Yes -->
-          <div id="smile-success-msg" class="hidden bg-white/95 p-3.5 rounded-2xl border border-pink-300 text-xs font-semibold text-pink-700 space-y-1 animate-pulse">
-            <div class="text-base">🎉🌸💖🌸🎉</div>
-            <p>
-              İşte dünyadaki en güzel manzara tam olarak o gülüşün! İyi ki varsın Helin, tüm pembe çiçekler senin olsun! 💐✨
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </main>
-  </div>
+  </main>
 
   <script>
     /********************************************************************
-     * 1. WEB AUDIO API - ROMANTIC PINK MUSIC BOX & SOUND EFFECTS
+     * 1. WEB AUDIO API - CUTE PINK MUSIC BOX & SOUND EFFECTS
      ********************************************************************/
     let audioCtx = null;
     let musicPlaying = false;
     let musicTimer = null;
     let noteIdx = 0;
 
-    // Dreamy Romantic Music Box Melody (in F Major / D Minor sweet voicing)
     const melodySequence = [
-      { f: 523.25, d: 0.38 }, // C5
-      { f: 659.25, d: 0.38 }, // E5
-      { f: 698.46, d: 0.38 }, // F5
-      { f: 880.00, d: 0.65 }, // A5
-      { f: 783.99, d: 0.38 }, // G5
-      { f: 698.46, d: 0.38 }, // F5
-      { f: 659.25, d: 0.70 }, // E5
-      { f: 587.33, d: 0.38 }, // D5
-      { f: 698.46, d: 0.38 }, // F5
+      { f: 587.33, d: 0.34 }, // D5
+      { f: 659.25, d: 0.34 }, // E5
+      { f: 783.99, d: 0.34 }, // G5
+      { f: 987.77, d: 0.55 }, // B5
+      { f: 880.00, d: 0.34 }, // A5
+      { f: 783.99, d: 0.55 }, // G5
+      { f: 659.25, d: 0.34 }, // E5
+      { f: 783.99, d: 0.34 }, // G5
       { f: 880.00, d: 0.45 }, // A5
-      { f: 1046.50, d: 0.65 }, // C6
-      { f: 880.00, d: 0.38 }, // A5
-      { f: 783.99, d: 0.38 }, // G5
-      { f: 698.46, d: 0.85 }, // F5
+      { f: 1174.66, d: 0.55 }, // D6
+      { f: 987.77, d: 0.38 }, // B5
+      { f: 880.00, d: 0.65 }, // A5
     ];
 
     function initAudio() {
@@ -491,105 +486,105 @@
       }
     }
 
-    function playChimeNote(freq, duration = 0.45, vol = 0.06) {
+    function playChimeNote(freq, duration = 0.4, vol = 0.055) {
       if (!audioCtx) return;
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
-      const sub = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
       osc.type = 'sine';
-      sub.type = 'triangle';
       osc.frequency.setValueAtTime(freq, now);
-      sub.frequency.setValueAtTime(freq * 2, now);
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.exponentialRampToValueAtTime(vol, now + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0008, now + duration * 1.6);
+      gain.gain.exponentialRampToValueAtTime(vol, now + 0.025);
+      gain.gain.exponentialRampToValueAtTime(0.0008, now + duration * 1.4);
 
       osc.connect(gain);
-      sub.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      sub.start(now);
-      osc.stop(now + duration * 1.65);
-      sub.stop(now + duration * 1.65);
+      osc.stop(now + duration * 1.45);
     }
 
-    function playEnvelopeOpenArpeggio() {
+    function playBoingSound() {
       initAudio();
-      const arp = [440, 554.37, 659.25, 880, 1108.73, 1318.51];
-      arp.forEach((f, i) => {
-        setTimeout(() => playChimeNote(f, 0.55, 0.07), i * 85);
-      });
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(680, now + 0.16);
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.22);
     }
 
     function playSparklePop() {
       initAudio();
-      const notes = [698.46, 880, 1046.5, 1396.91];
-      notes.forEach((f, i) => {
-        setTimeout(() => playChimeNote(f, 0.25, 0.045), i * 50);
+      [659.25, 880, 1046.5, 1318.5].forEach((f, i) => {
+        setTimeout(() => playChimeNote(f, 0.22, 0.045), i * 45);
       });
     }
 
-    function toggleMusic(forceStart = false) {
+    function playCelebrationFanfare() {
       initAudio();
-      const btn = document.getElementById('music-btn');
+      [523.25, 659.25, 783.99, 1046.5, 1318.5, 1567.98].forEach((f, i) => {
+        setTimeout(() => playChimeNote(f, 0.5, 0.07), i * 75);
+      });
+    }
+
+    function toggleMusic() {
+      initAudio();
       const label = document.getElementById('music-label');
       const icon = document.getElementById('music-icon');
 
-      if (musicPlaying && !forceStart) {
+      if (musicPlaying) {
         musicPlaying = false;
         clearTimeout(musicTimer);
         label.textContent = 'Melodi';
         icon.textContent = '🎵';
-        btn.classList.remove('bg-pink-500', 'text-white');
         return;
       }
 
-      if (!musicPlaying) {
-        musicPlaying = true;
-        label.textContent = 'Çalıyor';
-        icon.textContent = '🎶';
-
-        const step = () => {
-          if (!musicPlaying) return;
-          const item = melodySequence[noteIdx % melodySequence.length];
-          playChimeNote(item.f, item.d, 0.045);
-          noteIdx++;
-          musicTimer = setTimeout(step, item.d * 1000);
-        };
-        step();
-      }
+      musicPlaying = true;
+      label.textContent = 'Çalıyor';
+      icon.textContent = '🎶';
+      const step = () => {
+        if (!musicPlaying) return;
+        const item = melodySequence[noteIdx % melodySequence.length];
+        playChimeNote(item.f, item.d, 0.045);
+        noteIdx++;
+        musicTimer = setTimeout(step, item.d * 1000);
+      };
+      step();
     }
 
     /********************************************************************
-     * 2. AMBIENT 2D SAKURA PETALS & FLOATING SPARKLES
+     * 2. AMBIENT PETALS & FLOATING COMPLIMENTS
      ********************************************************************/
     const petalsBg = document.getElementById('petals-bg');
-    const petalSymbols = ['🌸', '🌷', '💗', '💮', '✨'];
-
-    function createAmbientPetals() {
-      for (let i = 0; i < 16; i++) {
-        const el = document.createElement('div');
-        el.className = 'sakura-petal';
-        el.textContent = petalSymbols[i % petalSymbols.length];
-        el.style.left = `${Math.random() * 96}vw`;
-        el.style.fontSize = `${12 + Math.random() * 10}px`;
-        el.style.animationDuration = `${8 + Math.random() * 9}s`;
-        el.style.animationDelay = `${-Math.random() * 12}s`;
-        petalsBg.appendChild(el);
-      }
+    const symbols = ['🌸', '🧸', '💗', '🌷', '✨', '🎀'];
+    for (let i = 0; i < 16; i++) {
+      const el = document.createElement('div');
+      el.className = 'sakura-petal';
+      el.textContent = symbols[i % symbols.length];
+      el.style.left = `${Math.random() * 96}vw`;
+      el.style.fontSize = `${13 + Math.random() * 10}px`;
+      el.style.animationDuration = `${8 + Math.random() * 9}s`;
+      el.style.animationDelay = `${-Math.random() * 12}s`;
+      petalsBg.appendChild(el);
     }
-    createAmbientPetals();
 
     function spawnFloatingCompliment(x, y, text) {
       const el = document.createElement('div');
-      el.className = 'tap-float pink-glass px-3.5 py-1.5 rounded-full shadow-pink-glow border border-pink-300 text-xs font-fredoka font-bold text-pink-700 whitespace-nowrap flex items-center gap-1.5';
+      el.className = 'tap-float pink-glass px-3.5 py-1.5 rounded-full shadow-pink-glow border border-pink-300 text-xs font-fredoka font-bold text-pink-700 whitespace-nowrap flex items-center gap-1';
       el.style.left = `${Math.min(Math.max(x, 90), window.innerWidth - 90)}px`;
       el.style.top = `${Math.max(y - 10, 60)}px`;
-      el.innerHTML = `${text}`;
+      el.textContent = text;
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1400);
     }
@@ -597,915 +592,633 @@
     function launchPinkConfetti() {
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 55,
-          spread: 75,
-          origin: { y: 0.55 },
+          particleCount: 65,
+          spread: 80,
+          origin: { y: 0.6 },
           colors: ['#F472B6', '#EC4899', '#FBCFE8', '#FB7185', '#DDD6FE', '#FFFFFF']
         });
       }
     }
 
     /********************************************************************
-     * 3. THREE.JS SCENE: 3D PINK ENVELOPE -> BLOOMING LUSH BOUQUET
+     * 3. THREE.JS SCENE: 3D PINK PLUSH TEDDY BEAR HOLDING FLOWER BOUQUET
      ********************************************************************/
-    const container = document.getElementById('three-container');
+    const stageEl = document.getElementById('three-container');
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
-      42,
-      window.innerWidth / window.innerHeight,
+      40,
+      stageEl.clientWidth / stageEl.clientHeight,
       0.1,
       100
     );
-    camera.position.set(0, 0.4, 9.2);
+    camera.position.set(0, 0.35, 7.6);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(stageEl.clientWidth, stageEl.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    container.appendChild(renderer.domElement);
+    stageEl.appendChild(renderer.domElement);
 
-    // Warm Romantic Pink Lighting
-    const ambientLight = new THREE.AmbientLight(0xFFF0F6, 0.88);
-    scene.add(ambientLight);
+    // Cozy Pink Studio Lighting
+    scene.add(new THREE.AmbientLight(0xFFF0F6, 0.92));
 
-    const mainLight = new THREE.DirectionalLight(0xFFF5F8, 0.95);
-    mainLight.position.set(4, 7, 6);
-    mainLight.castShadow = true;
-    scene.add(mainLight);
+    const dirLight = new THREE.DirectionalLight(0xFFF8FA, 0.9);
+    dirLight.position.set(4, 6, 6);
+    scene.add(dirLight);
 
-    const rimLight = new THREE.PointLight(0xF472B6, 0.75, 20);
-    rimLight.position.set(-5, 3, 4);
-    scene.add(rimLight);
+    const pinkPoint = new THREE.PointLight(0xF472B6, 0.7, 15);
+    pinkPoint.position.set(-4, 2, 4);
+    scene.add(pinkPoint);
 
-    const bottomGlow = new THREE.PointLight(0xFBCFE8, 0.6, 15);
-    bottomGlow.position.set(0, -4, 3);
-    scene.add(bottomGlow);
+    // Master Group containing Bear + Bouquet
+    const characterGroup = new THREE.Group();
+    characterGroup.position.y = -0.25;
+    scene.add(characterGroup);
 
-    // Master Groups
-    const rootGroup = new THREE.Group();
-    scene.add(rootGroup);
+    // Materials for Cute Pink Plush Teddy Bear
+    const bearPlushMat = new THREE.MeshStandardMaterial({
+      color: 0xF9A8D4, // Soft strawberry pink plush
+      roughness: 0.68,
+      metalness: 0.02
+    });
+    const bearCreamMat = new THREE.MeshStandardMaterial({
+      color: 0xFFF1F5, // Cream snout, tummy & paw pads
+      roughness: 0.6
+    });
+    const bearDeepPinkMat = new THREE.MeshStandardMaterial({
+      color: 0xEC4899, // Inner ears, blush, bow tie
+      roughness: 0.45
+    });
+    const eyeBlackMat = new THREE.MeshStandardMaterial({
+      color: 0x1F1224,
+      roughness: 0.15,
+      metalness: 0.2
+    });
+    const whiteSparkleMat = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
 
-    const envelopeGroup = new THREE.Group();
-    rootGroup.add(envelopeGroup);
+    const bearGroup = new THREE.Group();
+    characterGroup.add(bearGroup);
 
+    // 1. Teddy Head
+    const headGeo = new THREE.SphereGeometry(1.05, 32, 28);
+    headGeo.scale(1.08, 0.98, 0.95);
+    const headMesh = new THREE.Mesh(headGeo, bearPlushMat);
+    headMesh.position.set(0, 1.05, 0);
+    bearGroup.add(headMesh);
+
+    // 2. Cute Round Ears (Left & Right)
+    [-1, 1].forEach((side) => {
+      const earGroup = new THREE.Group();
+      earGroup.position.set(side * 0.82, 1.82, -0.05);
+      earGroup.rotation.z = side * -0.35;
+
+      const outerEar = new THREE.Mesh(new THREE.SphereGeometry(0.38, 20, 20), bearPlushMat);
+      outerEar.scale.set(1, 1, 0.6);
+      earGroup.add(outerEar);
+
+      const innerEar = new THREE.Mesh(new THREE.SphereGeometry(0.22, 16, 16), bearDeepPinkMat);
+      innerEar.scale.set(1, 1, 0.4);
+      innerEar.position.set(0, -0.02, 0.16);
+      earGroup.add(innerEar);
+
+      bearGroup.add(earGroup);
+    });
+
+    // 3. Cute Little Hair Flower on Bear's Ear (Matching Helin's Hair Flower!)
+    const earFlowerGroup = new THREE.Group();
+    earFlowerGroup.position.set(0.62, 1.72, 0.35);
+    earFlowerGroup.rotation.set(0.2, 0.3, -0.3);
+    const violetMat = new THREE.MeshStandardMaterial({ color: 0xC026D3, roughness: 0.3 });
+    for (let i = 0; i < 5; i++) {
+      const a = (i / 5) * Math.PI * 2;
+      const p = new THREE.Mesh(new THREE.SphereGeometry(0.11, 10, 10), violetMat);
+      p.scale.set(0.75, 1.2, 0.4);
+      p.position.set(Math.cos(a) * 0.11, Math.sin(a) * 0.11, 0);
+      p.rotation.z = a;
+      earFlowerGroup.add(p);
+    }
+    const flCenter = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06, 10, 10),
+      new THREE.MeshStandardMaterial({ color: 0xFACC15 })
+    );
+    flCenter.position.z = 0.04;
+    earFlowerGroup.add(flCenter);
+    bearGroup.add(earFlowerGroup);
+
+    // 4. Cream Snout & Pink Heart Nose
+    const snoutMesh = new THREE.Mesh(new THREE.SphereGeometry(0.36, 24, 20), bearCreamMat);
+    snoutMesh.scale.set(1.22, 0.92, 0.75);
+    snoutMesh.position.set(0, 0.88, 0.86);
+    bearGroup.add(snoutMesh);
+
+    const noseMesh = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 16), bearDeepPinkMat);
+    noseMesh.scale.set(1.3, 0.9, 0.8);
+    noseMesh.position.set(0, 0.98, 1.12);
+    bearGroup.add(noseMesh);
+
+    // 5. Shiny Anime Button Eyes & Rosy Cheeks
+    [-1, 1].forEach((side) => {
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.125, 18, 18), eyeBlackMat);
+      eye.position.set(side * 0.42, 1.15, 0.88);
+      bearGroup.add(eye);
+
+      // Eye shine dot
+      const shine = new THREE.Mesh(new THREE.SphereGeometry(0.042, 10, 10), whiteSparkleMat);
+      shine.position.set(side * 0.42 - 0.035, 1.19, 0.99);
+      bearGroup.add(shine);
+
+      // Rosy Pink Cheek
+      const cheek = new THREE.Mesh(
+        new THREE.SphereGeometry(0.16, 16, 16),
+        new THREE.MeshStandardMaterial({ color: 0xFB7185, roughness: 0.5 })
+      );
+      cheek.scale.set(1.3, 0.75, 0.4);
+      cheek.position.set(side * 0.64, 0.92, 0.82);
+      bearGroup.add(cheek);
+    });
+
+    // 6. Chubby Teddy Body & Cream Tummy Patch
+    const bodyMesh = new THREE.Mesh(new THREE.SphereGeometry(1.05, 32, 28), bearPlushMat);
+    bodyMesh.scale.set(1.02, 1.08, 0.92);
+    bodyMesh.position.set(0, -0.35, 0);
+    bearGroup.add(bodyMesh);
+
+    const tummyMesh = new THREE.Mesh(new THREE.SphereGeometry(0.72, 24, 24), bearCreamMat);
+    tummyMesh.scale.set(0.95, 1.02, 0.5);
+    tummyMesh.position.set(0, -0.35, 0.68);
+    bearGroup.add(tummyMesh);
+
+    // 7. Teddy Arms Holding the Flower Bouquet & Legs
+    const leftArm = new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 20), bearPlushMat);
+    leftArm.scale.set(0.75, 1.45, 0.75);
+    leftArm.position.set(-0.78, -0.15, 0.55);
+    leftArm.rotation.set(0.65, 0.3, -0.45);
+    bearGroup.add(leftArm);
+
+    const rightArm = new THREE.Mesh(new THREE.SphereGeometry(0.34, 20, 20), bearPlushMat);
+    rightArm.scale.set(0.75, 1.45, 0.75);
+    rightArm.position.set(0.78, -0.15, 0.55);
+    rightArm.rotation.set(0.65, -0.3, 0.45);
+    bearGroup.add(rightArm);
+
+    [-1, 1].forEach((side) => {
+      const leg = new THREE.Mesh(new THREE.SphereGeometry(0.4, 20, 20), bearPlushMat);
+      leg.scale.set(0.9, 0.85, 1.15);
+      leg.position.set(side * 0.55, -1.18, 0.42);
+      bearGroup.add(leg);
+
+      const pad = new THREE.Mesh(new THREE.SphereGeometry(0.24, 16, 16), bearCreamMat);
+      pad.scale.set(0.9, 0.8, 0.35);
+      pad.position.set(side * 0.55, -1.18, 0.85);
+      bearGroup.add(pad);
+    });
+
+    // 8. Lush 3D Pink Flower Bouquet Held by the Teddy Bear!
     const bouquetGroup = new THREE.Group();
-    bouquetGroup.scale.set(0.001, 0.001, 0.001);
-    bouquetGroup.position.set(0, -0.8, 0.2);
-    bouquetGroup.visible = false;
-    rootGroup.add(bouquetGroup);
+    bouquetGroup.position.set(0, -0.32, 1.05);
+    bouquetGroup.rotation.x = 0.22;
+    characterGroup.add(bouquetGroup);
 
-    // ------------------------------------------------------------------
-    // A. BUILD 3D ENVELOPE WITH HINGED TOP FLAP & HEART WAX SEAL
-    // ------------------------------------------------------------------
-    const envWidth = 3.5;
-    const envHeight = 2.35;
-    const envDepth = 0.14;
+    // Bouquet Cone Wrap
+    const coneWrap = new THREE.Mesh(
+      new THREE.ConeGeometry(0.78, 1.25, 24),
+      new THREE.MeshStandardMaterial({ color: 0xFFF5F8, roughness: 0.4 })
+    );
+    coneWrap.rotation.x = Math.PI;
+    coneWrap.position.y = -0.22;
+    bouquetGroup.add(coneWrap);
 
-    // Back body of envelope
-    const envBodyGeo = new THREE.BoxGeometry(envWidth, envHeight, envDepth);
-    const envPinkMat = new THREE.MeshStandardMaterial({
-      color: 0xF9A8D4,
-      roughness: 0.42,
-      metalness: 0.05
-    });
-    const envInnerMat = new THREE.MeshStandardMaterial({
-      color: 0xFFF1F5,
-      roughness: 0.5
-    });
-    const envBody = new THREE.Mesh(envBodyGeo, envPinkMat);
-    envBody.castShadow = true;
-    envBody.receiveShadow = true;
-    envelopeGroup.add(envBody);
+    // Satin Ribbon on Bouquet
+    const bowCenter = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 12, 12),
+      bearDeepPinkMat
+    );
+    bowCenter.position.set(0, -0.35, 0.35);
+    bouquetGroup.add(bowCenter);
 
-    // White Love Note Card peeking inside the envelope
-    const innerCardGeo = new THREE.BoxGeometry(envWidth * 0.88, envHeight * 0.84, 0.04);
-    const innerCardMesh = new THREE.Mesh(innerCardGeo, envInnerMat);
-    innerCardMesh.position.set(0, 0.05, 0.04);
-    envelopeGroup.add(innerCardMesh);
-
-    // Front folded pocket of envelope (decorative bevel triangles)
-    const frontPocketShape = new THREE.Shape();
-    frontPocketShape.moveTo(-envWidth / 2, -envHeight / 2);
-    frontPocketShape.lineTo(envWidth / 2, -envHeight / 2);
-    frontPocketShape.lineTo(envWidth / 2, envHeight / 2);
-    frontPocketShape.lineTo(0, -0.05);
-    frontPocketShape.lineTo(-envWidth / 2, envHeight / 2);
-    frontPocketShape.closePath();
-
-    const pocketExtrude = new THREE.ExtrudeGeometry(frontPocketShape, {
-      depth: 0.04,
-      bevelEnabled: true,
-      bevelThickness: 0.015,
-      bevelSize: 0.015,
-      bevelSegments: 2
-    });
-    const pocketMat = new THREE.MeshStandardMaterial({
-      color: 0xF472B6,
-      roughness: 0.38,
-      metalness: 0.06
-    });
-    const frontPocket = new THREE.Mesh(pocketExtrude, pocketMat);
-    frontPocket.position.set(0, 0, envDepth / 2 + 0.01);
-    envelopeGroup.add(frontPocket);
-
-    // Bottom triangular fold accent
-    const bottomFlapShape = new THREE.Shape();
-    bottomFlapShape.moveTo(-envWidth / 2, -envHeight / 2);
-    bottomFlapShape.lineTo(envWidth / 2, -envHeight / 2);
-    bottomFlapShape.lineTo(0, 0.12);
-    bottomFlapShape.closePath();
-    const bottomFlapGeo = new THREE.ExtrudeGeometry(bottomFlapShape, {
-      depth: 0.025,
-      bevelEnabled: true,
-      bevelThickness: 0.01,
-      bevelSize: 0.01
-    });
-    const bottomFlapMat = new THREE.MeshStandardMaterial({
-      color: 0xFBCFE8,
-      roughness: 0.4
-    });
-    const bottomFlapMesh = new THREE.Mesh(bottomFlapGeo, bottomFlapMat);
-    bottomFlapMesh.position.set(0, 0, envDepth / 2 + 0.04);
-    envelopeGroup.add(bottomFlapMesh);
-
-    // Top Hinged Flap (rotates open when clicked!)
-    const flapPivot = new THREE.Group();
-    flapPivot.position.set(0, envHeight / 2, envDepth / 2 + 0.055);
-    envelopeGroup.add(flapPivot);
-
-    const topFlapShape = new THREE.Shape();
-    topFlapShape.moveTo(-envWidth / 2, 0);
-    topFlapShape.lineTo(envWidth / 2, 0);
-    topFlapShape.lineTo(0, -envHeight * 0.62);
-    topFlapShape.closePath();
-
-    const topFlapGeo = new THREE.ExtrudeGeometry(topFlapShape, {
-      depth: 0.025,
-      bevelEnabled: true,
-      bevelThickness: 0.012,
-      bevelSize: 0.012
-    });
-    const topFlapMat = new THREE.MeshStandardMaterial({
-      color: 0xEC4899,
-      roughness: 0.35,
-      metalness: 0.08,
-      side: THREE.DoubleSide
-    });
-    const topFlapMesh = new THREE.Mesh(topFlapGeo, topFlapMat);
-    flapPivot.add(topFlapMesh);
-
-    // 3D Heart Wax Seal on the Envelope Flap
-    function createHeartShape(scale = 1) {
-      const s = new THREE.Shape();
-      const x = 0, y = 0;
-      s.moveTo(x, y + 0.25 * scale);
-      s.bezierCurveTo(x, y + 0.25 * scale, x - 0.25 * scale, y + 0.55 * scale, x - 0.5 * scale, y + 0.25 * scale);
-      s.bezierCurveTo(x - 0.75 * scale, y - 0.1 * scale, x - 0.25 * scale, y - 0.45 * scale, x, y - 0.65 * scale);
-      s.bezierCurveTo(x + 0.25 * scale, y - 0.45 * scale, x + 0.75 * scale, y - 0.1 * scale, x + 0.5 * scale, y + 0.25 * scale);
-      s.bezierCurveTo(x + 0.25 * scale, y + 0.55 * scale, x, y + 0.25 * scale, x, y + 0.25 * scale);
-      return s;
-    }
-
-    const sealGroup = new THREE.Group();
-    sealGroup.position.set(0, -envHeight * 0.56, 0.04);
-    flapPivot.add(sealGroup);
-
-    const waxDiskGeo = new THREE.CylinderGeometry(0.36, 0.38, 0.08, 32);
-    const waxMat = new THREE.MeshStandardMaterial({
-      color: 0xBE185D,
-      roughness: 0.28,
-      metalness: 0.22
-    });
-    const waxDisk = new THREE.Mesh(waxDiskGeo, waxMat);
-    waxDisk.rotation.x = Math.PI / 2;
-    sealGroup.add(waxDisk);
-
-    const heartSealGeo = new THREE.ExtrudeGeometry(createHeartShape(0.38), {
-      depth: 0.05,
-      bevelEnabled: true,
-      bevelThickness: 0.015,
-      bevelSize: 0.015
-    });
-    const goldHeartMat = new THREE.MeshStandardMaterial({
-      color: 0xFDE047,
-      roughness: 0.25,
-      metalness: 0.65
-    });
-    const heartSealMesh = new THREE.Mesh(heartSealGeo, goldHeartMat);
-    heartSealMesh.position.set(0, 0.04, 0.03);
-    sealGroup.add(heartSealMesh);
-
-    // ------------------------------------------------------------------
-    // B. BUILD LUSH 3D FLOWER BOUQUET (ROSES, PEONIES, HAIR-FLOWER VIOLETS, BABY'S BREATH & RIBBON)
-    // ------------------------------------------------------------------
-
-    // 1. Bouquet Wrapping Paper (Layered Pastel Pink & Cream Florist Cones)
-    const wrapMatOuter = new THREE.MeshStandardMaterial({
-      color: 0xFBCFE8,
-      roughness: 0.45,
-      metalness: 0.05,
-      side: THREE.DoubleSide
-    });
-    const wrapMatInner = new THREE.MeshStandardMaterial({
-      color: 0xFFF5F8,
-      roughness: 0.5,
-      side: THREE.DoubleSide
-    });
-    const wrapMatAccent = new THREE.MeshStandardMaterial({
-      color: 0xF472B6,
-      roughness: 0.4,
-      side: THREE.DoubleSide
-    });
-
-    // Main outer cone
-    const outerConeGeo = new THREE.ConeGeometry(1.75, 2.7, 28, 1, true);
-    const outerCone = new THREE.Mesh(outerConeGeo, wrapMatOuter);
-    outerCone.rotation.x = Math.PI;
-    outerCone.position.y = -0.55;
-    bouquetGroup.add(outerCone);
-
-    // Inner tissue paper frill cone
-    const innerConeGeo = new THREE.ConeGeometry(1.65, 2.55, 24, 1, true);
-    const innerCone = new THREE.Mesh(innerConeGeo, wrapMatInner);
-    innerCone.rotation.x = Math.PI;
-    innerCone.rotation.y = 0.3;
-    innerCone.position.y = -0.45;
-    bouquetGroup.add(innerCone);
-
-    // Back tall florist sheet fan (Korean bouquet backing)
-    for (let i = -2; i <= 2; i++) {
-      const sheetGeo = new THREE.PlaneGeometry(1.15, 1.85, 8, 8);
-      // Curve the sheet vertices slightly
-      const pos = sheetGeo.attributes.position;
-      for (let k = 0; k < pos.count; k++) {
-        const px = pos.getX(k);
-        const py = pos.getY(k);
-        pos.setZ(k, -Math.pow(px, 2) * 0.25 + (py > 0 ? py * 0.08 : 0));
-      }
-      sheetGeo.computeVertexNormals();
-      const sheet = new THREE.Mesh(sheetGeo, i % 2 === 0 ? wrapMatOuter : wrapMatInner);
-      sheet.position.set(i * 0.42, 0.75 + Math.abs(i) * -0.08, -0.55 - Math.abs(i) * 0.06);
-      sheet.rotation.z = -i * 0.22;
-      sheet.rotation.x = -0.18;
-      bouquetGroup.add(sheet);
-    }
-
-    // Bottom handle wrap (where hands hold the bouquet)
-    const handleGeo = new THREE.CylinderGeometry(0.26, 0.42, 1.15, 20);
-    const handleMesh = new THREE.Mesh(handleGeo, wrapMatAccent);
-    handleMesh.position.y = -1.75;
-    bouquetGroup.add(handleMesh);
-
-    // 2. Satin Pink Ribbon & Bow at the Waist of the Bouquet
-    const ribbonGroup = new THREE.Group();
-    ribbonGroup.position.set(0, -1.22, 0.34);
-    bouquetGroup.add(ribbonGroup);
-
-    const ribbonMat = new THREE.MeshStandardMaterial({
-      color: 0xDB2777,
-      roughness: 0.28,
-      metalness: 0.15,
-      side: THREE.DoubleSide
-    });
-
-    // Knot center
-    const knotGeo = new THREE.SphereGeometry(0.16, 16, 16);
-    knotGeo.scale(1.2, 0.9, 0.8);
-    const knotMesh = new THREE.Mesh(knotGeo, ribbonMat);
-    ribbonGroup.add(knotMesh);
-
-    // Left & Right Bow Loops
-    [-1, 1].forEach((dir) => {
-      const loopGeo = new THREE.TorusGeometry(0.28, 0.085, 14, 28);
-      loopGeo.scale(1.25, 0.78, 0.6);
-      const loopMesh = new THREE.Mesh(loopGeo, ribbonMat);
-      loopMesh.position.set(dir * 0.32, 0.04, -0.02);
-      loopMesh.rotation.z = dir * -0.25;
-      loopMesh.rotation.y = dir * 0.25;
-      ribbonGroup.add(loopMesh);
-
-      // Flowing ribbon tails
-      const tailGeo = new THREE.PlaneGeometry(0.18, 0.95, 4, 12);
-      const tPos = tailGeo.attributes.position;
-      for (let k = 0; k < tPos.count; k++) {
-        const py = tPos.getY(k);
-        tPos.setZ(k, Math.sin(py * 5) * 0.06);
-        tPos.setX(k, tPos.getX(k) + dir * (0.5 - py) * 0.14);
-      }
-      tailGeo.computeVertexNormals();
-      const tailMesh = new THREE.Mesh(tailGeo, ribbonMat);
-      tailMesh.position.set(dir * 0.15, -0.48, 0.05);
-      ribbonGroup.add(tailMesh);
-    });
-
-    // 3. Helper Function: Create a Lush 3D Rose / Peony Bloom
-    const clickableFlowers = [];
-
-    function createRoseBloom(paletteHexList, scale = 1.0) {
-      const rose = new THREE.Group();
-      const petalCount = 44;
-      const goldenAngle = 137.508 * (Math.PI / 180);
-
-      // Shared curved cupped petal geometry
-      const petalGeo = new THREE.SphereGeometry(
-        0.26,
-        12,
-        10,
-        0,
-        Math.PI * 0.62,
-        0.15,
-        Math.PI * 0.58
+    // Helper to create 3D Rose for the Bear's Bouquet
+    function createMiniRose(hexColors, sc = 1) {
+      const rGroup = new THREE.Group();
+      const pGeo = new THREE.SphereGeometry(0.15, 10, 8, 0, Math.PI * 0.65, 0.15, Math.PI * 0.6);
+      pGeo.scale(1, 1.2, 0.7);
+      const mats = hexColors.map(
+        (c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.35, side: THREE.DoubleSide })
       );
-      petalGeo.scale(1.0, 1.22, 0.68);
+      const count = 28;
+      const gold = 137.5 * (Math.PI / 180);
+      for (let i = 0; i < count; i++) {
+        const t = i / count;
+        const a = i * gold;
+        const rad = 0.02 + Math.pow(t, 0.85) * 0.2;
+        const m = new THREE.Mesh(pGeo, mats[Math.min(mats.length - 1, Math.floor(t * mats.length))]);
+        m.position.set(Math.cos(a) * rad, (1 - t) * 0.08, Math.sin(a) * rad);
+        m.rotation.y = -a + Math.PI / 2;
+        m.rotation.x = 0.35 + t * 0.9;
+        const s = (0.45 + t * 0.7) * sc;
+        m.scale.set(s, s, s);
+        rGroup.add(m);
+      }
+      return rGroup;
+    }
 
-      const materials = paletteHexList.map(
-        (hex) =>
-          new THREE.MeshStandardMaterial({
-            color: hex,
-            roughness: 0.35,
-            metalness: 0.04,
-            side: THREE.DoubleSide
-          })
+    const bouquetRoseCoords = [
+      { p: [0, 0.48, 0.05], s: 1.1, c: [0xBE185D, 0xEC4899, 0xF9A8D4] },
+      { p: [-0.36, 0.42, 0.12], s: 0.95, c: [0xDB2777, 0xF472B6, 0xFCE7F3] },
+      { p: [0.36, 0.42, 0.12], s: 0.95, c: [0xE11D48, 0xFB7185, 0xFFE4E6] },
+      { p: [0, 0.34, 0.34], s: 0.98, c: [0xC026D3, 0xE879F9, 0xFAE8FF] },
+      { p: [-0.26, 0.52, -0.18], s: 0.9, c: [0xDB2777, 0xF472B6, 0xFBCFE8] },
+      { p: [0.26, 0.52, -0.18], s: 0.9, c: [0xBE185D, 0xEC4899, 0xF9A8D4] },
+      { p: [-0.48, 0.32, -0.05], s: 0.85, c: [0xE11D48, 0xFB7185, 0xFFE4E6] },
+      { p: [0.48, 0.32, -0.05], s: 0.85, c: [0xDB2777, 0xF472B6, 0xFCE7F3] },
+    ];
+
+    bouquetRoseCoords.forEach((cfg) => {
+      const r = createMiniRose(cfg.c, cfg.s);
+      r.position.set(...cfg.p);
+      bouquetGroup.add(r);
+    });
+
+    // Baby's breath white dots in bouquet
+    const dotGeo = new THREE.SphereGeometry(0.04, 8, 8);
+    const dotMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF });
+    for (let i = 0; i < 20; i++) {
+      const a = (i / 20) * Math.PI * 2;
+      const rad = 0.2 + (i % 3) * 0.18;
+      const d = new THREE.Mesh(dotGeo, dotMat);
+      d.position.set(Math.cos(a) * rad, 0.36 + (i % 2) * 0.12, Math.sin(a) * rad);
+      bouquetGroup.add(d);
+    }
+
+    // 9. Floating 3D Hearts Orbiting the Bear
+    const orbitHearts = [];
+    const hShape = new THREE.Shape();
+    hShape.moveTo(0, 0.12);
+    hShape.bezierCurveTo(0, 0.12, -0.12, 0.28, -0.25, 0.12);
+    hShape.bezierCurveTo(-0.38, -0.05, -0.12, -0.22, 0, -0.32);
+    hShape.bezierCurveTo(0.12, -0.22, 0.38, -0.05, 0.25, 0.12);
+    hShape.bezierCurveTo(0.12, 0.28, 0, 0.12, 0, 0.12);
+    const hGeo = new THREE.ExtrudeGeometry(hShape, { depth: 0.04, bevelEnabled: true, bevelSize: 0.01, bevelThickness: 0.01 });
+
+    for (let i = 0; i < 10; i++) {
+      const hm = new THREE.Mesh(
+        hGeo,
+        new THREE.MeshStandardMaterial({ color: i % 2 === 0 ? 0xEC4899 : 0xF472B6, roughness: 0.3 })
       );
-
-      for (let i = 0; i < petalCount; i++) {
-        const t = i / petalCount;
-        const angle = i * goldenAngle;
-        const radius = 0.03 + Math.pow(t, 0.85) * 0.34;
-
-        const matIndex = Math.min(
-          materials.length - 1,
-          Math.floor(t * materials.length)
-        );
-        const petal = new THREE.Mesh(petalGeo, materials[matIndex]);
-
-        // Position in spiral
-        petal.position.set(
-          Math.cos(angle) * radius,
-          (1 - t) * 0.12,
-          Math.sin(angle) * radius
-        );
-
-        // Orient petal outward from center and cup upward
-        petal.rotation.y = -angle + Math.PI / 2;
-        petal.rotation.x = 0.32 + t * 0.95;
-
-        const s = (0.42 + t * 0.78) * scale;
-        petal.scale.set(s, s, s);
-        rose.add(petal);
-      }
-
-      // Warm golden stamen heart inside
-      const centerGeo = new THREE.SphereGeometry(0.08 * scale, 10, 10);
-      const centerMat = new THREE.MeshStandardMaterial({
-        color: 0xFDE047,
-        roughness: 0.4
-      });
-      const centerMesh = new THREE.Mesh(centerGeo, centerMat);
-      centerMesh.position.y = 0.1 * scale;
-      rose.add(centerMesh);
-
-      clickableFlowers.push(rose);
-      return rose;
+      const angle = (i / 10) * Math.PI * 2;
+      orbitHearts.push({ mesh: hm, angle, radius: 2.1 + (i % 2) * 0.35, yOffset: (i % 3 - 1) * 0.7 });
+      scene.add(hm);
     }
 
-    // 4. Helper Function: Create Purple-Pink Hair Blossom (Matching Helin's Hair Flower!)
-    function createHairBlossom(scale = 1.0) {
-      const blossom = new THREE.Group();
-      const petalMat = new THREE.MeshStandardMaterial({
-        color: 0xC026D3, // Vibrant purple-magenta like the flower in Helin's hair!
-        roughness: 0.32,
-        metalness: 0.06,
-        side: THREE.DoubleSide
-      });
+    // 3D Touch / Drag Rotation + Bear Jump Animation
+    let isDraggingBear = false;
+    let prevX = 0;
+    let targetRotY = 0;
+    let bearJumpVelocity = 0;
+    let bearJumpY = -0.25;
+    let zoomMode = 'bear'; // 'bear' | 'bouquet'
 
-      const innerMat = new THREE.MeshStandardMaterial({
-        color: 0xF0ABFC,
-        roughness: 0.35,
-        side: THREE.DoubleSide
-      });
-
-      for (let i = 0; i < 5; i++) {
-        const a = (i / 5) * Math.PI * 2;
-        const pGeo = new THREE.SphereGeometry(0.16 * scale, 12, 10);
-        pGeo.scale(0.75, 0.25, 1.35);
-        const pMesh = new THREE.Mesh(pGeo, i % 2 === 0 ? petalMat : innerMat);
-        pMesh.position.set(Math.cos(a) * 0.16 * scale, 0.03, Math.sin(a) * 0.16 * scale);
-        pMesh.rotation.y = -a + Math.PI / 2;
-        pMesh.rotation.x = 0.35;
-        blossom.add(pMesh);
-      }
-
-      const pistilGeo = new THREE.SphereGeometry(0.065 * scale, 10, 10);
-      const pistilMat = new THREE.MeshStandardMaterial({ color: 0xFACC15 });
-      const pistil = new THREE.Mesh(pistilGeo, pistilMat);
-      pistil.position.y = 0.05;
-      blossom.add(pistil);
-
-      clickableFlowers.push(blossom);
-      return blossom;
-    }
-
-    // 5. Arrange Hero Roses, Peonies, Hair-Blossoms, Baby's Breath & Leaves in Dome Bouquet
-    const rosePalettes = [
-      [0xBE185D, 0xEC4899, 0xF472B6, 0xFBCFE8], // Deep rose to blush
-      [0xDB2777, 0xF472B6, 0xF9A8D4, 0xFCE7F3], // Sweet sakura peony
-      [0xE11D48, 0xFB7185, 0xFDA4AF, 0xFFE4E6], // Coral pink rose
-      [0x9D174D, 0xDB2777, 0xF472B6, 0xF9A8D4], // Velvet magenta rose
+    const bearQuotes = [
+      '"Şşşt Helin! \'Aynısı bu\' diye trip atmışsın, bak senin için pembiş ayıcık oldum geldim! 🧸🌸"',
+      '"Saçındaki o çiçeğin aynısından ben de kulağıma taktım, yakışmış mı? 🌺😊"',
+      '"Aşağıdaki \'Beni Seviyorsun Değil Mi?\' sorusunda \'Hayır\'a basamazsın ki! 😜💘"',
+      '"Dışarıdan sert durduğuna bakma, senin yanında tam olarak benim gibi pamuk oluyor! 🧸💗"',
+      '"Pembeleri seven en tatlı kıza en pembiş buketi getirdim! 💐✨"'
     ];
+    let bearQuoteIdx = 0;
 
-    const rosePlacements = [
-      // Center top hero rose
-      { pos: [0, 0.98, 0.18], rot: [0.22, 0, 0], scale: 1.22, pal: 0 },
-      // Inner ring of 6 lush roses/peonies
-      { pos: [-0.62, 0.78, 0.42], rot: [0.42, 0.2, 0.35], scale: 1.05, pal: 1 },
-      { pos: [0.62, 0.78, 0.42], rot: [0.42, -0.2, -0.35], scale: 1.05, pal: 2 },
-      { pos: [0, 0.56, 0.74], rot: [0.68, 0, 0], scale: 1.1, pal: 1 },
-      { pos: [-0.52, 0.92, -0.22], rot: [-0.1, 0.1, 0.3], scale: 1.0, pal: 3 },
-      { pos: [0.52, 0.92, -0.22], rot: [-0.1, -0.1, -0.3], scale: 1.0, pal: 0 },
-      // Outer lower ring of 5 roses
-      { pos: [-0.98, 0.48, 0.25], rot: [0.45, 0.3, 0.65], scale: 0.95, pal: 2 },
-      { pos: [0.98, 0.48, 0.25], rot: [0.45, -0.3, -0.65], scale: 0.95, pal: 1 },
-      { pos: [-0.48, 0.38, 0.85], rot: [0.78, 0.2, 0.32], scale: 0.92, pal: 0 },
-      { pos: [0.48, 0.38, 0.85], rot: [0.78, -0.2, -0.32], scale: 0.92, pal: 3 },
-      { pos: [0, 1.08, -0.32], rot: [-0.25, 0, 0], scale: 1.02, pal: 1 },
-    ];
-
-    rosePlacements.forEach((cfg) => {
-      const bloom = createRoseBloom(rosePalettes[cfg.pal], cfg.scale);
-      bloom.position.set(...cfg.pos);
-      bloom.rotation.set(...cfg.rot);
-      bouquetGroup.add(bloom);
-    });
-
-    // Add 8 Purple-Magenta Hair Blossoms (referencing the flower in Helin's hair!)
-    const hairFlowerCoords = [
-      [-0.32, 0.92, 0.58],
-      [0.34, 0.92, 0.58],
-      [-0.82, 0.68, 0.58],
-      [0.82, 0.68, 0.58],
-      [0, 0.82, 0.68],
-      [-0.25, 1.12, 0.08],
-      [0.28, 1.12, 0.08],
-      [0, 0.35, 1.02]
-    ];
-    hairFlowerCoords.forEach((pt) => {
-      const hb = createHairBlossom(0.95);
-      hb.position.set(pt[0], pt[1], pt[2]);
-      hb.lookAt(pt[0] * 2.5, pt[1] + 1.5, pt[2] * 2.5);
-      bouquetGroup.add(hb);
-    });
-
-    // Add 42 Baby's Breath (Beyaz/Pembe Cipso Toplar) for full florist richness
-    const babyGeo = new THREE.SphereGeometry(0.055, 8, 8);
-    const babyWhiteMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.3 });
-    const babyPinkMat = new THREE.MeshStandardMaterial({ color: 0xFCE7F3, roughness: 0.3 });
-
-    for (let i = 0; i < 42; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const r = 0.25 + Math.random() * 1.05;
-      const bx = Math.cos(theta) * r;
-      const bz = Math.sin(theta) * r * 0.85 + 0.15;
-      const by = 0.35 + (1.15 - r * 0.55) + (Math.random() - 0.5) * 0.22;
-
-      const puff = new THREE.Mesh(babyGeo, i % 3 === 0 ? babyPinkMat : babyWhiteMat);
-      puff.position.set(bx, by, bz);
-      bouquetGroup.add(puff);
-    }
-
-    // Add Soft Sage Eucalyptus Leaves around the Bouquet Crown
-    const leafMat = new THREE.MeshStandardMaterial({
-      color: 0x34D399,
-      roughness: 0.45,
-      side: THREE.DoubleSide
-    });
-    const leafGeo = new THREE.SphereGeometry(0.22, 10, 8);
-    leafGeo.scale(0.65, 0.12, 1.45);
-
-    for (let i = 0; i < 16; i++) {
-      const a = (i / 16) * Math.PI * 2;
-      const leaf = new THREE.Mesh(leafGeo, leafMat);
-      const rad = 1.12 + (i % 2) * 0.14;
-      leaf.position.set(Math.cos(a) * rad, 0.38 + (i % 3) * 0.12, Math.sin(a) * rad * 0.85 + 0.08);
-      leaf.rotation.y = -a + Math.PI / 2;
-      leaf.rotation.x = 0.45;
-      bouquetGroup.add(leaf);
-    }
-
-    // ------------------------------------------------------------------
-    // C. 3D FLOATING HEARTS & SPARKLE PARTICLES AROUND SCENE
-    // ------------------------------------------------------------------
-    const floatingParticles = [];
-    const miniHeartGeo = new THREE.ExtrudeGeometry(createHeartShape(0.18), {
-      depth: 0.03,
-      bevelEnabled: true,
-      bevelThickness: 0.01,
-      bevelSize: 0.01
-    });
-    const miniHeartMats = [
-      new THREE.MeshStandardMaterial({ color: 0xF472B6, roughness: 0.3 }),
-      new THREE.MeshStandardMaterial({ color: 0xFB7185, roughness: 0.3 }),
-      new THREE.MeshStandardMaterial({ color: 0xF9A8D4, roughness: 0.3 }),
-    ];
-
-    for (let i = 0; i < 22; i++) {
-      const m = new THREE.Mesh(miniHeartGeo, miniHeartMats[i % miniHeartMats.length]);
-      m.position.set(
-        (Math.random() - 0.5) * 8.5,
-        (Math.random() - 0.5) * 7.5,
-        (Math.random() - 0.5) * 4 - 1.2
-      );
-      m.rotation.z = (Math.random() - 0.5) * 0.6;
-      const sc = 0.5 + Math.random() * 0.85;
-      m.scale.set(sc, sc, sc);
-      scene.add(m);
-      floatingParticles.push({
-        mesh: m,
-        speedY: 0.006 + Math.random() * 0.01,
-        rotSpeed: (Math.random() - 0.5) * 0.02,
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-
-    // ------------------------------------------------------------------
-    // D. ANIMATION STATE MACHINE & TOUCH / DRAG INTERACTION
-    // ------------------------------------------------------------------
-    let state = 'closed'; // 'closed' -> 'opening' -> 'opened'
-    let openStartTime = 0;
-    let isFullscreenBouquet = false;
-
-    // Drag to rotate bouquet
-    let isDragging = false;
-    let prevPointerX = 0;
-    let prevPointerY = 0;
-    let pointerDownPos = { x: 0, y: 0 };
-    let targetBouquetRotY = 0;
-    let targetBouquetRotX = 0.12;
-
-    const flowerTapCompliments = [
-      '🌸 Saçındaki çiçek kadar güzel!',
-      '💗 Pembeler sana çok yakışıyor Helin!',
-      '✨ Gülüşün bütün Ağrı’yı ısıtır!',
-      '🌷 Dünyanın en tatlı kızına...',
-      '🤍 Beyaz elbisenle peri kızı gibisin!',
-      '👓 O gözlüklerin ve bakışın... Bayıldım!',
-      '💐 Bu buket senin yanında sönük kalır!'
-    ];
-    let tapComplimentIdx = 0;
-
-    function triggerOpenEnvelope() {
-      if (state !== 'closed') return;
-      state = 'opening';
-      openStartTime = performance.now();
-
-      playEnvelopeOpenArpeggio();
-      launchPinkConfetti();
-
-      // Auto-start gentle music box melody if not playing yet
-      if (!musicPlaying) {
-        setTimeout(() => toggleMusic(true), 550);
-      }
-
-      // Hide closed envelope UI smoothly
-      const envUi = document.getElementById('stage-envelope-ui');
-      envUi.classList.add('opacity-0', 'translate-y-6');
+    function triggerBearJump(customQuote) {
+      playBoingSound();
+      bearJumpVelocity = 0.14;
+      const bubbleText = document.getElementById('bear-speech-text');
+      const bubbleBox = document.getElementById('bear-speech-bubble');
+      bubbleBox.classList.add('scale-95');
       setTimeout(() => {
-        envUi.classList.add('hidden');
-      }, 650);
-
-      // Show bouquet & letter UI after envelope opens and bouquet blooms
-      bouquetGroup.visible = true;
-      setTimeout(() => {
-        const openedUi = document.getElementById('stage-opened-ui');
-        openedUi.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          openedUi.classList.remove('opacity-0', 'translate-y-8');
-        });
-        launchPinkConfetti();
-      }, 1750);
-    }
-
-    // Raycaster for tapping the 3D envelope or individual flowers in the 3D bouquet
-    const raycaster = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
-
-    function onPointerDown(e) {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      isDragging = true;
-      prevPointerX = clientX;
-      prevPointerY = clientY;
-      pointerDownPos = { x: clientX, y: clientY };
-    }
-
-    function onPointerMove(e) {
-      if (!isDragging) return;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const dx = clientX - prevPointerX;
-      const dy = clientY - prevPointerY;
-      prevPointerX = clientX;
-      prevPointerY = clientY;
-
-      if (state === 'opened' || state === 'opening') {
-        targetBouquetRotY += dx * 0.012;
-        targetBouquetRotX = Math.max(-0.35, Math.min(0.65, targetBouquetRotX + dy * 0.008));
-      } else {
-        envelopeGroup.rotation.y += dx * 0.008;
-      }
-    }
-
-    function onPointerUp(e) {
-      if (!isDragging) return;
-      isDragging = false;
-
-      const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-      const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-      const dist = Math.hypot(clientX - pointerDownPos.x, clientY - pointerDownPos.y);
-
-      // If it was a clean tap (not a drag)
-      if (dist < 14) {
-        pointer.x = (clientX / window.innerWidth) * 2 - 1;
-        pointer.y = -(clientY / window.innerHeight) * 2 + 1;
-        raycaster.setFromCamera(pointer, camera);
-
-        if (state === 'closed') {
-          const hits = raycaster.intersectObjects(envelopeGroup.children, true);
-          if (hits.length > 0) {
-            triggerOpenEnvelope();
-          }
-        } else if (state === 'opened') {
-          const hits = raycaster.intersectObjects(bouquetGroup.children, true);
-          if (hits.length > 0) {
-            playSparklePop();
-            const msg = flowerTapCompliments[tapComplimentIdx % flowerTapCompliments.length];
-            tapComplimentIdx++;
-            spawnFloatingCompliment(clientX, clientY, msg);
-            // Gentle bounce on bouquet
-            bouquetGroup.scale.set(1.06, 1.06, 1.06);
-          }
-        }
-      }
-    }
-
-    container.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-
-    container.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('touchend', onPointerUp, { passive: true });
-
-    // Main Three.js Render Loop
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-      const now = performance.now();
-
-      // Animate ambient 3D hearts
-      floatingParticles.forEach((p) => {
-        p.mesh.position.y += p.speedY;
-        p.mesh.position.x += Math.sin(t * 1.5 + p.phase) * 0.003;
-        p.mesh.rotation.y += p.rotSpeed;
-        if (p.mesh.position.y > 4.5) {
-          p.mesh.position.y = -4.5;
-        }
-      });
-
-      if (state === 'closed') {
-        // Gentle floating & breathing of 3D envelope
-        envelopeGroup.position.y = Math.sin(t * 2.1) * 0.14 + 0.25;
-        envelopeGroup.rotation.z = Math.sin(t * 1.4) * 0.04;
-        envelopeGroup.rotation.y += (Math.sin(t * 0.9) * 0.18 - envelopeGroup.rotation.y) * 0.05;
-        sealGroup.scale.setScalar(1 + Math.sin(t * 3.5) * 0.05);
-      } else if (state === 'opening') {
-        const elapsed = (now - openStartTime) / 1000;
-
-        // 1. Pop off wax seal (0.0s - 0.5s)
-        if (elapsed < 0.5) {
-          const p = elapsed / 0.5;
-          sealGroup.position.z = 0.04 + p * 1.5;
-          sealGroup.position.y = -envHeight * 0.56 + p * 0.8;
-          sealGroup.rotation.z = p * 4;
-          sealGroup.scale.setScalar(Math.max(0.001, 1 - p));
+        if (customQuote) {
+          bubbleText.textContent = customQuote;
         } else {
-          sealGroup.visible = false;
+          bearQuoteIdx = (bearQuoteIdx + 1) % bearQuotes.length;
+          bubbleText.textContent = bearQuotes[bearQuoteIdx];
         }
+        bubbleBox.classList.remove('scale-95');
+      }, 100);
+    }
 
-        // 2. Rotate open top flap (0.15s - 0.95s)
-        const flapProgress = Math.min(1, Math.max(0, (elapsed - 0.12) / 0.75));
-        const easeFlap = 1 - Math.pow(1 - flapProgress, 3);
-        flapPivot.rotation.x = -easeFlap * Math.PI * 0.88;
+    stageEl.addEventListener('pointerdown', (e) => {
+      isDraggingBear = true;
+      prevX = e.clientX;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!isDraggingBear) return;
+      const dx = e.clientX - prevX;
+      prevX = e.clientX;
+      targetRotY += dx * 0.014;
+    });
+    window.addEventListener('pointerup', () => {
+      isDraggingBear = false;
+    });
 
-        // 3. Slide inner note up slightly then fade/lower envelope as bouquet blooms (0.55s - 1.8s)
-        const bloomProgress = Math.min(1, Math.max(0, (elapsed - 0.48) / 1.25));
-        // Elastic ease out for bouquet bloom
-        const easeBloom =
-          bloomProgress === 0
-            ? 0
-            : bloomProgress === 1
-            ? 1
-            : Math.pow(2, -9 * bloomProgress) *
-                Math.sin(((bloomProgress * 10 - 0.75) * (2 * Math.PI)) / 3) +
-              1;
+    stageEl.addEventListener('click', (e) => {
+      triggerBearJump();
+      spawnFloatingCompliment(e.clientX, e.clientY, '🧸 Pembiş Ayıcık Seni Çok Sevdi! 💖');
+    });
 
-        // Move envelope down and shrink smoothly into the base of the bouquet
-        envelopeGroup.position.y = 0.25 - bloomProgress * 2.6;
-        envelopeGroup.position.z = -bloomProgress * 1.4;
-        const envScale = Math.max(0.001, 1 - bloomProgress * 0.95);
-        envelopeGroup.scale.setScalar(envScale);
+    document.getElementById('bear-hug-btn').addEventListener('click', (e) => {
+      triggerBearJump();
+      launchPinkConfetti();
+      spawnFloatingCompliment(e.clientX, e.clientY, '🧸 Sarıldık bile! 🌸');
+    });
 
-        // Rise & bloom the 3D flower bouquet!
-        const bScale = Math.max(0.001, easeBloom * 0.96);
-        bouquetGroup.scale.setScalar(bScale);
-
-        // Position bouquet in upper viewport so both bouquet and letter card fit harmoniously
-        const targetY = isFullscreenBouquet ? 0.35 : 1.32;
-        bouquetGroup.position.y = -0.8 + bloomProgress * (targetY + 0.8);
-        bouquetGroup.rotation.y = (1 - bloomProgress) * Math.PI * 1.4 + targetBouquetRotY;
-        bouquetGroup.rotation.x = targetBouquetRotX;
-
-        if (elapsed > 1.85) {
-          state = 'opened';
-          envelopeGroup.visible = false;
-        }
-      } else if (state === 'opened') {
-        // Gentle idle sway + interactive rotation of the 3D Flower Bouquet
-        if (!isDragging) {
-          targetBouquetRotY += 0.0035;
-        }
-        bouquetGroup.rotation.y += (targetBouquetRotY - bouquetGroup.rotation.y) * 0.1;
-        bouquetGroup.rotation.x += (targetBouquetRotX - bouquetGroup.rotation.x) * 0.1;
-
-        const targetY = isFullscreenBouquet ? 0.35 : 1.32;
-        const targetScale = isFullscreenBouquet ? 1.18 : 0.92;
-
-        bouquetGroup.position.y +=
-          (targetY + Math.sin(t * 1.8) * 0.06 - bouquetGroup.position.y) * 0.08;
-        bouquetGroup.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
+    document.getElementById('bear-bouquet-btn').addEventListener('click', () => {
+      playSparklePop();
+      const lbl = document.getElementById('mode-switch-label');
+      if (zoomMode === 'bear') {
+        zoomMode = 'bouquet';
+        lbl.textContent = 'Ayıcığı Tam Gör';
+        triggerBearJump('"Bak bakalım buketteki pembe güller mi daha güzel yoksa sen mi? (Tabii ki sen!) 💐🌸"');
+      } else {
+        zoomMode = 'bear';
+        lbl.textContent = 'Bukete Yakınlaş';
+        triggerBearJump();
       }
+    });
+
+    const clock = new THREE.Clock();
+    function animateThree() {
+      requestAnimationFrame(animateThree);
+      const t = clock.getElapsedTime();
+
+      if (!isDraggingBear) {
+        targetRotY = Math.sin(t * 0.85) * 0.32;
+      }
+      characterGroup.rotation.y += (targetRotY - characterGroup.rotation.y) * 0.08;
+
+      // Bear jump physics + gentle breathing
+      bearJumpY += bearJumpVelocity;
+      bearJumpVelocity -= 0.0085;
+      if (bearJumpY < -0.25) {
+        bearJumpY = -0.25;
+        bearJumpVelocity = 0;
+      }
+      characterGroup.position.y = bearJumpY + Math.sin(t * 2.4) * 0.05;
+
+      // Gentle head tilt & arm wave
+      headMesh.rotation.z = Math.sin(t * 1.8) * 0.05;
+      leftArm.rotation.z = -0.45 + Math.sin(t * 3) * 0.08;
+      rightArm.rotation.z = 0.45 - Math.sin(t * 3) * 0.08;
+
+      // Camera zoom transition between full Bear & Bouquet close-up
+      const targetCamZ = zoomMode === 'bouquet' ? 4.4 : 7.6;
+      const targetCamY = zoomMode === 'bouquet' ? -0.15 : 0.35;
+      camera.position.z += (targetCamZ - camera.position.z) * 0.07;
+      camera.position.y += (targetCamY - camera.position.y) * 0.07;
+
+      // Orbiting 3D hearts
+      orbitHearts.forEach((h, i) => {
+        const a = h.angle + t * 0.6;
+        h.mesh.position.set(
+          Math.cos(a) * h.radius,
+          h.yOffset + Math.sin(t * 2 + i) * 0.25,
+          Math.sin(a) * h.radius - 0.5
+        );
+        h.mesh.rotation.y = t * 1.5 + i;
+      });
 
       renderer.render(scene, camera);
     }
-    animate();
+    animateThree();
 
-    // Handle Responsive Resize
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      // Slightly wider FOV adjustment on tall narrow phones so bouquet never clips
-      camera.position.z = window.innerWidth < 420 ? 9.8 : 9.0;
+      camera.aspect = stageEl.clientWidth / stageEl.clientHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(stageEl.clientWidth, stageEl.clientHeight);
     });
-    if (window.innerWidth < 420) {
-      camera.position.z = 9.8;
-      camera.updateProjectionMatrix();
-    }
 
     /********************************************************************
-     * 4. UI INTERACTIONS: BUTTONS, POLAROID CAPTIONS, DETAIL TABS
+     * 4. UNCLICKABLE "HAYIR" BUTTON ("BENİ SEVİYORSUN DEĞİL Mİ?")
      ********************************************************************/
-    document.getElementById('open-envelope-btn').addEventListener('click', () => {
-      triggerOpenEnvelope();
+    const noBtn = document.getElementById('no-runaway-btn');
+    const noBtnText = document.getElementById('no-runaway-text');
+    const yesBtn = document.getElementById('yes-love-btn');
+    const yesBtnText = document.getElementById('yes-love-text');
+    const arena = document.getElementById('runaway-arena');
+    const dodgeWrap = document.getElementById('dodge-counter-wrap');
+    const dodgeCountEl = document.getElementById('dodge-count');
+    const acceptedBox = document.getElementById('love-accepted-box');
+
+    let dodgeCount = 0;
+    const funnyNoTexts = [
+      'Yakalayamazsın ki! 😜',
+      'Hafif trip atma hemen! 🙈',
+      'Pembiş ayıcık üzülüyor ama! 🧸',
+      'Ağrı inadı burada sökmez! 🏔️🌸',
+      'Boşuna uğraşma, EVET’e basacaksın! 💘',
+      'Bu buton bozuk, sadece EVET çalışıyor! ✨',
+      'Hala mı Hayır peşindesin Helin?! 😂💗',
+      'Kaçarım vallahi tıklatmam! 🏃‍♀️💨'
+    ];
+
+    function dodgeNoButton(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      playBoingSound();
+      dodgeCount++;
+      dodgeWrap.classList.remove('hidden');
+      dodgeWrap.classList.add('flex');
+      dodgeCountEl.textContent = dodgeCount;
+
+      // Update funny text on the running button
+      noBtnText.textContent = funnyNoTexts[(dodgeCount - 1) % funnyNoTexts.length];
+
+      // Grow the YES button bigger and more irresistible!
+      const yesScale = Math.min(1.38, 1 + dodgeCount * 0.06);
+      yesBtn.style.transform = `scale(${yesScale})`;
+      if (dodgeCount >= 3) {
+        yesBtnText.textContent = 'Hadi İtiraf Et: EVET, ÇOK! 💖🌸';
+      }
+
+      // Move NO button to a random spot inside the arena
+      noBtn.style.position = 'absolute';
+      const arenaRect = arena.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth || 150;
+      const btnHeight = noBtn.offsetHeight || 40;
+
+      const maxX = Math.max(16, arenaRect.width - btnWidth - 16);
+      const maxY = Math.max(16, arenaRect.height - btnHeight - 16);
+
+      const randX = 12 + Math.random() * maxX;
+      const randY = 12 + Math.random() * maxY;
+
+      noBtn.style.left = `${randX}px`;
+      noBtn.style.top = `${randY}px`;
+
+      // Also make the 3D Teddy Bear react!
+      triggerBearJump('"Hahaha \'Hayır\' butonu senden kaçıyor Helin! Boşuna uğraşma, \'Evet\'e basacaksın! 🧸💘"');
+    }
+
+    // Attach to all possible touch/hover/click events so she can NEVER click "Hayır"
+    noBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+    noBtn.addEventListener('mouseenter', dodgeNoButton);
+    noBtn.addEventListener('pointerdown', dodgeNoButton);
+    noBtn.addEventListener('click', dodgeNoButton);
+
+    yesBtn.addEventListener('click', (e) => {
+      playCelebrationFanfare();
+      launchPinkConfetti();
+      setTimeout(launchPinkConfetti, 350);
+      setTimeout(launchPinkConfetti, 700);
+
+      // Auto-start melody if not playing
+      if (!musicPlaying) {
+        toggleMusic();
+      }
+
+      arena.classList.add('hidden');
+      acceptedBox.classList.remove('hidden');
+      triggerBearJump('"YAŞASIN! Helin \'Evet, hem de çok!\' dedi! Dünyanın en mutlu pembiş ayıcığı benim! 🧸💖🎉"');
+      spawnFloatingCompliment(e.clientX, e.clientY, '💖 Biliyordum! İyi ki varsın Helin! 🌸');
     });
 
-    document.getElementById('music-btn').addEventListener('click', () => {
-      toggleMusic(false);
+    /********************************************************************
+     * 5. SIDE-BY-SIDE COUPLE POLAROIDS INTERACTION
+     ********************************************************************/
+    const coupleStage = document.getElementById('couple-polaroid-stage');
+    const mergeBtn = document.getElementById('merge-photos-btn');
+    const mergeLabel = document.getElementById('merge-btn-label');
+    const compBarWrap = document.getElementById('compatibility-bar-wrap');
+    const centerHeart = document.getElementById('center-heart-badge');
+    let merged = false;
+
+    function triggerCoupleMerge(e) {
+      merged = !merged;
+      playSparklePop();
+      launchPinkConfetti();
+
+      if (merged) {
+        coupleStage.classList.add('couple-merged');
+        compBarWrap.classList.remove('hidden');
+        centerHeart.textContent = '💞';
+        mergeLabel.textContent = 'Uyum Test Edildi: %1000 Çok Yakıştık! 🌸';
+        if (e && e.clientX) {
+          spawnFloatingCompliment(e.clientX, e.clientY, '📸 Yan yana ne kadar tatlı duruyoruz! 💖');
+        }
+      } else {
+        coupleStage.classList.remove('couple-merged');
+        centerHeart.textContent = '💗';
+        mergeLabel.textContent = 'Fotoğrafları Yakınlaştır & Uyumu Ölç (%100)';
+      }
+    }
+
+    mergeBtn.addEventListener('click', triggerCoupleMerge);
+    document.getElementById('my-polaroid').addEventListener('click', (e) => {
+      playSparklePop();
+      spawnFloatingCompliment(e.clientX, e.clientY, '🪖 Dışarıdan sert, Helin’e karşı pamuk şeker! 🧸');
+    });
+    document.getElementById('helin-polaroid').addEventListener('click', (e) => {
+      playSparklePop();
+      spawnFloatingCompliment(e.clientX, e.clientY, '🌸 Saçındaki çiçeğe ve gülüşüne hayranım! 💖');
     });
 
+    /********************************************************************
+     * 6. INTERACTIVE PINK FLOWER FORTUNE ("PEMBE ÇİÇEK FALI")
+     ********************************************************************/
+    const petalsRing = document.getElementById('fortune-petals-ring');
+    const fortuneStatus = document.getElementById('fortune-status-text');
+    const petalsLeftBadge = document.getElementById('petals-left-badge');
+    const pluckBtnText = document.getElementById('pluck-btn-text');
+
+    const fortuneMessages = [
+      '🌸 1. Yaprak: "Yine aynısı" diye trip attı ama şu an kesin gülümsüyor! 😊',
+      '🧸 2. Yaprak: Pembiş ayıcığı görünce kalbi yumuşadı, hoşuna gitti!',
+      '📸 3. Yaprak: Yan yana duran fotoğraflarımıza gizlice uzun uzun baktı! 💗',
+      '👓 4. Yaprak: Gözlüğünün arkasından tatlı tatlı süzüp beğeniyor!',
+      '🌷 5. Yaprak: Pembeleri sevdiği kadar bu sürprizi yapanı da seviyor!',
+      '💖 SON YAPRAK: KESİN SONUÇ! Bayağı hoşlanıyor ve çok seviyor! 🎉✨'
+    ];
+
+    let currentPetalIdx = 0;
+    let petalElements = [];
+
+    function renderFortunePetals() {
+      petalsRing.innerHTML = '';
+      petalElements = [];
+      currentPetalIdx = 0;
+      petalsLeftBadge.textContent = '6 Yaprak';
+      pluckBtnText.textContent = 'Bir Pembe Yaprak Kopar 🌸';
+      fortuneStatus.textContent = '👆 Çiçeğin pembe yapraklarına veya aşağıdaki butona dokunarak falına bak!';
+
+      for (let i = 0; i < 6; i++) {
+        const angle = i * 60;
+        const petal = document.createElement('button');
+        petal.className = 'absolute w-12 h-16 rounded-full bg-gradient-to-t from-pink-400 to-pink-200 border-2 border-white shadow-md transition-all duration-500 origin-bottom cursor-pointer hover:brightness-105';
+        petal.style.transform = `rotate(${angle}deg) translateY(-44px)`;
+        petal.addEventListener('click', (e) => {
+          e.stopPropagation();
+          pluckNextPetal(petal, e.clientX, e.clientY);
+        });
+        petalsRing.appendChild(petal);
+        petalElements.push(petal);
+      }
+    }
+
+    function pluckNextPetal(specificPetalEl, cx, cy) {
+      if (currentPetalIdx >= 6) {
+        renderFortunePetals();
+        playSparklePop();
+        return;
+      }
+
+      const targetEl =
+        specificPetalEl && !specificPetalEl.dataset.plucked
+          ? specificPetalEl
+          : petalElements.find((el) => !el.dataset.plucked);
+
+      if (!targetEl) return;
+      targetEl.dataset.plucked = 'true';
+      targetEl.style.opacity = '0';
+      targetEl.style.transform += ' translateY(-40px) scale(0.4)';
+      targetEl.style.pointerEvents = 'none';
+
+      playSparklePop();
+      const msg = fortuneMessages[currentPetalIdx];
+      fortuneStatus.textContent = msg;
+      currentPetalIdx++;
+
+      const remaining = 6 - currentPetalIdx;
+      petalsLeftBadge.textContent = remaining > 0 ? `${remaining} Yaprak` : 'Bitti 💖';
+
+      if (cx && cy) {
+        spawnFloatingCompliment(cx, cy, '🌸 Yaprak koptu!');
+      }
+
+      if (remaining === 0) {
+        launchPinkConfetti();
+        pluckBtnText.textContent = 'Falı Yeniden Başlat 🔄';
+      }
+    }
+
+    renderFortunePetals();
+
+    document.getElementById('pluck-petal-btn').addEventListener('click', (e) => {
+      pluckNextPetal(null, e.clientX, e.clientY);
+    });
+    document.getElementById('fortune-center').addEventListener('click', (e) => {
+      pluckNextPetal(null, e.clientX, e.clientY);
+    });
+
+    /********************************************************************
+     * 7. HEADER BUTTONS
+     ********************************************************************/
+    document.getElementById('music-btn').addEventListener('click', toggleMusic);
     document.getElementById('shower-btn').addEventListener('click', (e) => {
       playSparklePop();
       launchPinkConfetti();
-      spawnFloatingCompliment(e.clientX, e.clientY + 30, '🌸 Helin için pembe çiçek yağmuru! 💖');
+      spawnFloatingCompliment(e.clientX, e.clientY + 25, '💖 Helin için pembiş kalp yağmuru! 🌸');
     });
-
-    document.getElementById('bloom-more-btn').addEventListener('click', (e) => {
-      playSparklePop();
-      launchPinkConfetti();
-      bouquetGroup.scale.set(1.12, 1.12, 1.12);
-      spawnFloatingCompliment(e.clientX, e.clientY, '💐 En güzel çiçekler Helin’e! 🌸');
-    });
-
-    // Toggle Fullscreen 3D Bouquet Inspection vs Letter Sheet
-    const toggleBouquetBtn = document.getElementById('toggle-fullscreen-bouquet');
-    const letterSheet = document.getElementById('letter-sheet');
-    const viewportSpacer = document.getElementById('bouquet-viewport-spacer');
-    const toggleBouquetText = document.getElementById('toggle-bouquet-text');
-    const toggleBouquetIcon = document.getElementById('toggle-bouquet-icon');
-
-    toggleBouquetBtn.addEventListener('click', () => {
-      isFullscreenBouquet = !isFullscreenBouquet;
-      playSparklePop();
-
-      if (isFullscreenBouquet) {
-        letterSheet.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
-        setTimeout(() => letterSheet.classList.add('hidden'), 350);
-        viewportSpacer.classList.remove('h-[46vh]', 'sm:h-[50vh]');
-        viewportSpacer.classList.add('h-[88vh]');
-        toggleBouquetText.textContent = 'Mektubu ve Fotoğrafı Göster';
-        toggleBouquetIcon.textContent = '💌';
-      } else {
-        letterSheet.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          letterSheet.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
-        });
-        viewportSpacer.classList.remove('h-[88vh]');
-        viewportSpacer.classList.add('h-[46vh]', 'sm:h-[50vh]');
-        toggleBouquetText.textContent = 'Buketi Tam Ekran İncele';
-        toggleBouquetIcon.textContent = '🔍';
-      }
-    });
-
-    // Polaroid Card Tap -> Cycles Handwritten Notes & Sparkles
-    const polaroidCaptions = [
-      'Ağrı\'nın En Güzel Manzarası 🌸',
-      'Saçındaki o tek çiçeğe kurban... 🌺',
-      'Beyazlar içinde tam bir peri kızı 🤍✨',
-      'Gözlüğün ve o tatlı tebessümün... 👓💗',
-      'Baktıkça insanın içini ısıtan güzellik 🌷'
-    ];
-    let captionIdx = 0;
-
-    document.getElementById('polaroid-card').addEventListener('click', (e) => {
-      captionIdx = (captionIdx + 1) % polaroidCaptions.length;
-      const capEl = document.getElementById('polaroid-caption');
-      capEl.textContent = polaroidCaptions[captionIdx];
-      playSparklePop();
-      spawnFloatingCompliment(e.clientX, e.clientY, '💖 ' + polaroidCaptions[captionIdx]);
-    });
-
-    // Interactive Photo Detail Compliment Buttons
-    const detailCompliments = {
-      flower:
-        '"Kulağının arkasına taktığın o mor-pembe çiçek sana o kadar yakışmış ki... O tek çiçek yalnız kalmasın diye sana pembe güllerle ve şakayıklarla dolu kocaman bir buket hazırladım. Gerçi hiçbir çiçek senin yanında başrol olamaz. 🌸💗"',
-      glasses:
-        '"O yuvarlak gözlüğünün arkasından uzaklara dalıp hafifçe gülümseyişin var ya... Hem çok entelektüel hem de aşırı tatlı duruyor. İnsan o bakışa baktıkça huzur buluyor. 👓✨"',
-      dress:
-        '"Doğanın yeşilliği içinde o zarif beyaz elbisen ve kırmızı ojelerinle resmen bir kuğu gibi parlamışsın. Sadeliğin ve zarafetin tek kelimeyle kusursuz Helin. 🤍🌷"',
-      smile:
-        '"Ağrı soğuk diyorlar ama senin yüzündeki o sıcacık, samimi tebessüm bence bütün şehri ısıtmaya yeter. Hep böyle güzel gülümse olur mu? 😊💖"'
-    };
-
-    const detailBtns = document.querySelectorAll('.detail-btn');
-    const detailTextEl = document.getElementById('detail-compliment-text');
-    const detailBoxEl = document.getElementById('detail-compliment-box');
-
-    detailBtns.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const key = btn.getAttribute('data-detail');
-        playSparklePop();
-
-        detailBtns.forEach((b) => {
-          b.classList.remove('bg-pink-100/90', 'border-pink-400');
-          b.classList.add('bg-white/80', 'border-pink-100');
-        });
-        btn.classList.remove('bg-white/80', 'border-pink-100');
-        btn.classList.add('bg-pink-100/90', 'border-pink-400');
-
-        detailBoxEl.classList.add('scale-95', 'opacity-70');
-        setTimeout(() => {
-          detailTextEl.textContent = detailCompliments[key];
-          detailBoxEl.classList.remove('scale-95', 'opacity-70');
-        }, 120);
-      });
-    });
-
-    // Bottom Response Buttons
-    const yesSmileBtn = document.getElementById('yes-smile-btn');
-    const shyBtn = document.getElementById('shy-btn');
-    const shyBtnText = document.getElementById('shy-btn-text');
-    const smileSuccessMsg = document.getElementById('smile-success-msg');
-
-    yesSmileBtn.addEventListener('click', (e) => {
-      playEnvelopeOpenArpeggio();
-      launchPinkConfetti();
-      setTimeout(launchPinkConfetti, 350);
-      smileSuccessMsg.classList.remove('hidden');
-      spawnFloatingCompliment(e.clientX, e.clientY, '💖 Gülüşün hiç solmasın Helin! 🌸');
-    });
-
-    const shyPhrases = [
-      'İtiraf et, sen de gülümsedin! 😊🌸',
-      'Yanakların da pembeleşti mi? 🙈💗',
-      'Hadi ama, evet butonuna bas! ✨',
-      'Tamam tamam, gülümsediğini biliyorum 💖'
-    ];
-    let shyIdx = 0;
-
-    shyBtn.addEventListener('click', (e) => {
-      playSparklePop();
-      shyBtnText.textContent = shyPhrases[shyIdx % shyPhrases.length];
-      shyIdx++;
-      spawnFloatingCompliment(e.clientX, e.clientY, '🙈 Tatlılığa bak!');
-    });
-
     document.getElementById('top-badge').addEventListener('click', (e) => {
       playSparklePop();
-      spawnFloatingCompliment(e.clientX, e.clientY + 25, '🏔️ Ağrı’nın en tatlı çiçeği Helin! 🌸');
+      spawnFloatingCompliment(e.clientX, e.clientY + 25, '🧸 Yepyeni Pembiş Sürpriz v2.0! 🌸');
     });
   </script>
 </body>
