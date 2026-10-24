@@ -397,16 +397,34 @@
         </h2>
       </div>
 
-      <!-- Visual Flower Petals Ring -->
-      <div class="relative w-44 h-44 mx-auto flex items-center justify-center my-1">
-        <div id="fortune-petals-ring" class="absolute inset-0 flex items-center justify-center">
-          <!-- Dynamically populated 6 clickable pink petals -->
-        </div>
-        <!-- Center Golden Heart of Flower -->
-        <div id="fortune-center" class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 to-yellow-400 border-4 border-white shadow-md flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform">
-          <span class="text-lg">😊</span>
-          <span id="petals-left-badge" class="text-[9px] font-fredoka font-bold text-amber-900">6 Yaprak</span>
-        </div>
+      <!-- Visual Flower Petals Ring (Perfectly Centered SVG Flower) -->
+      <div class="relative w-48 h-48 mx-auto flex items-center justify-center my-2">
+        <svg viewBox="-110 -110 220 220" class="w-full h-full overflow-visible">
+          <defs>
+            <linearGradient id="petalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FCE7F3" />
+              <stop offset="45%" stop-color="#F9A8D4" />
+              <stop offset="100%" stop-color="#EC4899" />
+            </linearGradient>
+            <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FDE047" />
+              <stop offset="100%" stop-color="#F59E0B" />
+            </linearGradient>
+            <filter id="petalShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#BE185D" flood-opacity="0.18" />
+            </filter>
+          </defs>
+
+          <!-- Dynamically populated 6 symmetrical SVG petals around (0,0) -->
+          <g id="fortune-petals-ring"></g>
+
+          <!-- Center Golden Core of Flower at (0,0) -->
+          <g id="fortune-center" class="cursor-pointer transition-transform duration-200 hover:scale-105">
+            <circle cx="0" cy="0" r="34" fill="url(#centerGrad)" stroke="#FFFFFF" stroke-width="4" filter="url(#petalShadow)" />
+            <text x="0" y="-2" text-anchor="middle" dominant-baseline="middle" font-size="18">😊</text>
+            <text id="petals-left-badge" x="0" y="16" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="10.5" fill="#78350F">6 Yaprak</text>
+          </g>
+        </svg>
       </div>
 
       <!-- Result Box for Each Plucked Petal -->
@@ -1148,17 +1166,34 @@
       pluckBtnText.textContent = 'Bir Pembe Yaprak Kopar 🌸';
       fortuneStatus.textContent = '👆 Çiçeğin pembe yapraklarına veya aşağıdaki butona dokunarak falına bak!';
 
+      const svgNS = 'http://www.w3.org/2000/svg';
       for (let i = 0; i < 6; i++) {
         const angle = i * 60;
-        const petal = document.createElement('button');
-        petal.className = 'absolute w-12 h-16 rounded-full bg-gradient-to-t from-pink-400 to-pink-200 border-2 border-white shadow-md transition-all duration-500 origin-bottom cursor-pointer hover:brightness-105';
-        petal.style.transform = `rotate(${angle}deg) translateY(-44px)`;
-        petal.addEventListener('click', (e) => {
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('transform', `rotate(${angle})`);
+        g.style.transition = 'all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        g.style.cursor = 'pointer';
+        g.dataset.angle = angle;
+
+        // Lush rounded sakura/daisy petal path extending upward from center (0,-24) to (0,-92)
+        const path = document.createElementNS(svgNS, 'path');
+        path.setAttribute(
+          'd',
+          'M 0 -22 C -24 -36, -28 -78, 0 -92 C 28 -78, 24 -36, 0 -22 Z'
+        );
+        path.setAttribute('fill', 'url(#petalGrad)');
+        path.setAttribute('stroke', '#FFFFFF');
+        path.setAttribute('stroke-width', '2.5');
+        path.setAttribute('filter', 'url(#petalShadow)');
+
+        g.appendChild(path);
+        g.addEventListener('click', (e) => {
           e.stopPropagation();
-          pluckNextPetal(petal, e.clientX, e.clientY);
+          pluckNextPetal(g, e.clientX, e.clientY);
         });
-        petalsRing.appendChild(petal);
-        petalElements.push(petal);
+
+        petalsRing.appendChild(g);
+        petalElements.push(g);
       }
     }
 
@@ -1176,8 +1211,9 @@
 
       if (!targetEl) return;
       targetEl.dataset.plucked = 'true';
+      const angle = targetEl.dataset.angle || 0;
       targetEl.style.opacity = '0';
-      targetEl.style.transform += ' translateY(-40px) scale(0.4)';
+      targetEl.setAttribute('transform', `rotate(${angle}) translate(0, -35) scale(0.35)`);
       targetEl.style.pointerEvents = 'none';
 
       playSparklePop();
