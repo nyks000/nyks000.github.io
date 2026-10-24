@@ -1,22 +1,20 @@
-# Konya'dan Ağrı'ya ✨ Acil Moral & Can Sıkıntısı Savar Paketi 🌤️🌸
+# Helin'e Özel 🌸 3D Pembe Çiçek Buketi & Sürpriz Mektup 💌
 
-> **Dünyanın en inatçı ama bir o kadar da tatlı kişisinin can sıkıntısını dağıtmak için Konya'dan Ağrı'ya özel olarak hazırlanmış interaktif mobil sürpriz!**
+> **Ağrı'nın en güzel çiçeği Helin için Three.js ile hazırlanmış, mobil uyumlu, mektuba dokununca açılan 3D pembe çiçek buketi ve Polaroid sürprizi.**
 
-![Hat](https://img.shields.io/badge/Hat-Konya_⇄_Ağrı-rose?style=for-the-badge)
-![Karakter](https://img.shields.io/badge/Karakter-İnatçı_%26_Tatlı-amber?style=for-the-badge)
-![Görev](https://img.shields.io/badge/Görev-Gülümsetmek-emerald?style=for-the-badge)
+![Tema](https://img.shields.io/badge/Tema-Pembe_%26_Romantik-ff69b4?style=for-the-badge)
+![3D](https://img.shields.io/badge/Teknoloji-Three.js_WebGL-ec4899?style=for-the-badge)
+![Mobil](https://img.shields.io/badge/Uyum-100%25_Mobil_Dokunmatik-f472b6?style=for-the-badge)
 
 ---
 
-## 📱 Özellikler
+## ✨ Özellikler
 
-- **Konya ⇄ Ağrı Acil Moral Hattı & İnteraktif Maskot**:
-  - Dokundukça Konya'dan Ağrı'ya tatlı ve şakacı sözler söyleyen, inatçılığına tatlı tatlı takılan özel tasarım maskot ve moral paketi sayacı.
-- **Acil Durum Analiz Raporu (İnat & Tatlılık Gözlem Merkezi)**:
-  - *"Ağrı Dağı kadar inatçı ama %100 tatlı"* teşhisleri ve tıkladıkça komik sistem hataları veren **"İnadını ve Can Sıkıntısını Sıfırla"** butonu.
-- **Can Sıkıntısı Savar 3D Dönen Kartlar**:
-  - Dokundukça 3 boyutlu dönen, arkasından bol eğlenceli ve moral verici notlar çıkan 4 özel kart.
-- **Resmi Moral & İnat Sözleşmesi (Kaçan Buton Oyunu)**:
-  - *"Şimdi dürüst olalım, gülümsedin değil mi?"* sorusunda asla yakalanmayan, dokundukça kaçan **"Hayır, inatla somurtacağım! 😤"** butonu!
-- **Dahili Müzik Kutusu & Ses Efektleri**:
-  - Web Audio API ile sıfır harici dosya yüküyle çalışan tatlı melodi ve ses efektleri.
+- **💌 3D İnteraktif Pembe Zarf & Mühür**:
+  - Dokunulduğunda kalp mührü kırılıp açılan ve içinden 3 boyutlu çiçek buketi yükselen özel tasarım pembe zarf.
+- **💐 Three.js 3D Pembe Çiçek Buketi**:
+  - Pembe güller, şakayıklar, Helin'in saçındaki çiçeğe gönderme yapan mor-pembe çiçekler, cipsolar ve saten pembe kurdeleden oluşan, parmakla 360° döndürülebilen 3D buket.
+- **📸 Özel Polaroid Çerçevesi & Detay İltifatları**:
+  - Saçındaki çiçek, gözlüğü, beyaz elbisesi ve tatlı gülümsemesine özel interaktif iltifat kartları.
+- **🎵 Romantik Müzik Kutusu**:
+  - Web Audio API ile zarf açıldığında başlayan tatlı melodi ve ses efektleri.
